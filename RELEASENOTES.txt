@@ -1,0 +1,813 @@
+                             Release Notes for
+              P4EXP, the Helix Plugin for File Explorer
+                             Version 2020.2
+
+Introduction
+
+        This document lists all user-visible changes to P4EXP that were
+        made between releases 2003.2 and 2020.2. To display the version of
+        P4EXP that you are using, choose "Connection Information..."
+        command from the More menu. P4EXP 2020.2 is compatible with the
+        2018.1 server release and above. P4EXP requires that P4V
+        2019.2/1883366 is installed.
+
+        To enable file state icons in File explorer after install a
+        restart of the explorer application is required. This can be done
+        via the Windows Task Manager or by rebooting the system.
+
+--------------------------------------------------------------------------
+
+Supported Platforms
+
+        * Windows 7, 10 (x86, x86_64)
+
+Third Party Software
+
+        P4EXP uses OpenSSL and SharpShell. License information is at the
+        end of these release notes.
+
+        The P4EXP installer uses WixWPFWizardBA. License information is at
+        the end of these release notes.
+
+Known Issues
+
+        On Windows 8.1, some actions (revert, add, log off) may not
+        automatically refresh the file icons in File Explorer. Updating
+        the visual file state after these actions may require a manual
+        refresh via: Perforce -> Refresh File State.
+
+        Due to a limit on the number of file overlay icons allowed by
+        Windows, the P4EXP icons may not show at all if other extensions
+        using file overlay icons are installed. For more information and
+        a workaround, please see:
+        https://community.perforce.com/s/article/2771
+
+        On High-DPI display, bitmap buttons on installer final dialog
+        are too small. This is a Windows problem that currently doesn't
+        have a fix or workaround.
+
+---------------------------------------------------------------------------
+
+New Functionality in 2020.2
+
+        (Job #105745)
+           Added support for 2020.2 P4D.
+
+---------------------------------------------------------------------------
+
+Bugs Fixed in 2020.1 / Patch 2
+
+        #2027601 (Job #103943)
+            P4EXP will no longer launch a blank command window when starting
+            Time-lapse View, Submit or File History.
+
+        #2031965 (Job #104311)
+            Updated SharpShell.dll to version 2.7.2.0.
+
+---------------------------------------------------------------------------
+
+Bugs Fixed in 2020.1 / Patch 1
+
+        #2022177 (Job #103925)
+            P4EXP installer will now show a link to the license.
+
+        #2018611 (Job #103765)
+            Set connection dialog box will allow for connecting to HAS
+            enabled server.
+
+---------------------------------------------------------------------------
+
+Bugs Fixed in 2020.1
+
+        #1930506 (Job #101769)
+            P4EXP will no longer cause the Unreal editor's file explorer
+            to crash if it is opened to a drive location that is a null
+            root.
+
+        #1929992 (Job #101142)
+            The Set Connection dialog now trims trailing and leading
+            spaces from text entered in the Server, User, and Workspace
+            text boxes.
+
+---------------------------------------------------------------------------
+
+New Functionality in 2019.3
+
+        #1881852 (Job #100078, #100079, #100080)
+            P4EXP now uses P4VC (the P4V rich client framework) to launch
+            Submit, History, and Property components from P4V.
+
+---------------------------------------------------------------------------
+
+New Functionality in 2019.2 / Patch 1
+
+        #1859673 (Job #100050)
+            P4EXP now supports Japanese as a Windows display language.
+
+---------------------------------------------------------------------------
+
+Bugs Fixed in 2019.2 / Patch 1
+
+        #1872569 (Job #96519)
+            P4EXP no longer fails to check out, submit, or revert files
+            containing Japanese characters.
+
+        #1863196 (Job #100057)
+            Folder history no longer fails on workspace the root directory.
+
+---------------------------------------------------------------------------
+New Functionality in 2019.2
+
+        #1849830 (Job #99439)
+            P4EXP now supports login via the Helix Authentication Service.
+            See the GitHub project at
+            https://github.com/perforce/helix-authentication-service.
+
+
+        #1845082 (Job #33849, #30751, #24574)
+            P4EXP now has a connection status menu item which will show
+            statuses of Connected, Not Connected, or Connected with
+            issues. To edit the current connection that is set in the
+            p4 environment variables, clicking on this menu item will
+            bring up a Set Connection dialog.
+
+---------------------------------------------------------------------------
+
+Bugs Fixed in 2019.2
+
+        #1845142 (Job #99299)
+            P4EXP now allows non-versioned files to be diffed.
+
+---------------------------------------------------------------------------
+
+New Functionality in 2019.1
+
+        #1776139 (Job #46236)
+            Files can now be marked for delete in Helix server. On
+            selecting and confirming this action, the local file will
+            be removed and the depot file will be marked for delete in
+            the default pending changelist. To complete the deletion in
+            the depot, the file must be submitted.
+
+        #1775584 (Job #98091, #55842)
+            There is now a View Pending Changelists menu item which will
+            launch a Pending Changelists window showing the Pending
+            Changelists for the current user and workspace.
+
+        #1774736 (Job #48453)
+            The Submit... command is now available on folders.
+
+---------------------------------------------------------------------------
+
+New Functionality in 2018.4
+
+        #1715414 (Job #46238)
+            Folder History is now available on single selection of
+            directories.
+
+        #1715414 (Job #46237)
+            Time-lapse View is now available on single selection of files.
+
+---------------------------------------------------------------------------
+
+Bugs Fixed in 2018.4
+
+        #1714336 (Job #96605)
+            P4EXP no longer silently fails when attempting to show
+            Connection Info for a server that is down.
+
+        #1708650 (Job #96402)
+            SSL key change warning will no longer appear if the user clicks
+            the Cancel button.
+
+        #1706853 (Job #96400)
+            P4EXP will now display a message stating files are identical
+            when diff is launched against 2 files that have no differences.
+
+        #1706746 (Job #30754)
+            Tab order in the preferences dialog has been corrected and
+            accelerator keys for individual items have been added.
+
+---------------------------------------------------------------------------
+
+Bugs Fixed in 2018.3
+
+        #1679333 (Job #93594)
+            P4EXP now locates the P4V application regardless of where it
+            has been installed.
+
+---------------------------------------------------------------------------
+
+New Functionality in 2018.2
+
+        #1636328 (Job #94496)
+            P4EXP now supports working with servers requiring two-factor
+            authentication by launching Helix MFA Authenticator to
+            authenticate the user.
+
+---------------------------------------------------------------------------
+
+Bugs Fixed in 2018.2
+
+        #1644647 (Job #94902)
+            P4EXP now launches P4V with the selected file highlighted with
+            the menu action "Show in P4V".
+
+---------------------------------------------------------------------------
+
+New Functionality in 2018.1
+
+        #1605998 (Job #93283)
+            P4EXP is now able to record diagnostic logging of menu command
+            actions at the API level. This is off by default and can be
+            enabled in preferences.
+
+---------------------------------------------------------------------------
+
+Bugs Fixed in 2018.1
+
+        #1604485 (Job #93840)
+            P4EXP no longer treats the parent directory of a directory as
+            the current working directory, but uses the selected directory
+            itself.
+
+---------------------------------------------------------------------------
+
+New Functionality in 2017.1
+
+        #1582451 (Job #93179)
+            P4EXP now uses a single threaded P4Server (from P4API.NET) to
+            limit the per-server connections to 1 per port+user+client.
+
+            The overlay handler code has been condensed to a base class
+            plus a few overrides.
+
+            P4EXP now uses RepoStorage, which represents a Connection and
+            holds cached file information per local path.
+
+            P4EXP now uses FileCache as a way to handle the results of an
+            fstat on a directory in a cache with some fixed expiration.
+
+---------------------------------------------------------------------------
+
+Bugs Fixed in 2014.2 / Patch 2
+
+        #975324 (Job #75847)
+            P4EXP no longer builds the Perforce context menu on right
+            click of an object in File Explorer. This could previously
+            cause a substantial delay in display of the File Explorer
+            context menu if Perforce environment variables were unset or
+            incorrectly set or if the targeted server is offline.
+
+        #974831 (Job #76415)
+            P4EXP now correctly displays its context menus when File
+            Explorer is launched via another application, for example,
+            the "Save As..." dialog launched by Windows Notepad.
+
+---------------------------------------------------------------------------
+
+Bugs Fixed in 2014.2 / Patch 1
+
+        #958806 (Job #75993)
+            P4EXP now correctly identifies itself in the connection by
+            Product Name and Product Version and actions performed on a
+            server can be found in the server log file by "P4EXP".
+
+        #958590 (Job #75812, Job #75897)
+            P4EXP no longer attempts to execute menu commands on user
+            click of "Run as administrator" or open/click on application
+            shortcuts from the Windows Task Bar or Start Menu (this would
+            previously cause the intended user action to fail silently).
+
+---------------------------------------------------------------------------
+
+Bugs Fixed in 2014.2
+
+        #928902 (Job #33956)
+            P4EXP help documentation now describes how to set the
+            connection.
+
+        #926906 (Job #68876)
+            P4EXP is now compatible with utf8-bom.
+
+        #891549 (Job #33829)
+            The connection information dialog now allows selecting and
+            copying of text.
+
+        #885210 (Job #31135)
+            Extra large file state icons no longer show a border around
+            them on Vista and later.
+
+---------------------------------------------------------------------------
+
+Bugs Fixed in 2012.3
+
+        #545318 (Job #59251)
+            P4EXP app name was missing from server log entries.
+
+---------------------------------------------------------------------------
+
+Bugs Fixed since 2012.1/459107 (GA)
+
+        #469506 (Job #55547, #55693, #55726, #55959, #55997)
+            Fix multitude of bugs associated with initial SSL
+            implementation.
+
+---------------------------------------------------------------------------
+
+Bugs Fixed in 2010.1
+
+        #295330 (Job #40870)
+            Added text to 'show file state icons' preference stating system
+            restart is necessary upon changing.
+
+---------------------------------------------------------------------------
+
+Bugs Fixed in 2010.1
+
+        #262440 (Job #40499)
+            P4EXP no longer slows explorer down when connected to a server
+            with a large number of clients or groups.
+
+        #237129 (Job #31185)
+            File state icons now correctly displayed when you are logged in.
+
+        #234742 (Job #31184)
+            Revert Unchanged now correctly displayed in context menu
+            when you are not logged in.
+
+        #234726 (Job #36335)
+            Message displayed when you attempt to Revert Unchanged on a
+            changed file is now consistent with P4V.
+
+        #234510 (Job #36319)
+            Results of reverting a locked file is no longer displayed as an
+            error or warning.
+
+---------------------------------------------------------------------------
+
+Bugs Fixed in 2009.2
+
+        #235350 (Job #37770)
+            P4EXP debug logs are no longer written with invalid filenames.
+
+        #233506 (Job #37230)
+            P4EXP now registers correctly on Windows 2000.
+
+        #231090 #231230 (Job #36059)
+            Improved error handling and reliability. Connections now make
+            sure that they are properly cleaned up before going away.
+
+        #227357 (Job #36110)
+            When running Submit the P4V 'bookmark' option is no longer
+            offered from the context menu of a file.
+
+        #222037 (Job #36309)
+            Fixed crash when selecting "Save as Numbered Change' in Submit
+            Dialog.
+
+---------------------------------------------------------------------------
+
+New functionality in 2009.1
+
+        #194271 (Job #31007)
+            Both 32-bit and 64-bit versions of P4EXP can be now installed
+            on the same 64-bit machine.
+
+---------------------------------------------------------------------------
+
+Bugs Fixed in 2009.1
+
+        #209230 (Job #29558)
+            P4V components are now properly launched with files containing
+            characters like #, @ and ' in its name
+
+        #208561 (Job #34747)
+            P4EXP is now properly registered when upgrading from 2008.2.
+
+        #194242 (Job #33107)
+            Diffing a file from the Submit dialog no longer closes the
+            Submit dialog.
+
+---------------------------------------------------------------------------
+
+New functionality in 2008.2
+
+        #161604 (Job #13079)
+            P4EXP now uses P4V as its supporting client application.
+
+---------------------------------------------------------------------------
+
+Bugs Fixed in 2008.1
+
+        #155718 (Job #27162)
+            Icons are now correctly displayed when client roots are
+            specified using forward slashes.
+
+        #155710 (Job #29549)
+            Menus now work with shortcuts on Windows Vista.
+
+        #155659 (Job #29560)
+            P4EXP now correctly ignores files with names that include "...".
+
+        #155577 (Job #21887)
+            Added support for the UTF_16_LE and UTF_31_LE charsets.
+
+        #155387 (Job #29558, #26685, #29585, #29586)
+            Files with special characters work with submit, diff, and
+            revision history again.
+
+---------------------------------------------------------------------------
+
+Bugs Fixed in 2007.3
+
+        #130430 (Job #25143)
+            Fixed support for running commands without saving the password or
+            logging in.
+
+        #130428
+            Updated the password requirements advisory text in the new
+            password dialog.
+
+---------------------------------------------------------------------------
+
+Bugs Fixed in 2007.2
+
+        #130384 (Job #21539)
+            P4EXP no longer resets the working directory if another process
+            has changed it while P4EXP is working.
+
+---------------------------------------------------------------------------
+
+New Functionality in 2006.2
+
+        #99444 (Job #19569)
+            Added a button to add the client root of the current client to the
+            filter list.
+
+---------------------------------------------------------------------------
+
+Bugs Fixed in 2006.2
+
+        #116299 (Job #23424)
+            Fixed crash when connecting to Unicode enabled servers.
+
+        #99242 (Job #20652)
+            P4EXP properly deals with plus mapped files and synced but
+            unmapped files.
+
+        #98922 (Job #18018)
+            P4EXP performance has been improved by sharing one connection to
+            issue multiple commands to the server when possible.
+
+        #98898 (Job #20065, #20428)
+            P4EXP no longer blocks for more than five seconds when trying to
+            connect to a server. This prevents Explorer from locking up in
+            cases where the server has gone down or the connection is
+            suffering from extreme latency.
+
+---------------------------------------------------------------------------
+
+New Functionality in 2006.1
+
+        #93685 (Job #19832, #20101)
+            Icon overlays are now turned off by default.
+
+        #93726 (Job #19449)
+            New menu option to add the selected path to the list of paths
+            operated on by P4EXP. This prevents P4EXP from accidentally being
+            turned off.
+
+---------------------------------------------------------------------------
+
+Bugs Fixed in 2006.1
+
+        #94039
+            Performance enhancement by reducing the number of registry
+            accesses.
+
+---------------------------------------------------------------------------
+
+New Functionality in 2005.2
+
+        #86601 (Job #11802)
+            Users can now specify which folders P4EXP should be active in.
+            Under preferences users can set which paths the Perforce menu and
+            icon overlays should be active. This should be useful for folks
+            experiencing performance problems when browsing outside of their
+            client root.
+
+---------------------------------------------------------------------------
+
+Bugs Fixed in 2005.2
+
+        #86616
+            The P4EXP preferences are now always accessible from the menu.
+
+        #85888
+            Cut down on server calls by caching more information about the
+            server.
+
+        #85882 (Job #16498, #16498,#18027)
+            Properly catch folders that are not under the client root. This
+            should prevent excessive communication with the server when
+            browsing outside of the client root.
+
+---------------------------------------------------------------------------
+
+New Functionality in 2005.1
+
+        #70317
+            P4EXP fully supports Unicode mode Perforce servers
+
+        #68947 (Job #15009)
+            P4EXP caches file state of files to minimize server communication.
+
+        #55539
+            P4EXP can display icons in all file views to show file state.
+
+        #74758
+            Added  a 'Refresh File State' menu item which forces an update
+            of the displayed file information.
+
+        #72940
+            A 'Login' menu item appears in the menu when no password is set.
+
+        #72523
+            A 'Start P4Win' menu option appears in cases where the selected
+            files are not mapped in the client root.
+
+        #72515 (Job #14374, #15789)
+            Added option to create a new client from P4EXP. P4EXP calls
+            P4Win's New Client Wizard.
+
+        #72321
+            New preferences menu to set basic P4EXP options.
+
+---------------------------------------------------------------------------
+
+Bugs fixed in 2005.1
+
+        #78570 (Job #17446)
+            P4EXP properly caches which paths are under a client root. This
+            prevents unnecessary calls to the server and greatly improves
+            performance.
+
+---------------------------------------------------------------------------
+
+New Functionality in 2004.2
+
+        #54653 (Job #13007, #13143)
+            Added Column extensions to P4EXP to display Perforce file data.
+            There are three columns that can be displayed; File State, Rev,
+            and Status.
+
+        #56763
+            Added support for 'p4 login' against 2004.2 servers.
+
+        #56947
+            Added support for Perforce wild characters in filenames against
+            2004.2 servers.
+
+        #60230
+            Added Help menu item and help page
+
+        #56695  (Job #13011)
+            Inform users in the menu if a file isn't under the current
+            workspace root.
+
+        #54789 (Job #9222, #12800)
+            Results dialogs are resizable.
+
+        #54675 (Job #13404, #12596)
+            Added registry flags to disable dynamic menus and column
+            extensions.
+
+            HKEY_CURRENT_USER/Software/Perforce/P4Exp/ForceStatic
+            HKEY_CURRENT_USER/Software/Perforce/P4Exp/NoColumns
+
+            ForceStatic is a DWORD value. Set it to 1 to disable dynamic menu
+            formation. NoCloumns is also a DWORD value. Set it to 1 to turn
+            off the column extensions.
+
+        #53037
+            Added logging to P4EXP. To enable logging there are two registry
+            values that must be set. Only set logging if you are debugging a
+            problem with P4EXP.
+
+            HKEY_CURRENT_USER/Software/Perforce/P4Exp/Debug
+            HKEY_CURRENT_USER/Software/Perforce/P4Exp/DebugPath
+
+            Debug is a DWORD value. Set to 1 to enable logging.
+            DebugPath is a string value. Set it to the full path of the log
+            file.
+
+---------------------------------------------------------------------------
+
+Bug Fixes in 2004.2
+
+        #62254 (Job #13120)
+            Re-arrange menu items such that "destructive" menu items are never
+            at the top. This should help users navigating Explorer using a
+            keyboard
+
+        #61839 (Job #14642)
+            Adjust files removed count when a can't clobber error occurs.
+
+        #57062 (Job #14005)
+            Only show "Revert Unchanged Files" against files open for edit or
+            integrate.
+
+        #54797 (Job #12798)
+            Fix scrollbars not showing up in Connection Information.
+
+---------------------------------------------------------------------------
+
+Bug Fixes in 2003.2
+
+        #54419 (Job #13323)
+            Properly support NULL client roots.
+
+        #53714 (Job #13153, #13194)
+            Fixed crash when P4CLIENT wasn't set.
+
+---------------------------------------------------------------------------
+
+Third Party Software
+
+       LICENSE ISSUES
+       ==============
+
+       The OpenSSL toolkit stays under a double license, i.e. both the conditions of
+       the OpenSSL License and the original SSLeay license apply to the toolkit.
+       See below for the actual license texts.
+
+       OpenSSL License
+       ---------------
+
+       ====================================================================
+       Copyright (c) 1998-2018 The OpenSSL Project.  All rights reserved.
+
+       Redistribution and use in source and binary forms, with or without
+       modification, are permitted provided that the following conditions
+       are met:
+
+       1. Redistributions of source code must retain the above copyright
+          notice, this list of conditions and the following disclaimer.
+
+       2. Redistributions in binary form must reproduce the above copyright
+          notice, this list of conditions and the following disclaimer in
+          the documentation and/or other materials provided with the
+          distribution.
+
+       3. All advertising materials mentioning features or use of this
+          software must display the following acknowledgment:
+          "This product includes software developed by the OpenSSL Project
+          for use in the OpenSSL Toolkit. (http://www.openssl.org/)"
+
+       4. The names "OpenSSL Toolkit" and "OpenSSL Project" must not be used
+          to endorse or promote products derived from this software without
+          prior written permission. For written permission, please contact
+          openssl-core@openssl.org.
+
+       5. Products derived from this software may not be called "OpenSSL"
+          nor may "OpenSSL" appear in their names without prior written
+          permission of the OpenSSL Project.
+
+       6. Redistributions of any form whatsoever must retain the following
+          acknowledgment:
+          "This product includes software developed by the OpenSSL Project
+          for use in the OpenSSL Toolkit (http://www.openssl.org/)"
+
+       THIS SOFTWARE IS PROVIDED BY THE OpenSSL PROJECT ``AS IS'' AND ANY
+       EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+       IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+       PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE OpenSSL PROJECT OR
+       ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+       SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+       NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+       LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+       HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+       STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+       ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+       OF THE POSSIBILITY OF SUCH DAMAGE.
+       ====================================================================
+
+       This product includes cryptographic software written by Eric Young
+       (eay@cryptsoft.com).  This product includes software written by Tim
+       Hudson (tjh@cryptsoft.com).
+
+
+       Original SSLeay License
+       -----------------------
+
+       Copyright (C) 1995-1998 Eric Young (eay@cryptsoft.com)
+       All rights reserved.
+
+       This package is an SSL implementation written
+       by Eric Young (eay@cryptsoft.com).
+       The implementation was written so as to conform with Netscapes SSL.
+
+       This library is free for commercial and non-commercial use as long as
+       the following conditions are aheared to.  The following conditions
+       apply to all code found in this distribution, be it the RC4, RSA,
+       lhash, DES, etc., code; not just the SSL code.  The SSL documentation
+       included with this distribution is covered by the same copyright terms
+       except that the holder is Tim Hudson (tjh@cryptsoft.com).
+
+       Copyright remains Eric Young's, and as such any Copyright notices in
+       the code are not to be removed.
+       If this package is used in a product, Eric Young should be given attribution
+       as the author of the parts of the library used.
+       This can be in the form of a textual message at program startup or
+       in documentation (online or textual) provided with the package.
+
+       Redistribution and use in source and binary forms, with or without
+       modification, are permitted provided that the following conditions
+       are met:
+       1. Redistributions of source code must retain the copyright
+          notice, this list of conditions and the following disclaimer.
+       2. Redistributions in binary form must reproduce the above copyright
+          notice, this list of conditions and the following disclaimer in the
+          documentation and/or other materials provided with the distribution.
+       3. All advertising materials mentioning features or use of this software
+          must display the following acknowledgement:
+          "This product includes cryptographic software written by
+           Eric Young (eay@cryptsoft.com)"
+          The word 'cryptographic' can be left out if the rouines from the library
+          being used are not cryptographic related :-).
+       4. If you include any Windows specific code (or a derivative thereof) from
+          the apps directory (application code) you must include an acknowledgement:
+          "This product includes software written by Tim Hudson (tjh@cryptsoft.com)"
+
+       THIS SOFTWARE IS PROVIDED BY ERIC YOUNG ``AS IS'' AND
+       ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+       IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+       ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+       FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+       DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+       OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+       HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+       LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+       OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+       SUCH DAMAGE.
+
+       The licence and distribution terms for any publically available version or
+       derivative of this code cannot be changed.  i.e. this code cannot simply be
+       copied and put under another distribution licence
+       [including the GNU Public Licence.]
+
+
+       SharpShell License
+       ------------------
+
+       The MIT License (MIT)
+
+       Copyright (c) 2014 Dave Kerr
+
+       Permission is hereby granted, free of charge, to any person
+       obtaining a copy of this software and associated documentation
+       files (the "Software"), to deal in the Software without restriction,
+       including without limitation the rights to use, copy, modify, merge,
+       publish, distribute, sublicense, and/or sell copies of the Software,
+       and to permit persons to whom the Software is furnished to do so,
+       subject to the following conditions:
+
+       The above copyright notice and this permission notice shall be
+       included in all copies or substantial portions of the Software.
+
+       THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+       EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+       MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+       NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+       BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+       ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+       CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+       SOFTWARE.
+
+       ====================================================================
+
+       WixWPFWizardBA License
+       ----------------------
+
+       MIT License
+
+       Copyright (c) 2017 Nick Guletskii, Arseniy Aseev
+
+       Permission is hereby granted, free of charge, to any person obtaining a copy
+       of this software and associated documentation files (the "Software"), to deal
+       in the Software without restriction, including without limitation the rights
+       to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+       copies of the Software, and to permit persons to whom the Software is
+       furnished to do so, subject to the following conditions:
+
+       The above copyright notice and this permission notice shall be included in all
+       copies or substantial portions of the Software.
+
+       THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+       IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+       FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+       AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+       LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+       OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+       SOFTWARE.

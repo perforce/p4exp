@@ -1,0 +1,491 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <!-- Todo: remove this file since we're not using the MSI's UI (confirm). -->
+    <UI>
+      <TextStyle Id="ExtHeading" FaceName="Tahoma" Size="10" Red="255" Green="255" Blue="255" />
+      <TextStyle Id="ExtHeadingTitle" FaceName="Tahoma" Size="10" Red="255" Green="255" Blue="255" Bold="yes"/>
+      <TextStyle Id="ExtText" FaceName="Tahoma" Size="8" Red="255" Green="255" Blue="255" />
+      <TextStyle Id="ExtTextBold" FaceName="Tahoma" Size="8" Red="255" Green="255" Blue="255" Bold="yes" />
+      <TextStyle Id="IntHeading" FaceName="Tahoma" Size="8" Red="255" Green="255" Blue="255" />
+      <TextStyle Id="IntHeadingTitle" FaceName="Tahoma" Size="8" Red="255" Green="255" Blue="255" Bold="yes"/>
+      <TextStyle Id="IntText" FaceName="Tahoma" Size="8" Red="255" Green="255" Blue="255" />
+      <TextStyle Id="IntTextBoldItalic" FaceName="Tahoma" Red="255" Green="255" Blue="255" Size="8" Bold="yes" Italic="yes"/>
+      <TextStyle Id="IntTextVersion" FaceName="Tahoma" Size="8" Red="128" Green="128" Blue="128" /> <!-- 128 = Gray -->
+      <TextStyle Id="TextBold" FaceName="Tahoma" Size="8" Bold="yes" />
+      <TextStyle Id="DefaultFont" FaceName="Tahoma" Size="8" />
+      <TextStyle Id="MSSansBold8" FaceName="MSSans" Size="8" Bold="yes"/>
+      <TextStyle Id="Note" FaceName="MSSansSerif" Size="8" Red="128" Green="128" Blue="128" />
+
+      <Property Id="DefaultUIFont" Value="DefaultFont" />
+
+      <Dialog Id="InstallWelcome" Width="370" Height="270" Title="[ProductName] - $(env.TitleBarRelease)" NoMinimize="yes">
+          <Control Type="Text" Id="TextLine1" X="184" Y="18" Width="179" Height="42" Transparent="yes">
+              <Text>{&amp;ExtHeadingTitle}Welcome to the Setup Wizard for [ProductName]</Text>
+          </Control>
+          <Control Type="Text" Id="TextLine2" X="25" Y="88" Width="169" Height="34" Transparent="yes">
+            <Text>{&amp;ExtText}This Wizard will install [ProductName] on your computer. To continue, click Next.</Text>
+          </Control>
+          <Control Type="Line" Id="DlgLine" Width="370" Height="2" X="0" Y="229" />
+          <Control Type="PushButton" Id="Next" X="230" Y="243" Width="56" Height="17" Text="&amp;Next &gt;">
+            <Publish Event="NewDialog" Value="SelectDest">1</Publish>
+          </Control>
+          <Control Type="PushButton" Id="Cancel" X="300" Y="243" Width="56" Height="17" Text="&amp;Cancel">
+            <Publish Event="SpawnDialog" Value="CancelSetup" />
+          </Control>
+          <Control Type="Bitmap" Id="Image" Width="370" Height="234" X="0" Y="0" Text="exterior.bmp" />
+      </Dialog>
+      <Dialog Id="SelectDest" Width="370" Height="270" Title="[ProductName] - $(env.TitleBarRelease)" NoMinimize="yes" TrackDiskSpace="yes">
+        <!-- By using TabSkip="no" any checkboxes appear on the background bitmap. -->
+        <Control Id="Background" Type="Bitmap" X="0" Y="0" Width="370" Height="234" TabSkip="no" Text="interior.bmp" />
+        <Control Id="Title" Type="Text" X="40" Y="10" Width="210" Height="12" Transparent="yes" NoPrefix="yes" Text="{&amp;IntHeadingTitle}Select Destination" />
+        <Control Id="Description" Type="Text" X="40" Y="20" Width="219" Height="12" Transparent="yes" NoPrefix="yes" Text="{&amp;IntHeading}Select the destination for the files" />
+        <!-- TODO: Get logo bitmap (icon will work?).
+                    <Control Id="P4EXPBMP" Type="Bitmap" X="46" Y="62" Width="21" Height="26" Text="p4exp_logo.bmp" />
+            -->
+        <Control Id="P4EXPText" Type="Text" X="22" Y="69" Width="199" Height="17" Transparent="yes" Text="{&amp;IntText}Helix Plugin for File Explorer (P4EXP)" />
+        <Control Id="P4EXPTextVersion" Type="Text" X="22" Y="88" Width="163" Height="17" Transparent="yes" Text="{&amp;IntTextVersion}[P4EXP_Version]" />
+        <Control Id="SideText1" Type="Text" X="22" Y="112" Height="35" Width="199" Transparent="yes" Text="{&amp;IntText}The Helix Plugin for File Explorer enables you to perform Helix Core operations directly from File Explorer." />
+        <Control Id="LocationLine" Type="Line" X="19" Y="201" Height="2" Width="341" />
+        <Control Id="LocationLabel" Type="Text" X="22" Y="205" Width="167" Height="10" Transparent="yes" Text="{&amp;IntText}Primary install directory:">
+          <Subscribe Event="SelectionPathOn" Attribute="Visible" />
+          <Condition Action="hide">Installed</Condition>
+        </Control>
+        <Control Id="Location" Type="Text" X="22" Y="215" Width="200" Height="17" Transparent="yes" Text="{&amp;IntText}[INSTALLDIR]">
+          <Condition Action="hide">Installed</Condition>
+        </Control>
+        <!-- Make Next button first so it's selected by default. Default="yes" isn't working. -->
+        <Control Id="Next" Type="PushButton" X="230" Y="243" Width="56" Height="17" Text="&amp;Next &gt;">
+          <Publish Event="NewDialog" Value="ReadyToInstall" Order="16">1</Publish>
+          <Publish Event="NewDialog" Value="ClientConfig" Order="17">1</Publish>
+        </Control>
+        <Control Id="Change" Type="PushButton" X="294" Y="210" Width="66" Height="17" Text="Ch&amp;ange...">
+          <Publish Property="_BrowseProperty" Value="INSTALLDIR" Order="1">1</Publish>
+          <Publish Event="SpawnDialog" Value="BrowseDlgMy" Order="2">1</Publish>
+          <Condition Action="hide">Installed</Condition>
+          <Condition Action="disable">Installed</Condition>
+        </Control>
+        <Control Id="BottomLine" Type="Line" X="0" Y="234" Width="370" Height="2" />
+        <Control Id="Back" Type="PushButton" X="170" Y="243" Width="56" Height="17" Text="&lt; &amp;Back">
+          <Publish Event="NewDialog" Value="ProgramMaintenance" Order="1">MAINTENANCE="modify"</Publish>
+          <Publish Event="NewDialog" Value="InstallWelcome" Order="3">NOT MAINTENANCE="modify"</Publish>
+          <Publish Event="NewDialog" Value="Upgrade" Order="4">WIX_UPGRADE_DETECTED</Publish>
+        </Control>
+        <Control Id="Cancel" Type="PushButton" X="300" Y="243" Width="56" Height="17" Cancel="yes" Text="&amp;Cancel">
+          <Publish Event="SpawnDialog" Value="CancelSetup">1</Publish>
+        </Control>
+      </Dialog>
+      <Dialog Id="BrowseDlgMy" Width="370" Height="270" Title="[ProductName] - $(env.TitleBarRelease)">
+        <!-- By using TabSkip="no" the checkboxes appear on the background bitmap. -->
+        <Control Id="Background" Type="Bitmap" X="0" Y="0" Width="370" Height="234" TabSkip="no" Text="interior.bmp" />
+        <Control Id="Title" Type="Text" X="45" Y="12" Width="210" Height="12" Transparent="yes" NoPrefix="yes" Text="{&amp;IntHeadingTitle}Change Current Destination Folder" />
+        <Control Id="Description" Type="Text" X="45" Y="22" Width="219" Height="12" Transparent="yes" NoPrefix="yes" Text="{&amp;IntHeading}Browse to the destination folder" />
+        <Control Id="PathEdit" Type="PathEdit" X="25" Y="202" Width="320" Height="18" Property="_BrowseProperty" Indirect="yes" />
+        <Control Id="ComboLabel" Type="Text" X="25" Y="58" Width="44" Height="10" TabSkip="no" Transparent="yes" Text="{&amp;IntText}Look in:" />
+        <Control Id="DirectoryCombo" Type="DirectoryCombo" X="70" Y="55" Width="220" Height="80" Property="_BrowseProperty" Indirect="yes" Fixed="yes" Remote="yes">
+          <Subscribe Event="IgnoreChange" Attribute="IgnoreChange" />
+        </Control>
+        <Control Id="Up" Type="PushButton" X="298" Y="55" Width="19" Height="19" ToolTip="Up one level" Icon="yes" FixedSize="yes" IconSize="16" Text="Up.ico">
+          <Publish Event="DirectoryListUp" Value="0">1</Publish>
+        </Control>
+        <Control Id="NewFolder" Type="PushButton" X="325" Y="55" Width="19" Height="19" ToolTip="Create a new folder" Icon="yes" FixedSize="yes" IconSize="16" Text="NewFolder.ico">
+          <Publish Event="DirectoryListNew" Value="0">1</Publish>
+        </Control>
+        <Control Id="DirectoryList" Type="DirectoryList" X="25" Y="83" Width="320" Height="98" Property="_BrowseProperty" Sunken="yes" Indirect="yes" TabSkip="no" />
+        <Control Id="PathLabel" Type="Text" X="25" Y="190" Width="320" Height="10" TabSkip="no" Transparent="yes" Text="{&amp;IntText}Folder name:" />
+        <Control Id="OK" Type="PushButton" X="240" Y="243" Width="56" Height="17" Default="yes" Text="&amp;OK">
+          <Publish Event="SetTargetPath" Value="[_BrowseProperty]">1</Publish>
+          <Publish Event="EndDialog" Value="Return">1</Publish>
+        </Control>
+        <Control Id="Cancel" Type="PushButton" X="304" Y="243" Width="56" Height="17" Cancel="yes" Text="&amp;Cancel">
+          <Publish Event="Reset" Value="0">1</Publish>
+          <Publish Event="EndDialog" Value="Return">1</Publish>
+        </Control>
+      </Dialog>
+      <Dialog Id="ClientConfig" Width="370" Height="270" Title="[ProductName] - $(env.TitleBarRelease)" NoMinimize="yes">
+        <Control Type="Bitmap" Id="Bitmap" X="0" Y="0" Width="370" Height="234" TabSkip="no" Text="interior.bmp" />
+        <Control Id="Title" Type="Text" X="45" Y="12" Width="210" Height="12" Transparent="yes" NoPrefix="yes" Text="{&amp;IntHeadingTitle}Client Configuration" />
+        <Control Id="Description" Type="Text" X="45" Y="22" Width="226" Height="12" Transparent="yes" NoPrefix="yes" Text="{&amp;IntHeading}Specify the settings for the client application(s)" />
+        <Control Id="P4PORTLabel" Type="Text" X="21" Y="50" Width="135" Height="12" Transparent="yes" Text="{&amp;IntText}Server" />
+        <Control Id="P4PORT" Type="Edit" X="21" Y="63" Width="237" Height="15" Property="P4PORT" />
+        <Control Id="P4PORTButton" Type="PushButton" X="260" Y="63" Width="15" Height="15" Text="?">
+            <Publish Event="SpawnDialog" Value="P4PORTInfo" />
+        </Control>
+        <Control Id="P4PORTNoteLabel" Type="Text" X="21" Y="80" Width="237" Height="24" Transparent="yes" Text="{&amp;Note}Name or hostname and port number of the Perforce server that clients connect to. Omit hostname for connecting to a local server." />
+        <Control Id="P4USERLabel" Type="Text" X="21" Y="108" Width="237" Height="12" Transparent="yes" Text="{&amp;IntText}User Name" />
+        <Control Id="P4USER" Type="Edit" X="21" Y="120" Width="237" Height="15" Property="P4USER" />
+        <Control Id="P4USERNoteLabel" Type="Text" X="21" Y="138" Width="237" Height="12" Transparent="yes" Text="{&amp;Note}Perforce user name for connecting to a Perforce server." />
+        <Control Id="P4EDITORLabel" Type="Text" X="21" Y="188" Width="237" Height="12" Transparent="yes" Text="{&amp;IntText}Text Editing Application" />
+        <Control Id="P4EDITOR" Type="Edit" X="21" Y="200" Width="237" Height="15" Property="P4EDITOR" />
+        <Control Id="P4EDITORButton" Type="PushButton" X="280" Y="199" Width="66" Height="17" Text="B&amp;rowse...">
+          <Publish Event="DoAction" Value="BrowseForFile" Order="1">1</Publish>
+          <Publish Property="P4EDITOR" Value="[P4EDITOR]" Order="2">1</Publish>
+<!-- DEBUG: To cause an error. . .
+         <Publish Event="Crash" Value="BrowseDlgMy" Order="1">1</Publish>
+-->
+        </Control>
+        <Control Id="P4EDITORNoteLabel" Type="Text" X="21" Y="218" Width="237" Height="12" Transparent="yes" Text="{&amp;Note}Application used to open text based forms." />
+        <Control Id="BottomLine" Type="Line" X="5" Y="180" Width="360" Height="2" />
+        <Control Id="DemoNote" Type="Text" X="21" Y="155" Width="332" Height="20" Hidden="yes" Transparent="yes" Text="{&amp;MSSansBold8}Server and User Name cannot be modified if installing sample data." />
+        <Control Id="Back" Type="PushButton" X="170" Y="243" Width="56" Height="17" Text="&lt; &amp;Back">
+            <Publish Event="NewDialog" Value="SelectDest" />
+        </Control>
+        <Control Id="Next" Type="PushButton" X="230" Y="243" Width="56" Height="17" Default="yes" Text="&amp;Next &gt;">
+            <Publish Event="SpawnDialog" Value="TargetWarning">
+              NOT TARGET_WARNED AND P4PORT = "perforce:1666"
+            </Publish>
+            <Subscribe Event="SelectionNoItems" Attribute="Enabled" />
+            <Publish Event="NewDialog" Value="ReadyToInstall" />
+        </Control>
+        <Control Id="Cancel" Type="PushButton" X="300" Y="243" Width="56" Height="17" Cancel="yes" Text="&amp;Cancel">
+            <Publish Event="SpawnDialog" Value="CancelSetup" />
+        </Control>
+      </Dialog>
+      <Dialog Id="P4PORTInfo" Width="320" Height="216" Title="[ProductName] - $(env.TitleBarRelease)" NoMinimize="yes">
+          <Control Id="Background" Type="Bitmap" X="0" Y="0" Width="321" Height="190" TabSkip="no" Text="help_bg.bmp" />
+          <Control Id="Icon" Type="Icon" X="15" Y="14" Width="40" Height="40" Text="info_bg_bk.ico" />
+          <Control Id="Text1" Type="Text" X="65" Y="14" Width="236" Height="23" Transparent="yes" Text="{&amp;IntText}The Server field specifies the location of the Perforce server. This value was likely given to you by your Perforce administrator." />
+          <Control Id="Text1B" Type="Text" X="65" Y="40" Width="236" Height="23" Transparent="yes" Text="{&amp;IntText}The location can be specified in multiple ways depending upon your configuration. Below are some supported formats:" />
+          <Control Id="Text2" Type="Text" X="65" Y="82" Width="225" Height="14" Transparent="yes" Text="{&amp;IntText}* &lt;hostname&gt;:&lt;port number&gt;" />
+          <Control Id="Text3" Type="Text" X="65" Y="96" Width="225" Height="14" Transparent="yes" Text="{&amp;IntText}* &lt;IP address&gt;:&lt;port number&gt;" />
+          <Control Id="Text4" Type="Text" X="65" Y="110" Width="246" Height="14" Transparent="yes" Text="{&amp;IntText}* &lt;zeroconf name&gt; (Server must have Zeroconf enabled)" />
+          <Control Id="Text5" Type="Text" X="65" Y="124" Width="246" Height="14" Transparent="yes" Text="{&amp;IntText}* &lt;hostname&gt; (Server must be on port 1666)" />
+          <Control Id="Text6" Type="Text" X="65" Y="138" Width="246" Height="14" Transparent="yes" Text="{&amp;IntText}* &lt;port number&gt; (Server must be local)" />
+          <Control Id="Text7" Type="Text" X="65" Y="152" Width="246" Height="14" Transparent="yes" Text="{&amp;IntText}* &lt;TCP/SSL prefix&gt;:&lt;hostname&gt;:&lt;port number&gt;" />
+          <Control Id="OK" Type="PushButton" X="128" Y="194" Width="66" Height="17" Text="&amp;Close">
+              <Publish Event="EndDialog" Value="Return">1</Publish>
+          </Control>
+      </Dialog>
+      <Dialog Id="ReadyToInstall" Width="370" Height="270" Title="[ProductName] - $(env.TitleBarRelease)" NoMinimize="yes">
+        <Control Type="Bitmap" Id="Banner" X="0" Y="0" Width="370" Height="234" TabSkip="no" Text="interior.bmp" />
+        <Control Id="TitleInstall" Type="Text" X="45" Y="12" Width="210" Height="12" Transparent="yes" Hidden="yes">
+          <Text>{&amp;IntHeadingTitle}Ready to Install</Text>
+          <Condition Action="show">NOT (MAINTENANCE="modify" OR MAINTENANCE="repair")</Condition>
+        </Control>
+        <Control Id="TitleModify" Type="Text" X="45" Y="12" Width="210" Height="12" Transparent="yes" Hidden="yes">
+          <Text>{&amp;IntHeadingTitle}Ready to Modify</Text>
+          <Condition Action="show">MAINTENANCE="modify"</Condition>
+        </Control>
+        <Control Id="TitleRepair" Type="Text" X="45" Y="12" Width="210" Height="12" Transparent="yes" Hidden="yes">
+          <Text>{&amp;IntHeadingTitle}Ready to Repair</Text>
+          <Condition Action="show">MAINTENANCE="repair"</Condition>
+        </Control>
+        <Control Id="Description" Type="Text" X="45" Y="22" Width="219" Height="12" Transparent="yes">
+          <Text>{&amp;IntHeading}The wizard is ready to begin</Text>
+        </Control>
+        <Control Id="DlgText1" Type="Text" Width="330" Height="24" X="21" Y="54" Transparent="yes">
+          <Text>{&amp;IntText}If you want to review or change any of your settings, click Back. Click Cancel to exit the wizard.</Text>
+        </Control>
+        <Control Id="DeleteSettingsCheckModify" Type="CheckBox" X="45" Y="80" Width="10" Height="10" CheckBoxPropertyRef="DELETE_SETTINGS" CheckBoxValue="1"
+                 Hidden="yes">
+          <Condition Action="show">MAINTENANCE="modify"</Condition>
+        </Control>
+        <Control Id="DeleteSettingsTextModify" Type="Text" X="60" Y="80" Width="219" Height="25" Transparent="yes"
+                 Hidden="yes">
+          <Text>{&amp;IntText}Delete current user's settings, preferences, and service parameters of any products being uninstalled.</Text>
+          <Condition Action="show">MAINTENANCE="modify"</Condition>
+        </Control>
+        <Control Type="Line" Id="DlgLine" X="0" Y="234" Width="370" Height="0" />
+        <Control Type="PushButton" Id="InstallNow" X="230" Y="243" Width="56" Height="17" Text="&amp;Install">
+          <!-- To Debug, instead of SetupProgress, ExitDialogMy so can review it. -->
+          <Publish Event="NewDialog" Value="SetupProgress" />
+        </Control>
+        <Control Type="PushButton" Id="Back" X="170" Y="243" Width="56" Height="17" Text="&lt; &amp;Back">
+          <Publish Event="NewDialog" Value="ClientConfig"><![CDATA[MAINTENANCE<>"repair"]]></Publish>
+          <Publish Event="NewDialog" Value="ProgramMaintenance"><![CDATA[MAINTENANCE="repair"]]></Publish>
+        </Control>
+        <Control Type="PushButton" Id="Cancel" X="300" Y="243" Width="56" Height="17" Text="&amp;Cancel">
+          <Publish Event="SpawnDialog" Value="CancelSetup"/>
+        </Control>
+      </Dialog>
+      <Dialog Id="ReadyToRemove" Width="370" Height="270" Title="[ProductName] - $(env.TitleBarRelease)" NoMinimize="yes">
+        <Control Type="Bitmap" Id="Banner" X="0" Y="0" Width="370" Height="234" TabSkip="no" Text="interior.bmp" />
+        <Control Id="Title" Type="Text" X="45" Y="12" Width="210" Height="12" Transparent="yes">
+          <Text>{&amp;IntHeadingTitle}Remove</Text>
+        </Control>
+        <Control Id="Description" Type="Text" X="45" Y="22" Width="219" Height="12" Transparent="yes">
+          <Text>{&amp;IntHeading}You have chosen to remove</Text>
+        </Control>
+        <Control Id="Text1" Type="Text" X="45" Y="60" Width="219" Height="12" Transparent="yes">
+          <Text>{&amp;IntText}To remove [ProductName] click Remove.</Text>
+        </Control>
+        <Control Id="DeleteSettingsCheck" Type="CheckBox" X="45" Y="80" Width="10" Height="10" Property="DELETE_SETTINGS" CheckBoxValue="1" />
+        <Control Id="DeleteSettingsText" Type="Text" X="60" Y="80" Width="219" Height="25" Transparent="yes">
+          <Text>{&amp;IntText}Delete settings, preferences, and service parameters of any products being uninstalled.</Text>
+        </Control>
+        <Control Id="Back" Type="PushButton" X="170" Y="243" Width="56" Height="17" Text="&lt; &amp;Back">
+          <Publish Event="NewDialog" Value="ProgramMaintenance">1</Publish>
+        </Control>
+        <Control Id="Remove" Type="PushButton" X="230" Y="243" Width="56" Height="17" Default="yes" Text="&amp;Remove">
+          <Publish Event="Remove" Value="ALL" Order="2">1</Publish>
+          <Publish Event="NewDialog" Value="SetupProgress" Order="3">1</Publish>
+        </Control>
+        <Control Id="Cancel" Type="PushButton" X="300" Y="243" Width="56" Height="17" Cancel="yes" Text="&amp;Cancel">
+          <Publish Event="SpawnDialog" Value="CancelSetup">1</Publish>
+        </Control>
+      </Dialog>
+  <!---->
+          <!--Don't use DialogRef to use built-in WiX dialogs since for this installer
+          we want dialogs to match the size and layout of the InstallShield dialogs
+          assuming this is what the customer would want.-->
+  <!---->
+      <Dialog Id="SetupProgress" Width="370" Height="270" Title="[ProductName] - $(env.TitleBarRelease)" Modeless="yes">
+        <Control Id="ActionText" Type="Text" X="59" Y="100" Width="275" Height="12" Transparent="yes" Text="{&amp;ExtText}">
+          <Subscribe Event="ActionText" Attribute="Text"/>
+        </Control>
+        <Control Id="ActionProgress" Type="ProgressBar" X="59" Y="113" Width="275" Height="12"
+                  ProgressBlocks="yes" Text="Progress done" >
+          <Subscribe Event="SetProgress" Attribute="Progress"/>
+        </Control>
+        <Control Id="Cancel" Type="PushButton" X="300" Y="243" Width="56" Height="17" Text="&amp;Cancel">
+          <Publish Event="SpawnDialog" Value="CancelSetup" />
+        </Control>
+        <Control Type="Bitmap" Id="Image" Width="370" Height="234" X="0" Y="0" Text="exterior.bmp" />
+      </Dialog>
+      <!-- We hide the FilesInUse since we don't want the user being asked at any time to close File Explorer
+      which it would ask in our case. We must have the dialog since it's required. -->
+      <!-- This should work in theory (see Rob Mensching's answer):
+      https://stackoverflow.com/questions/17823503/how-to-avoid-the-following-applications-should-be-closed-message-during-uninst
+      For the addition of the Modeless and NoMinimize settings see this:
+      http://wix-users.narkive.com/En6soiyN/suppressing-error-dialogs
+      -->
+      <Dialog Id="FilesInUse" Hidden="yes" Modeless="yes" NoMinimize="yes" Width="370" Height="270" Title="[ProductName] - $(env.TitleBarRelease)">
+        <Control Id="Title" Type="Text" X="45" Y="12" Width="200" Height="12" Transparent="yes" NoPrefix="yes">
+          <Text>{&amp;IntHeadingTitle}Files in Use</Text>
+        </Control>
+        <Control Id="Description" Type="Text" X="45" Y="22" Width="219" Height="12" Transparent="yes" NoPrefix="yes">
+          <Text>{&amp;IntHeading}Some files that need to be updated are currently in use.</Text>
+        </Control>
+        <Control Id="Text" Type="Text" X="20" Y="55" Width="330" Height="30" Transparent="yes">
+          <Text>{&amp;IntText}The following applications are using files that need to be updated by this setup. Close these applications and then click Retry to continue setup or Exit to exit it.</Text>
+        </Control>
+        <Control Id="Retry" Type="PushButton" X="304" Y="243" Width="56" Height="17" Text="Retry" Default="yes" Cancel="yes">
+          <Publish Event="EndDialog" Value="Retry">1</Publish>
+        </Control>
+        <Control Id="Ignore" Type="PushButton" X="235" Y="243" Width="56" Height="17" Text="Ignore">
+          <Publish Event="EndDialog" Value="Ignore">1</Publish>
+        </Control>
+        <Control Id="Exit" Type="PushButton" X="166" Y="243" Width="56" Height="17" Text="Exit">
+          <Publish Event="EndDialog" Value="Exit">1</Publish>
+        </Control>
+        <Control Id="InUseFiles" Type="ListBox" X="20" Y="87" Width="330" Height="130"
+                 Property="FileInUseProcess" Sorted="yes" TabSkip="yes" Sunken="yes" />
+        <Control Type="Bitmap" Id="Image" Width="370" Height="234" X="0" Y="0" Text="interior.bmp" />
+      </Dialog>
+
+      <!-- For SetupError, the first control must be ErrorText, so we can't have a background bitmap first,
+      so we can't have a background behind the text. Also, when the background bitmap is 2nd, the bitmap doesn't appear,
+      the text is not transparent nor with the correct style, and the text width is beyond the screen width.-->
+      <Dialog Id="SetupError" Width="270" Height="110" Title="[ProductName] - $(env.TitleBarRelease)" ErrorDialog="yes" NoMinimize="yes">
+        <Control Id="ErrorText" Type="Text" X="50" Y="15" Width="200" Height="50" TabSkip="no" Text="Error text" />
+        <Control Id="Y" Type="PushButton" X="192" Y="80" Width="66" Height="17" TabSkip="yes" Text="Yes">
+          <Publish Event="EndDialog" Value="ErrorYes">1</Publish>
+        </Control>
+        <Control Id="A" Type="PushButton" X="192" Y="80" Width="66" Height="17" TabSkip="yes" Text="Abort">
+          <Publish Event="EndDialog" Value="ErrorAbort">1</Publish>
+        </Control>
+        <Control Id="C" Type="PushButton" X="192" Y="80" Width="66" Height="17" TabSkip="yes" Text="Cancel">
+          <Publish Event="EndDialog" Value="ErrorCancel">1</Publish>
+        </Control>
+        <Control Id="I" Type="PushButton" X="192" Y="80" Width="66" Height="17" TabSkip="yes" Text="Ignore">
+          <Publish Event="EndDialog" Value="ErrorIgnore">1</Publish>
+        </Control>
+        <Control Id="N" Type="PushButton" X="192" Y="80" Width="66" Height="17" TabSkip="yes" Text="No">
+          <Publish Event="EndDialog" Value="ErrorNo">1</Publish>
+        </Control>
+        <Control Id="O" Type="PushButton" X="192" Y="80" Width="66" Height="17" TabSkip="yes" Text="OK">
+          <Publish Event="EndDialog" Value="ErrorOk">1</Publish>
+        </Control>
+        <Control Id="R" Type="PushButton" X="192" Y="80" Width="66" Height="17" TabSkip="yes" Text="Retry">
+          <Publish Event="EndDialog" Value="ErrorRetry">1</Publish>
+        </Control>
+        <Control Id="ErrorIcon" Type="Icon" X="15" Y="15" Width="24" Height="24" Text="error.ico" />
+        <!-- Have our own icon over the icon that Windows Installer will set (the yellow triangle). -->
+        <Control Id="MyErrorIcon" Type="Icon" X="15" Y="15" Width="24" Height="24" Text="error.ico" />
+      </Dialog>
+      <Dialog Id="ExitDialogMy" Width="370" Height="270" Title="[ProductName] - $(env.TitleBarRelease)">
+        <Control Id="Image" Type="Bitmap" X="0" Y="0" Width="370" Height="234" TabSkip="no" Text="success_bg.bmp" />
+        <Control Id="TitleInstall" Type="Text" X="250" Y="14" Width="110" Height="12" Transparent="yes" NoPrefix="yes" Hidden="yes">
+          <Text>{&amp;ExtHeadingTitle}Finished installing</Text>
+          <!-- MAINTENANCE="modify" is same as installing (see also ReadyToInstall dialog). -->
+          <Condition Action="show">NOT (MAINTENANCE="repair" OR MAINTENANCE="remove")</Condition>
+        </Control>
+        <Control Id="TitleRepair" Type="Text" X="250" Y="14" Width="110" Height="12" Transparent="yes" NoPrefix="yes" Hidden="yes">
+          <Text>{&amp;ExtHeadingTitle}Finished repairing</Text>
+          <Condition Action="show">MAINTENANCE="repair"</Condition>
+        </Control>
+        <Control Id="TitleRemove" Type="Text" X="250" Y="14" Width="110" Height="12" Transparent="yes" NoPrefix="yes" Hidden="yes">
+          <Text>{&amp;ExtHeadingTitle}Finished removing</Text>
+          <Condition Action="show">MAINTENANCE="remove"</Condition>
+        </Control>
+        <Control Id="SuccessInstall" Type="Text" X="18" Y="48" Width="283" Height="13" Transparent="yes" NoPrefix="yes" Hidden="yes">
+          <Text>{&amp;ExtText}Successfully installed [ProductName]</Text>
+          <Condition Action="show">NOT (MAINTENANCE="repair" OR MAINTENANCE="remove")</Condition>
+        </Control>
+        <!-- Make Close first in list so first in tab order (it will have dotted outline) so URL buttons don't. -->
+        <Control Id="Close" Type="PushButton" X="230" Y="243" Width="56" Height="17" Default="yes" Cancel="no" Text="&amp;Close">
+          <Publish Event="EndDialog" Value="Return" Order="999">1</Publish>
+        </Control>
+        <!-- We use bitmaps of URLs on buttons since the Hyperlink control when transparent has a white background which looks bad
+                          on a dark background. -->
+        <!-- urlversion probably isn't needed since we don't use the MSI's UI. -->
+        <Control Id="ReleaseNotes" Type="PushButton" X="14" Y="63" Width="58" Height="17" Bitmap="yes" FixedSize="yes" TabSkip="yes" Text="ReleaseNotes.bmp">
+          <Publish Property="WixShellExecTarget" Value="https://www.perforce.com/perforce/r$(env.urlversion)/user/p4expnotes.txt" Order="1">1</Publish>
+          <Publish Event="DoAction" Value="OpenURL" Order="2">1</Publish>
+        </Control>
+        <Control Id="TechnicalDocumentation" Type="PushButton" X="80" Y="64" Width="91" Height="17" Bitmap="yes" FixedSize="yes" TabSkip="yes" Text="TechnicalDoc.bmp">
+          <Publish Property="WixShellExecTarget" Value="https://www.perforce.com/perforce/doc.current/manuals/p4exp/" Order="1">1</Publish>
+          <Publish Event="DoAction" Value="OpenURL" Order="2">1</Publish>
+        </Control>
+        <Control Id="Back" Type="PushButton" X="170" Y="243" Width="56" Height="17" Text="&lt; &amp;Back" Disabled="yes" />
+        <Control Id="Cancel" Type="PushButton" X="300" Y="243" Width="56" Height="17" Text="&amp;Cancel" Disabled="yes" />
+        <Control Id="BottomLine" Type="Line" X="0" Y="234" Width="370" Height="2" />
+        <Control Id="ToLearnMore" Type="Text" X="66" Y="207" Height="10" Width="77" Transparent="yes" Text="{&amp;ExtText}To learn more, visit" />
+        <Control Id="ToLearnMoreBtn" Type="PushButton" X="138" Y="209" Width="165" Height="10" Bitmap="yes" FixedSize="yes" TabSkip="yes" Text="ToLearnMore.bmp">
+          <Publish Property="WixShellExecTarget" Value="https://www.perforce.com/products/helix-teamhub" Order="1">1</Publish>
+          <Publish Event="DoAction" Value="OpenURL" Order="2">1</Publish>
+        </Control>
+      </Dialog>
+      <Dialog Id="SetupCompleteError" Width="370" Height="270" Title="[ProductName] - $(env.TitleBarRelease)" NoMinimize="yes">
+        <Control Id="Background" Type="Bitmap" Width="370" Height="234" X="0" Y="0" TabSkip="no" Text="exterior.bmp" />
+        <Control Id="Title" Type="Text" X="184" Y="18" Width="179" Height="42" Transparent="yes" NoPrefix="yes">
+          <Text>{&amp;ExtHeadingTitle}[ProductName] Setup Wizard failed</Text>
+        </Control>
+        <Control Id="Icon" Type="Icon" X="20" Y="101" Width="40" Height="40" Text="error_bg_bk.ico" />
+        <Control Id="Message" Type="Text" X="92" Y="80" Width="210" Height="22" Transparent="yes">
+          <Text>{&amp;ExtText}[ProductName] Setup Wizard failed because of an error. Your system has not been modified.</Text>
+        </Control>
+        <Control Id="Message2" Type="Text" X="92" Y="112" Width="192" Height="20" Transparent="yes">
+          <Text>{&amp;ExtText}To install these applications at a later time, run this installer again.</Text>
+        </Control>
+        <Control Id="ShowLogFile" Type="CheckBox" X="92" Y="145" Width="10" Height="10" Property="ShowLogFile" CheckBoxValue="true" />
+        <Control Id="ShowLogFileText" Type="Text" X="105" Y="145" Width="258" Height="24" Transparent="yes">
+          <Text>{&amp;ExtText}Show log file</Text>
+        </Control>
+        <!--
+          <Control Id="Title" Type="Text" X="184" Y="18" Width="179" Height="42" Transparent="yes" NoPrefix="yes"
+            Text="{&amp;ExtHeadingTitle}[ProductName] Setup Wizard failed" />
+          <Control Id="Message" Type="Text" X="25" Y="88" Width="228" Height="51" Transparent="yes"
+            Text="{&amp;ExtText}[ProductName] Setup Wizard failed because of an error. Your system has not been modified. To install this program at a later time, run Setup Wizard again." />
+        -->
+        <Control Id="Finish" Type="PushButton" X="230" Y="243" Width="56" Height="17" Default="yes" Cancel="no" Text="&amp;Exit">
+          <Publish Event="DoAction" Value="ShowLogFile" Order="1">ShowLogFile="true"</Publish>
+          <Publish Event="EndDialog" Value="Exit" Order="2">1</Publish>
+        </Control>
+        <Control Id="Back" Type="PushButton" X="170" Y="243" Width="56" Height="17" Disabled="yes" Text="&lt; &amp;Back" />
+        <Control Id="Cancel" Type="PushButton" X="300" Y="243" Width="56" Height="17" Disabled="yes" Text="&amp;Cancel" />
+      </Dialog>
+      <Dialog Id="UserExitMy" Width="370" Height="270" Title="[ProductName] - $(env.TitleBarRelease)">
+        <Control Id="Background" Type="Bitmap" Width="370" Height="234" X="0" Y="0" TabSkip="no" Text="exterior.bmp" />
+        <Control Id="Title" Type="Text" X="184" Y="18" Width="179" Height="42" Transparent="yes" NoPrefix="yes" Text="{&amp;ExtHeadingTitle}[ProductName] Setup Wizard was interrupted" />
+        <Control Id="Icon" Type="Icon" X="20" Y="94" Width="40" Height="40" Text="error_bg_bk.ico" />
+        <Control Id="Message1" Type="Text" X="92" Y="88" Width="192" Height="38" Transparent="yes">
+          <Text>{&amp;ExtText}The installation of the [ProductName] was interrupted. Your system has not been modified.</Text>
+        </Control>
+        <Control Id="Message2" Type="Text" X="92" Y="134" Width="192" Height="20" Transparent="yes">
+          <Text>{&amp;ExtText}To install the application at a later time, run this installer again.</Text>
+        </Control>
+        <Control Id="Back" Type="PushButton" X="170" Y="243" Width="56" Height="17" Disabled="yes" Text="&lt; &amp;Back" />
+        <Control Id="Quit" Type="PushButton" X="230" Y="243" Width="56" Height="17" Default="yes" Cancel="no" Text="&amp;Quit">
+          <Publish Event="EndDialog" Value="Exit">1</Publish>
+        </Control>
+        <Control Id="Cancel" Type="PushButton" X="300" Y="243" Width="56" Height="17" Disabled="yes" Text="&amp;Cancel" />
+        <Control Id="BottomLine" Type="Line" X="0" Y="234" Width="370" Height="2" />
+      </Dialog>
+      <Dialog Id="CancelSetup" Width="260" Height="85" Title="[ProductName] - $(env.TitleBarRelease)" NoMinimize="yes">
+        <Control Id="Background" Type="Bitmap" X="0" Y="0" Width="260" Height="85" TabSkip="no" Text="help_bg.bmp" />
+        <Control Id="Text" Type="Text" X="59" Y="18" Width="194" Height="30" Transparent="yes">
+          <Text>{&amp;IntText}Are you sure you want to cancel the installation of [ProductName]?</Text>
+        </Control>
+        <Control Id="Icon" Type="Icon" X="15" Y="10" Width="40" Height="40" Text="warning_bg_bk.ico" />
+        <Control Id="Yes" Type="PushButton" X="62" Y="57" Width="66" Height="17" Default="yes" Cancel="no" Text="&amp;Yes">
+          <Publish Event="EndDialog" Value="Exit" />
+        </Control>
+        <Control Id="No" Type="PushButton" X="135" Y="57" Width="66" Height="17" Cancel="no" Text="&amp;No">
+          <Publish Event="EndDialog" Value="Return" />
+        </Control>
+      </Dialog>
+      <Dialog Id="TargetWarning" Width="260" Height="95" Title="[ProductName] - $(env.TitleBarRelease)" NoMinimize="yes">
+        <Control Id="Background" Type="Bitmap" X="0" Y="0" Width="260" Height="95" TabSkip="no" Text="help_bg.bmp" />
+        <Control Id="Text" Type="Text" X="59" Y="18" Width="194" Height="43" Transparent="yes">
+          <Text>{&amp;IntText}The default value of "perforce:1666" in the Server field likely needs to be updated. Contact your Perforce administrator, if you are unsure of the name of your server.</Text>
+        </Control>
+        <Control Id="Icon" Type="Icon" X="10" Y="20" Width="40" Height="40" Text="warning_bg_bk.ico" />
+        <Control Id="OK" Type="PushButton" X="92" Y="70" Width="66" Height="17" Text="&amp;OK">
+          <Publish Property="TARGET_WARNED" Value="1" Order="1">1</Publish>
+          <Publish Event="EndDialog" Value="Return" Order="2">1</Publish>
+        </Control>
+      </Dialog>
+      <Dialog Id="ProgramMaintenance" Width="370" Height="270" Title="[ProductName] - $(env.TitleBarRelease)" NoMinimize="yes">
+        <Control Type="Bitmap" Id="background" X="0" Y="0" Width="370" Height="234" TabSkip="no" Text="interior.bmp" />
+        <Control Id="Title" Type="Text" X="40" Y="10" Width="210" Height="12" Transparent="yes" NoPrefix="yes" Text="{&amp;IntHeadingTitle}Program Maintenance" />
+        <Control Id="Description" Type="Text" X="40" Y="20" Width="219" Height="12" Transparent="yes" NoPrefix="yes" Text="{&amp;IntHeading}Repair or remove the application" />
+        <Control Id="RepairButton" Type="PushButton" X="25" Y="56" Width="56" Height="17" Text="Re&amp;pair">
+          <Publish Property="MAINTENANCE" Value="repair" Order="1">1</Publish>
+          <Publish Event="NewDialog" Value="ReadyToInstall" Order="2">1</Publish>
+        </Control>
+        <Control Id="RepairText" Type="Text" X="25" Y="77" Height="34" Width="309" Transparent="yes">
+          <Text>{&amp;IntText}Repair installation errors. This option fixes missing or corrupted files, shortcuts, and registry entries.</Text>
+        </Control>
+        <Control Id="RemoveButton" Type="PushButton" X="25" Y="120" Width="56" Height="17" Text="&amp;Remove">
+          <Publish Property="MAINTENANCE" Value="remove" Order="1">1</Publish>
+          <Publish Event="NewDialog" Value="ReadyToRemove" Order="2">1</Publish>
+        </Control>
+        <Control Id="RemoveText1" Type="Text" X="25" Y="142" Height="13" Width="309" Transparent="yes">
+          <Text>{&amp;IntText}Remove Helix Plugin for File Explorer from this machine.</Text>
+        </Control>
+        <Control Id="RemoveText2" Type="Text" X="25" Y="157" Height="20" Width="309" Transparent="yes">
+          <Text>{&amp;IntTextBoldItalic}No client/workspace files, server database files, or proxy cache files will be removed when this option is used.</Text>
+        </Control>
+        <Control Id="Back" Type="PushButton" X="170" Y="243" Width="56" Height="17" Text="&lt; &amp;Back" Disabled="yes" />
+        <Control Id="Next" Type="PushButton" X="230" Y="243" Width="56" Height="17" Text="&amp;Next &gt;" Disabled="yes" />
+        <Control Type="PushButton" Id="Cancel" X="300" Y="243" Width="56" Height="17" Text="&amp;Cancel">
+          <Publish Event="SpawnDialog" Value="CancelSetup" />
+        </Control>
+      </Dialog>
+      <Dialog Id="Upgrade" Width="370" Height="270" Title="[ProductName] - $(env.TitleBarRelease)" NoMinimize="yes">
+        <Control Id="Title" Type="Text" X="184" Y="18" Width="179" Height="42" Transparent="yes">
+          <Text>{&amp;ExtHeadingTitle}Upgrading the [ProductName] Installation</Text>
+        </Control>
+        <Control Id="Description" Type="Text" X="25" Y="88" Width="169" Height="34" Transparent="yes">
+          <Text>{&amp;ExtText}To start the upgrade Wizard click Next.</Text>
+        </Control>
+        <Control Id="Back" Type="PushButton" X="170" Y="243" Width="56" Height="17" Text="&lt; &amp;Back" Disabled="yes" />
+        <Control Id="Next" Type="PushButton" X="230" Y="243" Width="56" Height="17" Text="&amp;Next &gt;">
+          <!-- TODO: Show OutOfSpace dialog as 12.2 did? -->
+          <!-- Handle case where REMOVE="ALL" is passed on the command line.
+          That is an option in the KB article. -->
+          <Publish Event="NewDialog" Value="SelectDest" Order="1">NOT REMOVE="ALL" AND NOT REINSTALL="ALL"</Publish>
+          <Publish Event="NewDialog" Value="SetupProgress" Order="3">REMOVE="ALL" OR REINSTALL="ALL"</Publish>
+        </Control>
+        <Control Type="PushButton" Id="Cancel" X="300" Y="243" Width="56" Height="17" Text="&amp;Cancel">
+          <Publish Event="SpawnDialog" Value="CancelSetup" />
+        </Control>
+        <Control Type="Bitmap" Id="Image" Width="370" Height="234" X="0" Y="0" Text="exterior.bmp" />
+      </Dialog>
+    </UI>
+
+    <Binary Id="banner.bmp" SourceFile="..\res\banner.bmp" />
+    <Binary Id="exterior.bmp" SourceFile="..\res\exterior.bmp" />
+    <Binary Id="interior.bmp" SourceFile="..\res\interior.bmp" />
+    <Binary Id="success_bg.bmp" SourceFile="..\res\success_bg.bmp" />
+    <Binary Id="help_bg.bmp" SourceFile="..\res\help_bg.bmp" />
+    <Binary Id="NewFolder.ico" SourceFile="..\res\NewFolder.ico" />
+    <Binary Id="Up.ico" SourceFile="..\res\Up.ico" />
+    <Binary Id="error.ico" SourceFile="..\res\error.ico" />
+    <Binary Id="error_bg_bk.ico" SourceFile="..\res\error_bg_bk.ico" />
+    <Binary Id="warning.ico" SourceFile="..\res\warning.ico" />
+    <Binary Id="warning_bg_bk.ico" SourceFile="..\res\warning_bg_bk.ico" />
+    <Binary Id="question.ico" SourceFile="..\res\question.ico" />
+    <Binary Id="question_bg_bk.ico" SourceFile="..\res\question_bg_bk.ico" />
+    <Binary Id="info.ico" SourceFile="..\res\info.ico" />
+    <Binary Id="info_bg_bk.ico" SourceFile="..\res\info_bg_bk.ico" />
+    <Binary Id="ReleaseNotes.bmp" SourceFile="..\res\ReleaseNotes.bmp" />
+    <Binary Id="TechnicalDoc.bmp" SourceFile="..\res\TechnicalDocumentation.bmp" />
+    <Binary Id="ToLearnMore.bmp" SourceFile="..\res\ToLearnMore.bmp" />
+    <Binary Id="LearnMore.bmp" SourceFile="..\res\LearnMore.bmp" />
+    
+    <Icon Id="P4EXP.ico" SourceFile="..\res\P4EXP.ico" />
+    
+  </Fragment>
+</Wix>

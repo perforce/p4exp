@@ -1,0 +1,460 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E48D396E-04AC-40C8-9046-66A896EF3568}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>P4EXP</RootNamespace>
+    <AssemblyName>p4exp</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <PlatformTarget>x64</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <OutputPath>C:\Program Files (x86)\Perforce\P4EXP\</OutputPath>
+    <PlatformTarget>x64</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Apex.WinForms, Version=1.6.0.0, Culture=neutral, PublicKeyToken=98d06957926c086d, processorArchitecture=MSIL">
+      <HintPath>packages\SharpShellTools.2.2.0.0\lib\Apex.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Deployment.WindowsInstaller, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce35f76fcda82bad, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="p4api.net">
+      <HintPath>libs\p4api.net.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpShell, Version=2.7.1.0, Culture=neutral, PublicKeyToken=f14dc899472fe6fb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>libs\SharpShell.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="AutoSizeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DlgEditWorkspace.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DlgEditWorkspace.Designer.cs">
+      <DependentUpon>DlgEditWorkspace.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DoubleBufferedListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FileCache.cs" />
+    <Compile Include="FileLogger.cs" />
+    <Compile Include="FilterComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GetStringDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GetStringDlg.Designer.cs" />
+    <Compile Include="GridLayoutCell.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GridLayoutPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GridLayoutPanel.designer.cs">
+      <DependentUpon>GridLayoutPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HASCheckDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HASCheckDlg.Designer.cs" />
+    <Compile Include="Images.Designer.cs" />
+    <Compile Include="LabeledControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LabeledControl.designer.cs">
+      <DependentUpon>LabeledControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LaunchingHMFA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LaunchingHMFA.designer.cs">
+      <DependentUpon>LaunchingHMFA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListViewColumnSorter.cs" />
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Message.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Message.Designer.cs">
+      <DependentUpon>Message.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewUserDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewUserDlg.Designer.cs">
+      <DependentUpon>NewUserDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OpenConnectionDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OpenConnectionDlg.Designer.cs">
+      <DependentUpon>OpenConnectionDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OverlayHandler.cs" />
+    <Compile Include="P4EXPContextMenuExtension.cs" />
+    <Compile Include="P4EXPCheckedOutOverlayIconExtension.cs" />
+    <Compile Include="P4EXPStaleOverlayIconExtension.cs" />
+    <Compile Include="P4EXPAddOverlayIconExtension.cs" />
+    <Compile Include="P4EXPLatestOverlayIconExtension.cs" />
+    <Compile Include="P4EXPProgram.cs" />
+    <Compile Include="P4FileTreeListViewItem.cs" />
+    <Compile Include="P4ObjectTreeListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="P4ObjectTreeListView.Designer.cs" />
+    <Compile Include="P4ObjectTreeListViewItem.cs" />
+    <Compile Include="P4ToolWindowControlBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Preferences.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Preferences.Designer.cs">
+      <DependentUpon>Preferences.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.ja.Designer.cs">
+      <DependentUpon>Resources.ja.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="RepoStorage.cs" />
+    <Compile Include="RevertDeleteWarning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RevertDeleteWarning.Designer.cs">
+      <DependentUpon>RevertDeleteWarning.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SlidingPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SlidingPanelContainer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SslPrompt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SslPrompt.Designer.cs">
+      <DependentUpon>SslPrompt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TreeListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TreeListViewItem.cs" />
+    <Compile Include="WorkspaceBrowserDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorkspaceBrowserDlg.Designer.cs">
+      <DependentUpon>WorkspaceBrowserDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UsersBrowserDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UsersBrowserDlg.Designer.cs">
+      <DependentUpon>UsersBrowserDlg.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DlgEditWorkspace.resx">
+      <DependentUpon>DlgEditWorkspace.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DoubleBufferedListView.resx">
+      <DependentUpon>DoubleBufferedListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GetStringDlg.resx" />
+    <EmbeddedResource Include="GridLayoutPanel.resx">
+      <DependentUpon>GridLayoutPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HASCheckDlg.resx" />
+    <EmbeddedResource Include="Images.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LabeledControl.resx">
+      <DependentUpon>LabeledControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LaunchingHMFA.resx">
+      <DependentUpon>LaunchingHMFA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Message.resx">
+      <DependentUpon>Message.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewUserDlg.resx">
+      <DependentUpon>NewUserDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OpenConnectionDlg.resx">
+      <DependentUpon>OpenConnectionDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="P4ObjectTreeListView.resx" />
+    <EmbeddedResource Include="Preferences.resx">
+      <DependentUpon>Preferences.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.ja.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.ja.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RevertDeleteWarning.resx">
+      <DependentUpon>RevertDeleteWarning.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SlidingPanel.resx">
+      <DependentUpon>SlidingPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SlidingPanelContainer.resx">
+      <DependentUpon>SlidingPanelContainer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SslPrompt.resx">
+      <DependentUpon>SslPrompt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TreeListView.resx">
+      <DependentUpon>TreeListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorkspaceBrowserDlg.resx">
+      <DependentUpon>WorkspaceBrowserDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UsersBrowserDlg.resx">
+      <DependentUpon>UsersBrowserDlg.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="MsBuildAL1073WarningWorkaround.targets" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="p4bridge.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\add.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\addO_badge.png" />
+    <Content Include="Resources\add_badge.png" />
+    <Content Include="Resources\add_moveO_badge.png" />
+    <Content Include="Resources\add_move_badge.png" />
+    <Content Include="Resources\blank.png" />
+    <Content Include="Resources\branchO_badge.png" />
+    <Content Include="Resources\branch_badge.png" />
+    <Content Include="Resources\CheckBox.png" />
+    <Content Include="Resources\checked-out.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\connected.png" />
+    <Content Include="Resources\connected_with_issues.png" />
+    <Content Include="Resources\disconnected.png" />
+    <Content Include="Resources\stream_clients_icon.png" />
+    <Content Include="Resources\submitted.ico" />
+    <Content Include="Resources\submitted_change_icon.png" />
+    <Content Include="Resources\submitted_change_review_icon.png" />
+    <Content Include="Resources\swarm_contextmenu16_16.png" />
+    <Content Include="Resources\toolwindow_icons_strip.png" />
+    <Content Include="Resources\TriangleDownGray.png" />
+    <Content Include="Resources\TriangleDownRed.png" />
+    <Content Include="Resources\TriangleRightGray.png" />
+    <Content Include="Resources\TriangleRightRed.png" />
+    <Content Include="Resources\user.ico" />
+    <Content Include="Resources\users_icon.png" />
+    <Content Include="Resources\virtual_file_badge.png" />
+    <Content Include="Resources\virtual_folder_badge.png" />
+    <Content Include="Resources\workspace.ico" />
+    <None Include="Resources\workspace_icon.png" />
+    <None Include="Resources\HMFA-spinner-78x78.gif" />
+    <None Include="Resources\download-icon.png" />
+    <Content Include="Resources\CheckMark.png" />
+    <Content Include="Resources\clients_icon.png" />
+    <Content Include="Resources\client_folder.png" />
+    <Content Include="Resources\collapsed.png" />
+    <Content Include="Resources\datetime.png" />
+    <Content Include="Resources\deleteO_badge.png" />
+    <Content Include="Resources\delete_badge.png" />
+    <Content Include="Resources\delete_center_badge.png" />
+    <Content Include="Resources\delete_moveO_badge.png" />
+    <Content Include="Resources\delete_move_badge.png" />
+    <Content Include="Resources\delete_move_center_badge.png" />
+    <Content Include="Resources\depot.png" />
+    <Content Include="Resources\depot_folder.png" />
+    <Content Include="Resources\depot_icon.png" />
+    <Content Include="Resources\editO_badge.png" />
+    <Content Include="Resources\expanded.png" />
+    <Content Include="Resources\file_changed_icon.png" />
+    <Content Include="Resources\file_depot_icon.png" />
+    <Content Include="Resources\file_local_icon.png" />
+    <Content Include="Resources\file_notInClient_icon.png" />
+    <Content Include="Resources\file_unmapped_icon.png" />
+    <Content Include="Resources\folder.png" />
+    <Content Include="Resources\greyfile.png" />
+    <Content Include="Resources\head_dot_badge.png" />
+    <Content Include="Resources\HistoryToolWindow.bmp" />
+    <Content Include="Resources\Images_32bit.bmp" />
+    <Content Include="Resources\integrateO_badge.png" />
+    <Content Include="Resources\integrate_badge.png" />
+    <Content Include="Resources\job.ico" />
+    <Content Include="Resources\jobs_icon.png" />
+    <Content Include="Resources\label.ico" />
+    <Content Include="Resources\labels_icon.png" />
+    <Content Include="Resources\latest_rev.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\lock_badge.png" />
+    <Content Include="Resources\lock_other_badge.png" />
+    <Content Include="Resources\minus.png" />
+    <Content Include="Resources\noCheckBox.png" />
+    <Content Include="Resources\out_of_sync_badge.png" />
+    <Content Include="Resources\p4exp.ico" />
+    <None Include="Resources\p4exp.png" />
+    <Content Include="Resources\p4v.png" />
+    <Content Include="Resources\pending.ico" />
+    <Content Include="Resources\pending_icon.png" />
+    <Content Include="Resources\pending_icon_shelved.png" />
+    <Content Include="Resources\pending_icon_shelved_review.png" />
+    <Content Include="Resources\pending_other.png" />
+    <Content Include="Resources\pending_other_shelved.png" />
+    <Content Include="Resources\pending_other_shelved_review.png" />
+    <Content Include="Resources\pending_resolve.png" />
+    <Content Include="Resources\pending_resolve_badge.png" />
+    <Content Include="Resources\pending_resolve_shelved.png" />
+    <Content Include="Resources\pending_review_badge.png" />
+    <Content Include="Resources\pending_shelved_badge.png" />
+    <Content Include="Resources\plus.png" />
+    <Content Include="Resources\portrait.png" />
+    <Content Include="Resources\Product.ico" />
+    <Content Include="Resources\refresh.png" />
+    <Content Include="Resources\ResolveCommon.bmp" />
+    <Content Include="Resources\ResolveFlow.bmp" />
+    <Content Include="Resources\ResolveFlow.png" />
+    <Content Include="Resources\resolve_badge.png" />
+    <Content Include="Resources\revision_icon_add.png" />
+    <Content Include="Resources\revision_icon_archive.png" />
+    <Content Include="Resources\revision_icon_base.png" />
+    <Content Include="Resources\revision_icon_branch.png" />
+    <Content Include="Resources\revision_icon_delete.png" />
+    <Content Include="Resources\revision_icon_edit.png" />
+    <Content Include="Resources\revision_icon_integrate.png" />
+    <Content Include="Resources\revision_icon_moveadd.png" />
+    <Content Include="Resources\revision_icon_movedelete.png" />
+    <Content Include="Resources\revision_icon_purge.png" />
+    <Content Include="Resources\shelve_icon_add.png" />
+    <Content Include="Resources\shelve_icon_archive.png" />
+    <Content Include="Resources\shelve_icon_base.png" />
+    <Content Include="Resources\shelve_icon_branch.png" />
+    <Content Include="Resources\shelve_icon_delete.png" />
+    <Content Include="Resources\shelve_icon_edit.png" />
+    <Content Include="Resources\shelve_icon_folder.png" />
+    <Content Include="Resources\shelve_icon_integrate.png" />
+    <Content Include="Resources\shelve_icon_moveadd.png" />
+    <Content Include="Resources\shelve_icon_movedelete.png" />
+    <Content Include="Resources\shelve_icon_purge.png" />
+    <Content Include="Resources\SslWarning.png" />
+    <Content Include="Resources\stale_rev.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="MsBuildAL1073WarningWorkaround.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>echo copying bridge dll  to "$(ProjectDir)"
+      COPY "$(ProjectDir)libs\p4bridge.dll" "$(ProjectDir)"
+    </PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

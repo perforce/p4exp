@@ -1,0 +1,6 @@
+LIBRARY "CustomActions"
+
+EXPORTS
+    BrowseForFile
+    DeleteSettings
+    GetAppVersions

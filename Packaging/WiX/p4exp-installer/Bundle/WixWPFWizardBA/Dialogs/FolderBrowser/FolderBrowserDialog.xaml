@@ -1,0 +1,139 @@
+﻿<Window x:Class="WixWPFWizardBA.Dialogs.FolderBrowser.FolderBrowserDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d"
+        x:Name="view"
+        Title="{Binding DialogTitle}"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:wixWpfWizardBa="clr-namespace:WixWPFWizardBA"
+        xmlns:local="clr-namespace:WixWPFWizardBA.Dialogs.FolderBrowser"
+        DataContext="{Binding ElementName=view, Path=ViewModel}"
+        Width="513"
+        Height="397"
+        WindowStyle="ToolWindow"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        Foreground="White"
+        >
+    <Window.Resources>
+        <ResourceDictionary>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <!-- TODO Need? <converters:EnumToVisibilityConverter x:Key="EnumToVisibilityConverter" /> -->
+        </ResourceDictionary>
+    </Window.Resources>
+    <!-- If we don't set the background to white, it's black, which doesn't match the pages. -->
+    <DockPanel Background="White">
+        <Separator Height="2"
+                   DockPanel.Dock="Top" />
+
+        <DockPanel DockPanel.Dock="Top"
+                   Width="507"
+                   Height="312">
+            <DockPanel.Background>
+                <ImageBrush ImageSource="/WixWPFWizardBA;component/Resources/interior.bmp"/>
+            </DockPanel.Background>
+            <TextBlock DockPanel.Dock="Top"
+                   Margin="50, 20"
+                   Text="{x:Static wixWpfWizardBa:Localisation.FolderBrowserDialog_Title}" />
+            <!---->
+
+            <!-- The selected folder path -->
+            <!-- The windows explorer style treeview of folders -->
+            <!--TODO Remove Height and have it fit. -->
+            <TreeView 
+                DockPanel.Dock="Top"
+                Height="180"
+                 Margin="5,15,5,5"
+                ItemsSource="{Binding Folders}"
+                SelectedValuePath="" >
+                <TreeView.ItemContainerStyle>
+                    <Style TargetType="{x:Type TreeViewItem}">
+                        <Setter Property="local:TreeViewItemBehaviour.IsBroughtIntoViewWhenSelected" 
+                                Value="True" />
+                        <Setter Property="IsExpanded"
+                                Value="{Binding IsExpanded, Mode=TwoWay}" />
+                        <Setter Property="IsSelected"
+                                Value="{Binding IsSelected, Mode=TwoWay}" />
+                        <Setter Property="FontWeight"
+                                Value="Normal" />
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected"
+                                     Value="True">
+                                <Setter Property="FontWeight"
+                                        Value="Bold" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TreeView.ItemContainerStyle>
+
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Folders}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{Binding FolderIcon}"
+                                   Margin="2"
+                                   VerticalAlignment="Center"
+                                   Height="13" />
+                            <TextBlock Text="{Binding FolderName}"
+                                       MouseDown="TextBlock_MouseDown"
+                                       VerticalAlignment="Center"
+                                       Margin="2"
+                                       Height="16" />
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{x:Static wixWpfWizardBa:Localisation.FolderBrowserDialog_PathTitle}" 
+                               MinHeight="25"
+                               Margin="5 5"/>
+                    <TextBox Grid.Column="1" Text="{Binding Path=SelectedFolder, UpdateSourceTrigger=PropertyChanged}"
+                            local:InputBindingsManager.UpdatePropertySourceWhenEnterPressed="TextBox.Text"
+                            MinHeight="25"
+                            Margin="5"
+                            />
+                </Grid>
+                <TextBlock Text="{x:Static wixWpfWizardBa:Localisation.FolderBrowserDialog_PathDesc}"
+                           Foreground="Gray"
+                           DockPanel.Dock="Bottom" 
+                           MinHeight="20"
+                           Margin="45,0,0,0"/>
+            </StackPanel>
+        </DockPanel>
+        <Grid Height="25"
+              Margin="0 0 0 15"
+              HorizontalAlignment="Stretch"
+              DockPanel.Dock="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="1"
+                    Margin="10 0 20 0"
+                    HorizontalAlignment="Right"
+                    Click="Ok_Click"
+                    Content="{x:Static wixWpfWizardBa:Localisation.Wizard_OKText}"
+                    IsDefault="True"
+                    Padding="5 0" />
+            <Button Grid.Column="2"
+                    Margin="30 0 30 0"
+                    HorizontalAlignment="Left"
+                    Content="{x:Static wixWpfWizardBa:Localisation.Wizard_CancelButtonText}"
+                    IsCancel="True"
+                    Padding="5 0" />
+        </Grid>
+        <Separator Height="2"
+                   Margin="0 0 0 15"
+                   DockPanel.Dock="Bottom" />
+    </DockPanel>
+</Window>

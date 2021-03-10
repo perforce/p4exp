@@ -1,0 +1,75 @@
+﻿<!--
+    Copyright (c) Nick Guletskii and Arseniy Aseev. All rights reserved.  
+    Licensed under the MIT License. See LICENSE file in the solution root for full license information.  
+-->
+<UserControl x:Class="WixWPFWizardBA.Views.Pages.SelectApplicationsPage.SelectApplicationsPageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:selectApplicationsPage="clr-namespace:WixWPFWizardBA.Views.Pages.SelectApplicationsPage"
+             xmlns:wixWpfWizardBa="clr-namespace:WixWPFWizardBA"
+             d:DataContext="{d:DesignInstance selectApplicationsPage:SelectApplicationsPageViewModel}"
+             d:DesignWidth="493"
+             d:DesignHeight="312"
+             Background="Transparent"
+             Foreground="White"
+             mc:Ignorable="d">
+    <DockPanel Margin="0"
+               LastChildFill="False">
+        <DockPanel.Background>
+            <ImageBrush ImageSource="/WixWPFWizardBA;component/Resources/interior.bmp" Stretch="Fill"/>
+        </DockPanel.Background>
+        <TextBlock DockPanel.Dock="Top"
+                   Margin="50, 20"
+                   Text="{x:Static wixWpfWizardBa:Localisation.SelectApplicationsPage_SelectApplicationsText}" />
+        <Grid Height="250"
+              Margin="25 0 0 15"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch"
+              DockPanel.Dock="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="60" />
+                <RowDefinition Height="15" />
+                <RowDefinition Height="30" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="1"
+                   Text="{x:Static wixWpfWizardBa:Localisation.SelectApplicationsPage_ProductName}" />
+            <TextBlock Grid.Row="2"
+                   Foreground="Gray"
+                   Text="{Binding Bootstrapper.Engine.StringVariables[VersionForPage], 
+                         StringFormat={x:Static wixWpfWizardBa:Localisation.SelectApplicationsPage_Version}}" />
+            <TextBlock Grid.Row="3"
+                       HorizontalAlignment="Left"
+                       TextWrapping="Wrap"
+                       Width="270"
+                       Text="{x:Static wixWpfWizardBa:Localisation.SelectApplicationsPage_ProductDescription}" />
+            <Separator Grid.Row="4"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Bottom"
+                Width="450" />
+            <TextBlock Grid.Row="5"
+                       HorizontalAlignment="Left"
+                       Text="{x:Static wixWpfWizardBa:Localisation.SelectApplicationsPage_DirectoryTitle}" />
+            <TextBlock Grid.Row="6"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Width="370"
+                       Height="20"
+                       TextWrapping="WrapWithOverflow"
+                       Text="{Binding ApplicationsFolder}" />
+            <Button Grid.Row="6"
+                    Width="70"
+                    Margin="0 0 10 0"
+                    HorizontalAlignment="Right"
+                    Command="{Binding SelectAppsFolderBrowseCommand}"
+                    Content="{x:Static wixWpfWizardBa:Localisation.SelectApplicationsPage_ChangeButtonText}" />
+
+        </Grid>
+    </DockPanel>
+</UserControl>

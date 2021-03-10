@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B498A99C-532C-4E96-9265-25BCC5873C9B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WixWPFWizardBA</RootNamespace>
+    <AssemblyName>WixWPFWizardBA</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;$(MSIPLATFORM64)</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;$(MSIPLATFORM64)</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BootstrapperCore, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce35f76fcda82bad, processorArchitecture=MSIL" />
+    <Reference Include="Interop.SHDocVw, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>.\Interop.SHDocVw.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Deployment.WindowsInstaller, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce35f76fcda82bad, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\WiX Toolset v3.11\bin\Microsoft.Deployment.WindowsInstaller.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\Architecture.cs" />
+    <Compile Include="Common\BootstrapperManager.cs" />
+    <Compile Include="Common\BurnInstallationState.cs" />
+    <Compile Include="Converters\EnumToBooleanConverter.cs" />
+    <Compile Include="Converters\EnumToVisibilityConverter.cs" />
+    <Compile Include="Common\InstallationResult.cs" />
+    <Compile Include="Converters\TextBlockFormatToHyperlinkConverter.cs" />
+    <Compile Include="Dialogs\DefaultPortWarning\DefaultPortWarningDialog.xaml.cs" />
+    <Compile Include="Dialogs\DefaultPortWarning\DefaultPortWarningDialogViewModel.cs" />
+    <Compile Include="Dialogs\FolderBrowser\BrowserViewModel.cs" />
+    <Compile Include="Dialogs\FolderBrowser\FolderBrowserDialog.xaml.cs" />
+    <Compile Include="Dialogs\FolderBrowser\FolderViewModel.cs" />
+    <Compile Include="Dialogs\FolderBrowser\InputBindingsManager.cs" />
+    <Compile Include="Dialogs\FolderBrowser\TreeViewItemBehaviour.cs" />
+    <Compile Include="Dialogs\FolderBrowser\ViewModelBase.cs" />
+    <Compile Include="Dialogs\ServerHelp\ServerHelpDialog.xaml.cs">
+      <DependentUpon>ServerHelpDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ServerHelp\ServerHelpDialogViewModel.cs" />
+    <Compile Include="Common\IPackageInstallationStrategy.cs" />
+    <Compile Include="Localisation.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Localisation.resx</DependentUpon>
+    </Compile>
+    <Compile Include="PackageCombinationConfiguration.cs" />
+    <Compile Include="Common\Package.cs" />
+    <Compile Include="PackageConfiguration.cs" />
+    <Compile Include="PackageInstallationStrategy.cs" />
+    <Compile Include="Common\PackageInstallationStrategyBase.cs" />
+    <Compile Include="PageType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimpleCommand.cs" />
+    <Compile Include="Common\UpdateState.cs" />
+    <Compile Include="Utilities\MaskAttachedProperty.cs" />
+    <Compile Include="Utilities\SystemInformationUtilities.cs" />
+    <Compile Include="Common\VersionStatus.cs" />
+    <Compile Include="Utilities\WixVariableHelper.cs" />
+    <Compile Include="Views\BootstrapperAwareViewModel.cs" />
+    <Compile Include="Views\Pages\ClientConfigurationPage\ClientConfigurationPageView.xaml.cs" />
+    <Compile Include="Views\Pages\ClientConfigurationPage\ClientConfigurationPageViewModel.cs" />
+    <Compile Include="Views\Pages\FinishErrorPage\FinishErrorPageView.xaml.cs">
+      <DependentUpon>FinishErrorPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\FinishErrorPage\FinishErrorPageViewModel.cs" />
+    <Compile Include="Views\Pages\FinishPage\FinishPageView.xaml.cs">
+      <DependentUpon>FinishPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\FinishPage\FinishPageViewModel.cs" />
+    <Compile Include="Views\Pages\MaintenancePage\MaintenancePageView.xaml.cs" />
+    <Compile Include="Views\Pages\MaintenancePage\MaintenancePageViewModel.cs" />
+    <Page Include="Dialogs\DefaultPortWarning\DefaultPortWarningDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\MaintenancePage\MaintenancePageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Views\Pages\PageViewModel.cs" />
+    <Compile Include="Views\Pages\PlanPage\PlanPageView.xaml.cs">
+      <DependentUpon>PlanPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\PlanPage\PlanPageViewModel.cs" />
+    <Compile Include="Views\Pages\ProgressPage\ActionType.cs" />
+    <Compile Include="Views\Pages\ProgressPage\ActionTypeUtils.cs" />
+    <Compile Include="Views\Pages\ProgressPage\ProgressEntry.cs" />
+    <Compile Include="Views\Pages\ProgressPage\ProgressPageView.xaml.cs">
+      <DependentUpon>ProgressPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\ProgressPage\ProgressPageViewModel.cs" />
+    <Compile Include="Views\Pages\ReadyToInstallPage\ReadyToInstallPageView.xaml.cs" />
+    <Compile Include="Views\Pages\ReadyToInstallPage\ReadyToInstallPageViewModel.cs" />
+    <Compile Include="Views\Pages\SelectApplicationsPage\SelectApplicationsPageView.xaml.cs">
+      <DependentUpon>SelectApplicationsPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\SelectApplicationsPage\SelectApplicationsPageViewModel.cs" />
+    <Compile Include="Views\Pages\UninstallPage\UninstallPageView.xaml.cs" />
+    <Compile Include="Views\Pages\UninstallPage\UninstallPageViewModel.cs" />
+    <Compile Include="Views\Pages\UpgradePage\UpgradePageView.xaml.cs">
+      <DependentUpon>UpgradePageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\UpgradePage\UpgradePageViewModel.cs" />
+    <Compile Include="Views\Pages\WarningPage\WarningPageView.xaml.cs" />
+    <Compile Include="Views\Pages\WarningPage\WarningPageViewModel.cs" />
+    <Compile Include="Views\WizardViewModel.cs" />
+    <Compile Include="Views\WizardWindow.xaml.cs">
+      <DependentUpon>WizardWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WixBootstrapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Dialogs\FolderBrowser\FolderBrowserDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\ServerHelp\ServerHelpDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\ClientConfigurationPage\ClientConfigurationPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\FinishErrorPage\FinishErrorPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\FinishPage\FinishPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\PlanPage\PlanPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\ProgressPage\ProgressPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\ReadyToInstallPage\ReadyToInstallPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\SelectApplicationsPage\SelectApplicationsPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\UninstallPage\UninstallPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\UpgradePage\UpgradePageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\WarningPage\WarningPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\WizardWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BootstrapperCore.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Localisation.ja-JP.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Localisation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localisation.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Localisation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\interior.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\help_bg.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\success_bg.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\exterior.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\p4exp.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\FolderClosed.png" />
+    <Resource Include="Resources\FolderOpen.png" />
+    <Resource Include="Resources\HardDisk.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

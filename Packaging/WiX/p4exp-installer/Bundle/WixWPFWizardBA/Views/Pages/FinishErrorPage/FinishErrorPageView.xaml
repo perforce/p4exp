@@ -1,0 +1,175 @@
+﻿<!--
+    Copyright (c) Nick Guletskii and Arseniy Aseev. All rights reserved.  
+    Licensed under the MIT License. See LICENSE file in the solution root for full license information.  
+-->
+<UserControl x:Class="WixWPFWizardBA.Views.Pages.FinishErrorPage.FinishErrorPageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:finishErrorPage="clr-namespace:WixWPFWizardBA.Views.Pages.FinishErrorPage"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:httpconverter="clr-namespace:WixWPFWizardBA.Converters"
+             xmlns:wixWpfWizardBa="clr-namespace:WixWPFWizardBA"
+             d:DataContext="{d:DesignInstance finishErrorPage:FinishErrorPageViewModel}"
+             d:DesignWidth="493"
+             d:DesignHeight="312"
+             Foreground="White"
+             mc:Ignorable="d">
+    <UserControl.Background>
+        <ImageBrush ImageSource="/WixWPFWizardBA;component/Resources/exterior.bmp" Stretch="Fill"/>
+    </UserControl.Background>
+    <UserControl.Resources>
+        <httpconverter:TextBlockFormatToHyperlinkConverter x:Key="TextBlockFormatToHyperlinkConverter" />
+    </UserControl.Resources>
+    <Grid Margin="25 90">
+        <TextBlock Margin="0 0 0 110"
+                   Text="{Binding ErrorTitle}"
+                   TextWrapping="Wrap" />
+        <TextBlock Margin="0 40"
+                   FontSize="12"
+                   Text="{Binding WizardViewModel.ErrorMessage}"
+                   TextWrapping="Wrap">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding WizardViewModel.ErrorMessage}"
+                                     Value="Message Flag: ErrorOSx86MSIx64">
+                            <Setter Property="Visibility" Value="Hidden" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding WizardViewModel.ErrorMessage}"
+                                     Value="Message Flag: ErrorP4VVersion">
+                            <Setter Property="Visibility" Value="Hidden" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding WizardViewModel.ErrorMessage}"
+                                     Value="Message Flag: ErrorUpgradex64Withx86">
+                            <Setter Property="Visibility" Value="Hidden" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding WizardViewModel.ErrorMessage}"
+                                     Value="Message Flag: ErrorUpgradex86Withx64">
+                            <Setter Property="Visibility" Value="Hidden" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                    <Setter Property="Visibility" Value="Visible" />
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <CheckBox Margin="25 100 25 0"
+                  Foreground="White"
+                  IsChecked="{Binding ShowLogFilesChecked}">
+            <TextBlock Text="{x:Static wixWpfWizardBa:Localisation.FinishErrorPage_ShowLogFiles}"
+                   TextWrapping="Wrap"/>
+            <CheckBox.Style>
+                <Style TargetType="CheckBox">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding WizardViewModel.ErrorMessage}"
+                                     Value="Message Flag: ErrorOSx86MSIx64">
+                            <Setter Property="Visibility" Value="Hidden" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding WizardViewModel.ErrorMessage}"
+                                     Value="Message Flag: ErrorP4VVersion">
+                            <Setter Property="Visibility" Value="Hidden" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding WizardViewModel.ErrorMessage}"
+                                     Value="Message Flag: ErrorUpgradex64Withx86">
+                            <Setter Property="Visibility" Value="Hidden" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding WizardViewModel.ErrorMessage}"
+                                     Value="Message Flag: ErrorUpgradex86Withx64">
+                            <Setter Property="Visibility" Value="Hidden" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                    <Setter Property="Visibility" Value="Visible" />
+                </Style>
+            </CheckBox.Style>
+        </CheckBox>
+        <TextBlock x:Name="tblk_ErrorOSx86MSIx64" TextWrapping="Wrap"> <!--Margin="0,-10,0,0" -->
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding WizardViewModel.ErrorMessage}"
+                                     Value="Message Flag: ErrorOSx86MSIx64">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                        <Setter Property="Visibility" Value="Hidden" />
+                    </Style>
+                </TextBlock.Style>
+                <TextBlock.Tag>
+                    <MultiBinding Converter="{StaticResource TextBlockFormatToHyperlinkConverter}">
+                        <!--WixWPFWizardBA.Converters.TextBlockFormatToHyperlinkConverter-->
+                        <Binding x:Name="textblock_ErrorOSx86MSIx64" ElementName="tblk_ErrorOSx86MSIx64"/>
+                        <Binding x:Name="formatString_ErrorOSx86MSIx64" Source="{x:Static wixWpfWizardBa:Localisation.FinishErrorPage_ErrorOSx86MSIx64}"/>
+                        <Binding x:Name="firstHyperlink_ErrorOSx86MSIx64">
+                            <Binding.Source>
+                                <!-- We localize the URL by binding it to a property that is set to the localized string.
+                            Can't use the localized string here or get error:
+                            System.Windows.Markup.XamlParseException: Set property 'System.Windows.Documents.Hyperlink.NavigateUri' threw an exception.
+                            System.ArgumentException: 'https://www.perforce.com/products/helix-teamhub' is not a valid value for property 'NavigateUri'.
+                            https://www.perforce.com/products/helix-core-apps/helix-visual-client-p4v -->
+                                <Hyperlink NavigateUri="{Binding P4EXPDownloadLink}"
+                                       RequestNavigate="Hyperlink_RequestNavigate">
+                                    <Run Text="{x:Static wixWpfWizardBa:Localisation.Wizard_TextForLink}"/>
+                                    <!-- Reuse. -->
+                                </Hyperlink>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </TextBlock.Tag>
+            </TextBlock>
+        <TextBlock x:Name="tblk_ErrorP4VVersion" TextWrapping="Wrap">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding WizardViewModel.ErrorMessage}"
+                                    Value="Message Flag: ErrorP4VVersion">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                    <Setter Property="Visibility" Value="Hidden" />
+                </Style>
+            </TextBlock.Style>
+            <TextBlock.Tag>
+                <MultiBinding Converter="{StaticResource TextBlockFormatToHyperlinkConverter}">
+                    <Binding x:Name="textblock_ErrorP4VVersion" ElementName="tblk_ErrorP4VVersion"/>
+                    <Binding x:Name="formatString_ErrorP4VVersion" Source="{x:Static wixWpfWizardBa:Localisation.FinishErrorPage_ErrorP4VVersion}"/>
+                    <Binding x:Name="firstHyperlink_ErrorP4VVersion">
+                        <Binding.Source>
+                            <Hyperlink NavigateUri="{Binding P4VDownloadLink}"
+                                    RequestNavigate="Hyperlink_RequestNavigate">
+                                <Run Text="{x:Static wixWpfWizardBa:Localisation.Wizard_TextForLink}"/>
+                            </Hyperlink>
+                        </Binding.Source>
+                    </Binding>
+                </MultiBinding>
+            </TextBlock.Tag>
+        </TextBlock>
+        <TextBlock x:Name="tblk_ErrorUpgradex64Withx86" TextWrapping="Wrap"
+                Text="{x:Static wixWpfWizardBa:Localisation.FinishErrorPage_ErrorUpgradex64Withx86}">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding WizardViewModel.ErrorMessage}"
+                                    Value="Message Flag: ErrorUpgradex64Withx86">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                    <Setter Property="Visibility" Value="Hidden" />
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBlock x:Name="tblk_ErrorUpgradex86Withx64" TextWrapping="Wrap"
+                   Text="{x:Static wixWpfWizardBa:Localisation.FinishErrorPage_ErrorUpgradex86Withx64}">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding WizardViewModel.ErrorMessage}"
+                                     Value="Message Flag: ErrorUpgradex86Withx64">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                    <Setter Property="Visibility" Value="Hidden" />
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+    </Grid>
+</UserControl>

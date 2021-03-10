@@ -1,0 +1,1054 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="p4v_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\p4v.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="latest_rev" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\latest_rev.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\add.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="stale_rev" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\stale_rev.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="p4exp_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\p4exp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="disconnected" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\disconnected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="connected" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\connected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="connected_with_issues" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\connected_with_issues.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="checked_out" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\checked-out.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HMFA-spinner-78x78" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\HMFA-spinner-78x78.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ContextMenus_SetConnectionConnectedMenuItem" xml:space="preserve">
+    <value>Connected - Manage Connection</value>
+  </data>
+  <data name="ContextMenus_AddToSourceControlMenuItem" xml:space="preserve">
+    <value>Add to Source Control</value>
+  </data>
+  <data name="ContextMenus_CheckOutMenuItem" xml:space="preserve">
+    <value>Check Out</value>
+  </data>
+  <data name="ContextMenus_ConnectionInfoMenuItem" xml:space="preserve">
+    <value>Connection Info</value>
+  </data>
+  <data name="ContextMenus_DeleteInHelixServerMenuItem" xml:space="preserve">
+    <value>Delete in Helix Server</value>
+  </data>
+  <data name="ContextMenus_DiffAgainstHaveMenuItem" xml:space="preserve">
+    <value>Diff Against Have Revision</value>
+  </data>
+  <data name="ContextMenus_DiffAgainstMenuItem" xml:space="preserve">
+    <value>Diff Against...</value>
+  </data>
+  <data name="ContextMenus_GetLatestRevisionMenuItem" xml:space="preserve">
+    <value>Get Latest Revision</value>
+  </data>
+  <data name="ContextMenus_HelpMenuItem" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="ContextMenus_HistoyMenuItem" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="ContextMenus_LogInMenuItem" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="ContextMenus_LogOffMenuItem" xml:space="preserve">
+    <value>Log off</value>
+  </data>
+  <data name="ContextMenus_MainMenuItem" xml:space="preserve">
+    <value>Helix Core</value>
+  </data>
+  <data name="ContextMenus_MoreMenuItem" xml:space="preserve">
+    <value>More</value>
+  </data>
+  <data name="ContextMenus_NoWorkspaceSet" xml:space="preserve">
+    <value>No workspace has been set for this connection</value>
+  </data>
+  <data name="ContextMenus_OutsideRoot" xml:space="preserve">
+    <value>The selection is not under your workspace root</value>
+  </data>
+  <data name="ContextMenus_PreferencesMenuItem" xml:space="preserve">
+    <value>Preferences...</value>
+  </data>
+  <data name="ContextMenus_PropertiesMenuItem" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="ContextMenus_RefreshFileStateMenuItem" xml:space="preserve">
+    <value>Refresh File State</value>
+  </data>
+  <data name="ContextMenus_RemoveFromWorkspaceMenuItem" xml:space="preserve">
+    <value>Remove from Workspace</value>
+  </data>
+  <data name="ContextMenus_RevertMenuItem" xml:space="preserve">
+    <value>Revert</value>
+  </data>
+  <data name="ContextMenus_RevertUnchangedMenuItem" xml:space="preserve">
+    <value>Revert Unchanged Files</value>
+  </data>
+  <data name="ContextMenus_SelectionTypeFile" xml:space="preserve">
+    <value>File </value>
+  </data>
+  <data name="ContextMenus_SelectionTypeFolder" xml:space="preserve">
+    <value>Folder </value>
+  </data>
+  <data name="ContextMenus_SetConnectionNotConnectedMenuItem" xml:space="preserve">
+    <value>Not Connected - Set Connection</value>
+  </data>
+  <data name="ContextMenus_ShowInP4VMenuItem" xml:space="preserve">
+    <value>Show in P4V</value>
+  </data>
+  <data name="ContextMenus_StartP4VMenuItem" xml:space="preserve">
+    <value>Start P4V</value>
+  </data>
+  <data name="ContextMenus_SubmitMenuItem" xml:space="preserve">
+    <value>Submit...</value>
+  </data>
+  <data name="ContextMenus_TimeLapseViewMenuItem" xml:space="preserve">
+    <value>Time-lapse View</value>
+  </data>
+  <data name="ContextMenus_ViewPendingChangelistsMenuItem" xml:space="preserve">
+    <value>View Pending Changelists</value>
+  </data>
+  <data name="DlgEditWorkspace_Title" xml:space="preserve">
+    <value>Workspace: {0} ({1}, {2})</value>
+    <comment>{0} is workspace.Name, {1} is  Server Port,  {2} is Peforce User</comment>
+  </data>
+  <data name="download_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\download-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FileLogger_BuildContextMenu" xml:space="preserve">
+    <value>Build context menu</value>
+  </data>
+  <data name="FileLogger_MenuExtension" xml:space="preserve">
+    <value>menu extension</value>
+  </data>
+  <data name="FileLogger_RefreshFileState" xml:space="preserve">
+    <value>Refresh file state</value>
+  </data>
+  <data name="HAS_Authenticating" xml:space="preserve">
+    <value>Authenticating...</value>
+  </data>
+  <data name="HAS_Auth_Fail" xml:space="preserve">
+    <value>Unable to URL authorize user '{0}' to the server {1}</value>
+    <comment>{0} is Peforce User, {1} is  Server Port</comment>
+  </data>
+  <data name="HAS_Timeout" xml:space="preserve">
+    <value>This dialog will timeout if no external authentication is provided</value>
+  </data>
+  <data name="HMFA_Download" xml:space="preserve">
+    <value>Helix MFA Authenticator could not be found.
+Download and install it to continue.</value>
+  </data>
+  <data name="HMFA_Launch" xml:space="preserve">
+    <value>Launching Helix MFA Authenticator...</value>
+  </data>
+  <data name="HMFA_Title" xml:space="preserve">
+    <value>Verify your identity for {0} on {1}</value>
+    <comment>{0} is Peforce User, {1} is  Server Port</comment>
+  </data>
+  <data name="JobsToolWindowControl_1Match" xml:space="preserve">
+    <value>1 match</value>
+  </data>
+  <data name="JobsToolWindowControl_nMatches" xml:space="preserve">
+    <value>{0} matches</value>
+    <comment>{0} is number of specs returned</comment>
+  </data>
+  <data name="JobsToolWindowControl_NoConnection" xml:space="preserve">
+    <value>no connection</value>
+  </data>
+  <data name="JobsToolWindowControl_NoItemsAvailable" xml:space="preserve">
+    <value>No Items Available</value>
+  </data>
+  <data name="JobsToolWindowControl_NoMatches" xml:space="preserve">
+    <value>no matches</value>
+  </data>
+  <data name="MessageDlg_Exception" xml:space="preserve">
+    <value>Exception</value>
+  </data>
+  <data name="MessageDlg_P4Exception" xml:space="preserve">
+    <value>P4Exception</value>
+  </data>
+  <data name="MessageDlg_PasswordExpired" xml:space="preserve">
+    <value>Password expired</value>
+  </data>
+  <data name="NewUserDlg_NameContainsSpacesWarning" xml:space="preserve">
+    <value>The name contains spaces and will be automatically corrected.</value>
+  </data>
+  <data name="NewUserDlg_PasswordsDontMatchWarning" xml:space="preserve">
+    <value>The new password and confirm new password fields do not match.
+Please re-enter your new password.</value>
+  </data>
+  <data name="NewUserDlg_PasswordTooShortOrSimple" xml:space="preserve">
+    <value>Passwords must be at least eight characters long and must contain upper and lower case letters, or letters plus one or more symbols or numbers.</value>
+  </data>
+  <data name="NewUserDlg_UserExistsWarning" xml:space="preserve">
+    <value>The user, {0}, already exists</value>
+    <comment>{0} is Peforce User</comment>
+  </data>
+  <data name="OpenConnectionDlg_EmptyWorkspaceNameWarning" xml:space="preserve">
+    <value>name cannot be empty</value>
+  </data>
+  <data name="OpenConnectionDlg_NameContainsSpacesWarning" xml:space="preserve">
+    <value>The name contains spaces and will be automatically corrected.</value>
+  </data>
+  <data name="OpenConnectionDlg_NewWorkspaceDlgPrompt" xml:space="preserve">
+    <value>Enter a name for the new workspace:</value>
+  </data>
+  <data name="OpenConnectionDlg_NewWorkspaceDlgTitle" xml:space="preserve">
+    <value>New Workspace</value>
+  </data>
+  <data name="OpenConnectionDlg_WorkspaceExistsWarning" xml:space="preserve">
+    <value>a workspace named {0} already exists</value>
+    <comment>{0} is workspace.Name</comment>
+  </data>
+  <data name="P4EXP" xml:space="preserve">
+    <value>P4EXP</value>
+  </data>
+  <data name="SccHistoryDetailsControl_FileSizeBytes" xml:space="preserve">
+    <value>{0} bytes</value>
+    <comment>{0} is number of bytes</comment>
+  </data>
+  <data name="SccHistoryDetailsControl_FileSizeGigaBytes" xml:space="preserve">
+    <value>{0:F3} GB</value>
+    <comment>{0} is number of GB</comment>
+  </data>
+  <data name="SccHistoryDetailsControl_FileSizeKiloBytes" xml:space="preserve">
+    <value>{0:F3} KB</value>
+    <comment>{0} is number of KB</comment>
+  </data>
+  <data name="SccHistoryDetailsControl_FileSizeMegaBytes" xml:space="preserve">
+    <value>{0:F3} MB</value>
+    <comment>{0} is number of MB</comment>
+  </data>
+  <data name="SccHistoryDetailsControl_FileSizeTeraBytes" xml:space="preserve">
+    <value>{0:F3} TB</value>
+    <comment>{0} is number of TB</comment>
+  </data>
+  <data name="HASCheckDlg_AuthenticatingLabel" xml:space="preserve">
+    <value>Authenticating...</value>
+  </data>
+  <data name="HASCheckDlg_TimeoutLabel" xml:space="preserve">
+    <value>This dialog will timeout if no external authentication is provided</value>
+  </data>
+  <data name="HASCheckDlg_VerifyTitle" xml:space="preserve">
+    <value>Verify your identity for {0} on {1}</value>
+    <comment>{0} is Peforce User, {1} is  Server Port</comment>
+  </data>
+  <data name="LaunchingHMFA_CloseBtn" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="LaunchingHMFA_DownloadBtn" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="LaunchingHMFA_ExpiredLabel" xml:space="preserve">
+    <value>Your session has expired. You must authenticate your identity to continue working in this open connection.</value>
+  </data>
+  <data name="LaunchingHMFA_LaunchingLabel" xml:space="preserve">
+    <value>Launching Helix MFA Authenticator...</value>
+  </data>
+  <data name="LaunchingHMFA_VerifyTitle" xml:space="preserve">
+    <value>Verify your identity for {0} on {1}</value>
+    <comment>{0} is Peforce User, {1} is  Server Port</comment>
+  </data>
+  <data name="LoginDlg_CancelBtn" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="LoginDlg_LoginTitle" xml:space="preserve">
+    <value>Helix Core Password Required</value>
+  </data>
+  <data name="LoginDlg_MessageLabel" xml:space="preserve">
+    <value>A password is required for user '{0}' on server '{1}'.</value>
+    <comment>{0} is Peforce User, {1} is  Server Port</comment>
+  </data>
+  <data name="LoginDlg_OKBtn" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="LoginDlg_PromptLabel" xml:space="preserve">
+    <value>Please enter the password:</value>
+  </data>
+  <data name="MessageDlg_MessageTitle" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="MessageDlg_OKBtn" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="PreferencesDlg_DeletePromptCB" xml:space="preserve">
+    <value>Prompt for confirmation of delete in Helix server</value>
+  </data>
+  <data name="PreferencesDlg_DiagLoggingCB" xml:space="preserve">
+    <value>Enable &amp;diagnostic logging</value>
+  </data>
+  <data name="PreferencesDlg_ExceptionsCB" xml:space="preserve">
+    <value>show Exceptions (debug)</value>
+  </data>
+  <data name="PreferencesDlg_IconsCB" xml:space="preserve">
+    <value>&amp;Show file state icons (This change will take effect when you restart File Explorer.)</value>
+  </data>
+  <data name="PreferencesDlg_Logging PathTB" xml:space="preserve">
+    <value>(local path of log.txt file)</value>
+  </data>
+  <data name="PreferencesDlg_LoggingCB" xml:space="preserve">
+    <value>&amp;Enable logging to file</value>
+  </data>
+  <data name="PreferencesDlg_LoggingPathLabel" xml:space="preserve">
+    <value>Name:</value>
+  </data>
+  <data name="PreferencesDlg_LoggingSizeLabel" xml:space="preserve">
+    <value>Size (kb):</value>
+  </data>
+  <data name="PreferencesDlg_LoggingSizeTB" xml:space="preserve">
+    <value>500</value>
+  </data>
+  <data name="PreferencesDlg_MessagesCB" xml:space="preserve">
+    <value>S&amp;how only error messages</value>
+  </data>
+  <data name="PreferencesDlg_OKBtn" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="PreferencesDlg_P4ExceptionsCB" xml:space="preserve">
+    <value>show P4Exceptions (debug)</value>
+  </data>
+  <data name="PreferencesDlg_PreferencesTitle" xml:space="preserve">
+    <value>Preferences</value>
+  </data>
+  <data name="PreferencesDlg_SelectBtn" xml:space="preserve">
+    <value>Select...</value>
+  </data>
+  <data name="RevertDeleteWarningDlg_DeleteCB" xml:space="preserve">
+    <value>Don't confirm deletes in the future</value>
+  </data>
+  <data name="RevertDeleteWarningDlg_DeleteWarningLabel" xml:space="preserve">
+    <value>Marking file(s) for delete in Helix server will delete local file(s).
+File(s) marked for delete must be submitted to complete the deletion
+in Helix server. Proceed with delete?</value>
+  </data>
+  <data name="RevertDeleteWarningDlg_DeleteWarningTitle" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="RevertDeleteWarningDlg_NoBtn" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="RevertDeleteWarningDlg_RevertDeleteWarningTitle" xml:space="preserve">
+    <value>Helix</value>
+  </data>
+  <data name="RevertDeleteWarningDlg_RevertWarningLabel" xml:space="preserve">
+    <value>Reverting file(s) will overwrite any edits to the files.
+Proceed with revert?</value>
+  </data>
+  <data name="RevertDeleteWarningDlg_RevertWarningTitle" xml:space="preserve">
+    <value>Revert</value>
+  </data>
+  <data name="RevertDeleteWarningDlg_YesBtn" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="SslPromptDlg_CancelBtn" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="SslPromptDlg_ConnectBtn" xml:space="preserve">
+    <value>Connect</value>
+  </data>
+  <data name="SslPromptDlg_SslTitle" xml:space="preserve">
+    <value>P4EXP Security Warning</value>
+  </data>
+  <data name="SslPromptDlg_TrustCB" xml:space="preserve">
+    <value>&amp;Trust the connection for future connections</value>
+  </data>
+  <data name="SslPromptDlg_WarningLabel" xml:space="preserve">
+    <value>******* WARNING P4PORT IDENTIFICATION HAS CHANGED! *******</value>
+  </data>
+  <data name="FileLogger_Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="FileLogger_CheckOut" xml:space="preserve">
+    <value>Check Out</value>
+  </data>
+  <data name="FileLogger_Connect" xml:space="preserve">
+    <value>Connect</value>
+  </data>
+  <data name="FileLogger_ConnectionInfo" xml:space="preserve">
+    <value>Connection Info</value>
+  </data>
+  <data name="FileLogger_CreatingNewRepository" xml:space="preserve">
+    <value>creating new repository: {0}/{1}/{2}</value>
+    <comment>{0} is Server Port, {1} is Peforce User ,  {2} is workspace.Name</comment>
+  </data>
+  <data name="FileLogger_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="FileLogger_DiffAgainst" xml:space="preserve">
+    <value>Diff Against</value>
+  </data>
+  <data name="FileLogger_DiffAgainstHave" xml:space="preserve">
+    <value>Diff Against Have</value>
+  </data>
+  <data name="FileLogger_DiffFile" xml:space="preserve">
+    <value>Diff File</value>
+  </data>
+  <data name="FileLogger_DiffVSHave" xml:space="preserve">
+    <value>Diff vs Have</value>
+  </data>
+  <data name="FileLogger_FailedToSetClientDelay15" xml:space="preserve">
+    <value>Failed to set client, delay 15s</value>
+  </data>
+  <data name="FileLogger_FileHistory" xml:space="preserve">
+    <value>FileHistory</value>
+  </data>
+  <data name="FileLogger_FileProperties" xml:space="preserve">
+    <value>File Properties</value>
+  </data>
+  <data name="FileLogger_FolderHistory" xml:space="preserve">
+    <value>Folder History</value>
+  </data>
+  <data name="FileLogger_GetFileContents" xml:space="preserve">
+    <value>Get File Contents</value>
+  </data>
+  <data name="FileLogger_GetLatest" xml:space="preserve">
+    <value>Get Latest</value>
+  </data>
+  <data name="FileLogger_GetLatestRevision" xml:space="preserve">
+    <value>Get Latest Revision</value>
+  </data>
+  <data name="FileLogger_GetRepository" xml:space="preserve">
+    <value>getRepository</value>
+  </data>
+  <data name="FileLogger_Help" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="FileLogger_History" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="FileLogger_LaunchingPreferences" xml:space="preserve">
+    <value>Launching Preferences dialog</value>
+  </data>
+  <data name="FileLogger_LocateP4Merge" xml:space="preserve">
+    <value>Locate P4Merge</value>
+  </data>
+  <data name="FileLogger_LocateP4VC" xml:space="preserve">
+    <value>Locate P4VC</value>
+  </data>
+  <data name="FileLogger_Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="FileLogger_LogOff" xml:space="preserve">
+    <value>Log Off</value>
+  </data>
+  <data name="FileLogger_Open in P4V" xml:space="preserve">
+    <value>Open in P4V</value>
+  </data>
+  <data name="FileLogger_P4EXPProgram" xml:space="preserve">
+    <value>P4EXPProgram</value>
+  </data>
+  <data name="FileLogger_PendingChangelists" xml:space="preserve">
+    <value>Pending Changelists</value>
+  </data>
+  <data name="FileLogger_Preferences" xml:space="preserve">
+    <value>Preferences</value>
+  </data>
+  <data name="FileLogger_RefreshClientData" xml:space="preserve">
+    <value>RefreshClientData</value>
+  </data>
+  <data name="FileLogger_RefreshExplorer" xml:space="preserve">
+    <value>Refresh Explorer</value>
+  </data>
+  <data name="FileLogger_RefreshingClient" xml:space="preserve">
+    <value>Refreshing client {0}</value>
+    <comment>{0} is workspace.Name</comment>
+  </data>
+  <data name="FileLogger_RefreshingPath" xml:space="preserve">
+    <value>Refreshing path {0}</value>
+    <comment>{0} is file path</comment>
+  </data>
+  <data name="FileLogger_RemoveFromWorkspace" xml:space="preserve">
+    <value>Remove from Workspace</value>
+  </data>
+  <data name="FileLogger_RepoStorage" xml:space="preserve">
+    <value>RepoStorage</value>
+  </data>
+  <data name="FileLogger_RetryingConnection" xml:space="preserve">
+    <value>Retrying connection to {0}</value>
+    <comment>{0} is Server Port</comment>
+  </data>
+  <data name="FileLogger_Revert" xml:space="preserve">
+    <value>Revert</value>
+  </data>
+  <data name="FileLogger_RevertUnchanged" xml:space="preserve">
+    <value>Revert Unchanged</value>
+  </data>
+  <data name="FileLogger_SetConnection" xml:space="preserve">
+    <value>Set Connection</value>
+  </data>
+  <data name="FileLogger_ShowProperties" xml:space="preserve">
+    <value>Show Properties</value>
+  </data>
+  <data name="FileLogger_StartP4V" xml:space="preserve">
+    <value>Start P4V</value>
+  </data>
+  <data name="FileLogger_Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="FileLogger_TimeLapseView" xml:space="preserve">
+    <value>Time-lapse View</value>
+  </data>
+  <data name="FileLogger_TreeListView_EnsureVisible" xml:space="preserve">
+    <value>Ensure Selection Visible</value>
+  </data>
+  <data name="FileLogger_UsingSSO" xml:space="preserve">
+    <value>Using SSO: </value>
+  </data>
+  <data name="MessageDlg_AddFiles" xml:space="preserve">
+    <value>Add files</value>
+  </data>
+  <data name="MessageDlg_CannotLocateP4Merge" xml:space="preserve">
+    <value>Cannot locate P4Merge application required for some P4EXP functionality</value>
+  </data>
+  <data name="MessageDlg_CannotLocateP4V" xml:space="preserve">
+    <value>Cannot locate P4V application required for some P4EXP functionality</value>
+  </data>
+  <data name="MessageDlg_CannotLocateP4VC" xml:space="preserve">
+    <value>Cannot locate P4VC application required for some P4EXP functionality</value>
+  </data>
+  <data name="MessageDlg_CheckOut" xml:space="preserve">
+    <value>Check Out</value>
+  </data>
+  <data name="MessageDlg_CheckoutWarningsAndErrors" xml:space="preserve">
+    <value>
+
+The following errors and warnings were reported by the server:
+</value>
+  </data>
+  <data name="MessageDlg_ConnectionError" xml:space="preserve">
+    <value>Connection error</value>
+  </data>
+  <data name="MessageDlg_ConnectionInfo" xml:space="preserve">
+    <value>Connection Information</value>
+  </data>
+  <data name="MessageDlg_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="MessageDlg_DiffAgainstHave" xml:space="preserve">
+    <value>Diff Against Have</value>
+  </data>
+  <data name="MessageDlg_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="MessageDlg_FileAdded" xml:space="preserve">
+    <value> file added</value>
+  </data>
+  <data name="MessageDlg_FileCheckedOut" xml:space="preserve">
+    <value> file checked out</value>
+  </data>
+  <data name="MessageDlg_FileMarkedForDelete" xml:space="preserve">
+    <value> file marked for delete in Helix server</value>
+  </data>
+  <data name="MessageDlg_FileRemovedFromWorkspace" xml:space="preserve">
+    <value> file removed from workspace</value>
+  </data>
+  <data name="MessageDlg_FileReverted" xml:space="preserve">
+    <value> file reverted</value>
+  </data>
+  <data name="MessageDlg_FilesAdded" xml:space="preserve">
+    <value> files added</value>
+  </data>
+  <data name="MessageDlg_FilesCheckedOut" xml:space="preserve">
+    <value> files checked out</value>
+  </data>
+  <data name="MessageDlg_FilesMarkedForDelete" xml:space="preserve">
+    <value> files marked for delete in Helix server</value>
+  </data>
+  <data name="MessageDlg_FilesRemovedFromWorkspace" xml:space="preserve">
+    <value> files removed from workspace</value>
+  </data>
+  <data name="MessageDlg_FilesReverted" xml:space="preserve">
+    <value> files reverted</value>
+  </data>
+  <data name="MessageDlg_FilesUpdated" xml:space="preserve">
+    <value> files updated</value>
+  </data>
+  <data name="MessageDlg_FileUpdated" xml:space="preserve">
+    <value> file updated</value>
+  </data>
+  <data name="MessageDlg_GetLatestRevision" xml:space="preserve">
+    <value>Get Latest Revision</value>
+  </data>
+  <data name="MessageDlg_LoginFailed" xml:space="preserve">
+    <value>Login failed</value>
+  </data>
+  <data name="MessageDlg_MaximumFileLimitExceeded" xml:space="preserve">
+    <value> files in directory.  Maximum file limit exceeded.</value>
+  </data>
+  <data name="MessageDlg_MissingApplication" xml:space="preserve">
+    <value>Missing application</value>
+  </data>
+  <data name="MessageDlg_NoConnection" xml:space="preserve">
+    <value>No Connection</value>
+  </data>
+  <data name="MessageDlg_NoConnectionForPort" xml:space="preserve">
+    <value>No connection for {0}</value>
+    <comment>{0} is  Server Port</comment>
+  </data>
+  <data name="MessageDlg_NoDiffsFromHaveRev" xml:space="preserve">
+    <value>No differences from Have Revision</value>
+  </data>
+  <data name="MessageDlg_NoFilesAdded" xml:space="preserve">
+    <value>no files added</value>
+  </data>
+  <data name="MessageDlg_NoFilesCheckedOut" xml:space="preserve">
+    <value>no files checked out</value>
+  </data>
+  <data name="MessageDlg_NoFilesMarkedForDelete" xml:space="preserve">
+    <value>no files marked for delete in Helix server</value>
+  </data>
+  <data name="MessageDlg_NoFilesRemovedFromWorkspace" xml:space="preserve">
+    <value>no files removed from workspace</value>
+  </data>
+  <data name="MessageDlg_NoFilesReverted" xml:space="preserve">
+    <value>no files reverted</value>
+  </data>
+  <data name="MessageDlg_NoFilesUpdated" xml:space="preserve">
+    <value>no files updated</value>
+  </data>
+  <data name="MessageDlg_RemoveFromWorkspace" xml:space="preserve">
+    <value>Remove from Workspace</value>
+  </data>
+  <data name="MessageDlg_Revert" xml:space="preserve">
+    <value>Revert</value>
+  </data>
+  <data name="MessageDlg_RevertUnchanged" xml:space="preserve">
+    <value>Revert Unchanged</value>
+  </data>
+  <data name="MessageDlg_UnableToCompleteAction" xml:space="preserve">
+    <value>Unable to complete action</value>
+  </data>
+  <data name="OpenConnectionDlg_CheckConnectionError" xml:space="preserve">
+    <value>Unable to complete action.
+Confirm valid Server and User entries.</value>
+  </data>
+  <data name="OpenConnectionDlg_CheckLoginError" xml:space="preserve">
+    <value>Unable to complete action. Confirm that you are logged in.</value>
+  </data>
+  <data name="OpenConnectionDlg_SetRepoFromDlgError" xml:space="preserve">
+    <value>Unable to complete action. Confirm valid Server entry.</value>
+  </data>
+  <data name="ConnectionInfo_ClientVersion" xml:space="preserve">
+    <value>Client version:</value>
+  </data>
+  <data name="ConnectionInfo_Copyright" xml:space="preserve">
+    <value>Copyright (C)</value>
+  </data>
+  <data name="ConnectionInfo_CurrentDirectory" xml:space="preserve">
+    <value>Current directory:</value>
+  </data>
+  <data name="ConnectionInfo_HelixPlugin" xml:space="preserve">
+    <value>Helix Plugin for File Explorer</value>
+  </data>
+  <data name="ConnectionInfo_PerforceSoftware" xml:space="preserve">
+    <value>Perforce Software</value>
+  </data>
+  <data name="ConnectionInfo_Platformx64" xml:space="preserve">
+    <value>x64</value>
+  </data>
+  <data name="ConnectionInfo_Platformx86" xml:space="preserve">
+    <value>x86</value>
+  </data>
+  <data name="FileLogger_BeginDiagLogging" xml:space="preserve">
+    <value>Begin diagnostic logging</value>
+  </data>
+  <data name="FileLogger_Debug" xml:space="preserve">
+    <value>Debug-{0}</value>
+  </data>
+  <data name="FileLogger_EndDiagLogging" xml:space="preserve">
+    <value>End diagnostic logging</value>
+  </data>
+  <data name="FileLogger_InnerException" xml:space="preserve">
+    <value>Inner Exception</value>
+  </data>
+  <data name="FileLogger_LogLevelError" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="FileLogger_LogLevelFatal" xml:space="preserve">
+    <value>Fatal</value>
+  </data>
+  <data name="FileLogger_LogLevelInfo" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="FileLogger_LogLevelWarning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="Login_PasswordRequired" xml:space="preserve">
+    <value>A password is required for user '{0}' on server '{1}'.</value>
+  </data>
+  <data name="SaveFileDlg_Filter" xml:space="preserve">
+    <value>txt files (*.txt)|*.txt</value>
+  </data>
+  <data name="SaveFileDlg_Title" xml:space="preserve">
+    <value>Enter a log file name:</value>
+  </data>
+  <data name="SslPromptDlg_WarningText" xml:space="preserve">
+    <value>It is possible that someone is intercepting your connection
+to the Helix Core server P4PORT '10.0.50.39:1667'
+If this is not a scheduled key change, then you should contact
+your Helix Core server administrator.
+The fingerprint for the mismatched key sent to your client is
+19:4F:E0:B8:C9:C8:2B:EF:30:72:7F:DF:C1:95:5A:11:77:37:BA:39</value>
+  </data>
+  <data name="OpenConnectionDlg_CancelBtn" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="OpenConnectionDlg_EnterConnectionSettings" xml:space="preserve">
+    <value>Enter Connection Settings:</value>
+  </data>
+  <data name="OpenConnectionDlg_HelpBtn" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="OpenConnectionDlg_OKBtn" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="OpenConnectionDlg_ServerLabel" xml:space="preserve">
+    <value>Server:</value>
+  </data>
+  <data name="OpenConnectionDlg_Title" xml:space="preserve">
+    <value>Set Connection</value>
+  </data>
+  <data name="OpenConnectionDlg_UserBrowseBtn" xml:space="preserve">
+    <value>Browse...</value>
+  </data>
+  <data name="OpenConnectionDlg_UserLabel" xml:space="preserve">
+    <value>User:</value>
+  </data>
+  <data name="OpenConnectionDlg_UserNewBtn" xml:space="preserve">
+    <value>New...</value>
+  </data>
+  <data name="OpenConnectionDlg_VersionLabel" xml:space="preserve">
+    <value>Version:</value>
+  </data>
+  <data name="OpenConnectionDlg_WorkspaceBrowseBtn" xml:space="preserve">
+    <value>Browse...</value>
+  </data>
+  <data name="OpenConnectionDlg_WorkspaceLabel" xml:space="preserve">
+    <value>Workspace:</value>
+  </data>
+  <data name="OpenConnectionDlg_WorkspaceNewBtn" xml:space="preserve">
+    <value>New...</value>
+  </data>
+  <data name="NewUserDlg_CancelBtn" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="NewUserDlg_EmailLabel" xml:space="preserve">
+    <value>Email:</value>
+  </data>
+  <data name="NewUserDlg_EnterPasswordTwiceLabel" xml:space="preserve">
+    <value>Enter password twice</value>
+  </data>
+  <data name="NewUserDlg_FirstAndLastNameLabel" xml:space="preserve">
+    <value>First and last name</value>
+  </data>
+  <data name="NewUserDlg_FullNameLabel" xml:space="preserve">
+    <value>Full Name:</value>
+  </data>
+  <data name="NewUserDlg_PasswordLabel" xml:space="preserve">
+    <value>Password:</value>
+  </data>
+  <data name="NewUserDlg_SaveBtn" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="NewUserDlg_Title" xml:space="preserve">
+    <value>New User</value>
+  </data>
+  <data name="NewUserDlg_UserNameInstLabel" xml:space="preserve">
+    <value>Name used for log in (no spaces allowed)</value>
+  </data>
+  <data name="NewUserDlg_UserNameLabel" xml:space="preserve">
+    <value>User Name:</value>
+  </data>
+  <data name="UsersBrowser_CancelBtn" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="UsersBrowser_EmailHeader" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="UsersBrowser_FullNameHeader" xml:space="preserve">
+    <value>Full Name</value>
+  </data>
+  <data name="UsersBrowser_LastAccessedHeader" xml:space="preserve">
+    <value>Last Accessed</value>
+  </data>
+  <data name="UsersBrowser_OKBtn" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="UsersBrowser_Title" xml:space="preserve">
+    <value>Select User</value>
+  </data>
+  <data name="UsersBrowser_UserHeader" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="WorkspaceBrowser_CancelBtn" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="WorkspaceBrowser_DescriptionHeader" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="WorkspaceBrowser_LastAccessedHeader" xml:space="preserve">
+    <value>Last Accessed</value>
+  </data>
+  <data name="WorkspaceBrowser_OKBtn" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="WorkspaceBrowser_OwnerHeader" xml:space="preserve">
+    <value>Owner</value>
+  </data>
+  <data name="WorkspaceBrowser_Title" xml:space="preserve">
+    <value>Select Workspace</value>
+  </data>
+  <data name="WorkspaceBrowser_WorkspaceHeader" xml:space="preserve">
+    <value>Workspace</value>
+  </data>
+  <data name="WorkspaceEditDlg_AllwriteChkB" xml:space="preserve">
+    <value>allwrite</value>
+  </data>
+  <data name="WorkspaceEditDlg_AltRootsLabel" xml:space="preserve">
+    <value>Alt Roots:</value>
+  </data>
+  <data name="WorkspaceEditDlg_BrowseBtn" xml:space="preserve">
+    <value>Browse</value>
+  </data>
+  <data name="WorkspaceEditDlg_CancelBtn" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="WorkspaceEditDlg_ClobberChkB" xml:space="preserve">
+    <value>clobber</value>
+  </data>
+  <data name="WorkspaceEditDlg_CompressChkB" xml:space="preserve">
+    <value>compress</value>
+  </data>
+  <data name="WorkspaceEditDlg_DateModifiedLabel" xml:space="preserve">
+    <value>Date Modified:</value>
+  </data>
+  <data name="WorkspaceEditDlg_DescriptionLabel" xml:space="preserve">
+    <value>Description:</value>
+  </data>
+  <data name="WorkspaceEditDlg_HostLabel" xml:space="preserve">
+    <value>Host:</value>
+  </data>
+  <data name="WorkspaceEditDlg_LastAccessedLabel" xml:space="preserve">
+    <value>Last Accessed:</value>
+  </data>
+  <data name="WorkspaceEditDlg_LineEndingsLabel" xml:space="preserve">
+    <value>Line Endings:</value>
+  </data>
+  <data name="WorkspaceEditDlg_LineEndingsLocalCB" xml:space="preserve">
+    <value>local</value>
+  </data>
+  <data name="WorkspaceEditDlg_LineEndingsMacCB" xml:space="preserve">
+    <value>mac</value>
+  </data>
+  <data name="WorkspaceEditDlg_LineEndingsShareCB" xml:space="preserve">
+    <value>share</value>
+  </data>
+  <data name="WorkspaceEditDlg_LineEndingsUnixCB" xml:space="preserve">
+    <value>unix</value>
+  </data>
+  <data name="WorkspaceEditDlg_LineEndingsWinCB" xml:space="preserve">
+    <value>win</value>
+  </data>
+  <data name="WorkspaceEditDlg_LockedChkB" xml:space="preserve">
+    <value>locked</value>
+  </data>
+  <data name="WorkspaceEditDlg_ModtimeChkB" xml:space="preserve">
+    <value>modtime</value>
+  </data>
+  <data name="WorkspaceEditDlg_OKBtn" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="WorkspaceEditDlg_OptionsLabel" xml:space="preserve">
+    <value>Options:</value>
+  </data>
+  <data name="WorkspaceEditDlg_OwnerLabel" xml:space="preserve">
+    <value>Owner:</value>
+  </data>
+  <data name="WorkspaceEditDlg_RmdirChkB" xml:space="preserve">
+    <value>rmdir</value>
+  </data>
+  <data name="WorkspaceEditDlg_RootLabel" xml:space="preserve">
+    <value>Root:</value>
+  </data>
+  <data name="WorkspaceEditDlg_ServerIDLabel" xml:space="preserve">
+    <value>Server ID:</value>
+  </data>
+  <data name="WorkspaceEditDlg_StreamAtChangeLabel" xml:space="preserve">
+    <value>At Change:</value>
+  </data>
+  <data name="WorkspaceEditDlg_StreamRootLabel" xml:space="preserve">
+    <value>Stream Root:</value>
+  </data>
+  <data name="WorkspaceEditDlg_SubmitoptionsLabel" xml:space="preserve">
+    <value>Submit Options:</value>
+  </data>
+  <data name="WorkspaceEditDlg_SubmitOptionsLeaveUnchanged" xml:space="preserve">
+    <value>leaveunchanged</value>
+  </data>
+  <data name="WorkspaceEditDlg_SubmitOptionsLeaveUnchangedReopen" xml:space="preserve">
+    <value>leaveunchanged+reopen</value>
+  </data>
+  <data name="WorkspaceEditDlg_SubmitOptionsRevertUnchanged" xml:space="preserve">
+    <value>revertunchanged</value>
+  </data>
+  <data name="WorkspaceEditDlg_SubmitOptionsRevertUnchangedReopen" xml:space="preserve">
+    <value>revertunchanged+reopen</value>
+  </data>
+  <data name="WorkspaceEditDlg_SubmitOptionsSubmitUnchangedCB" xml:space="preserve">
+    <value>submitunchanged</value>
+  </data>
+  <data name="WorkspaceEditDlg_SubmitOptionsSubmitUnchangedReopen" xml:space="preserve">
+    <value>submitunchanged+reopen</value>
+  </data>
+  <data name="WorkspaceEditDlg_Title" xml:space="preserve">
+    <value>Workspace:</value>
+  </data>
+  <data name="WorkspaceEditDlg_ViewLabel" xml:space="preserve">
+    <value>View:</value>
+  </data>
+  <data name="WorkspaceEditDlg_WorkspaceLabel" xml:space="preserve">
+    <value>Workspace:</value>
+  </data>
+  <data name="GetStringDlg_CancelBtn" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="GetStringDlg_OKBtn" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="HelpLink_Connection" xml:space="preserve">
+    <value>https://www.perforce.com/manuals/p4exp/Content/P4EXP/p4exp.html#Connecting_to_Helix_server</value>
+  </data>
+  <data name="HelpLink_Index" xml:space="preserve">
+    <value>https://www.perforce.com/perforce/doc.current/manuals/p4exp/index.html</value>
+  </data>
+</root>

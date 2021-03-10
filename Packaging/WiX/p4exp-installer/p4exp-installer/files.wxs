@@ -1,0 +1,373 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <Fragment>
+    <Feature Id="P4EXP" Title="Visual Client (P4V)"
+              ConfigurableDirectory="INSTALLDIR"
+              AllowAdvertise="no">
+      <!-- Components not specific to 32-bit or 64-bit. -->
+      <ComponentRef Id="cmpp4client_pm"/>
+      <ComponentRef Id="cmpp4client_pu"/>
+      <ComponentRef Id="cmpp4client_sm"/>
+      <ComponentRef Id="cmpp4client_su"/>
+      <ComponentRef Id="cmpp4diff_pm"/>
+      <ComponentRef Id="cmpp4diff_pu"/>
+      <ComponentRef Id="cmpp4diff_sm"/>
+      <ComponentRef Id="cmpp4diff_su"/>
+      <ComponentRef Id="cmpp4editor_pm"/>
+      <ComponentRef Id="cmpp4editor_pu"/>
+      <ComponentRef Id="cmpp4editor_sm"/>
+      <ComponentRef Id="cmpp4editor_su"/>
+      <ComponentRef Id="cmpp4merge_pm"/>
+      <ComponentRef Id="cmpp4merge_pu"/>
+      <ComponentRef Id="cmpp4merge_sm"/>
+      <ComponentRef Id="cmpp4merge_su"/>
+      <ComponentRef Id="cmpp4port_pu"/>
+      <ComponentRef Id="cmpp4port_su"/>
+      <ComponentRef Id="cmpp4user_pm"/>
+      <ComponentRef Id="cmpp4user_pu"/>
+      <ComponentRef Id="cmpp4user_sm"/>
+      <ComponentRef Id="cmpp4user_su"/>
+      <ComponentRef Id="env_var_priv"/>
+      <ComponentRef Id="universal_key_priv"/>
+      <ComponentRef Id="p4exp_integ_with_p4v_key"/>
+      <ComponentRef Id="ReleaseNotesShortcut"/>
+      <?if $(var.Platform) = x64 ?>
+        <!-- 64-bit components go here -->
+        <MergeRef Id="VisualC++10CRTx64"/>
+        <ComponentRef Id="cmpApex.WinForms.dll_64"/>
+        <ComponentRef Id="p4exp_p4api_dot_net_x64"/>
+        <ComponentRef Id="p4exp_p4bridge_x64"/>
+        <ComponentRef Id="p4exp_x64"/>
+        <ComponentRef Id="cmpSharpShell.dll_x64"/>
+        <ComponentRef Id="cmpsrm64.exe"/>
+        <ComponentRef Id="p4exp_icons_x64"/>
+        <ComponentRef Id="Microsoft.Deployment.WindowsInstaller.dll_x64"/>
+        <ComponentRef Id="cmpp4exp.resources.dll_64"/>
+        <!-- Since we also install x86 on x64, also include them. -->
+        <MergeRef Id="VisualC++10CRTx86"/>
+        <ComponentRef Id="cmpApex.WinForms.dll_x86"/>
+        <ComponentRef Id="p4exp_p4api_dot_net_x86"/>
+        <ComponentRef Id="p4exp_p4bridge_x86"/>
+        <ComponentRef Id="p4exp_x86"/>
+        <ComponentRef Id="cmpSharpShell.dll_x86"/>
+        <ComponentRef Id="cmpsrm86.exe"/>
+        <ComponentRef Id="p4exp_icons_x86"/>
+        <ComponentRef Id="cmpp4exp.resources.dll_x86"/>
+      <?else ?>
+        <!-- 32-bit components go here -->
+        <MergeRef Id="VisualC++10CRTx86"/>
+        <ComponentRef Id="cmpApex.WinForms.dll_x86"/>
+        <ComponentRef Id="p4exp_p4api_dot_net_x86"/>
+        <ComponentRef Id="p4exp_p4bridge_x86"/>
+        <ComponentRef Id="p4exp_x86"/>
+        <ComponentRef Id="cmpSharpShell.dll_x86"/>
+        <ComponentRef Id="cmpsrm86.exe"/>
+        <ComponentRef Id="p4exp_icons_x86"/>
+        <ComponentRef Id="Microsoft.Deployment.WindowsInstaller.dll_x86"/>
+        <ComponentRef Id="cmpp4exp.resources.dll_x86"/>
+      <?endif ?>
+    </Feature>
+
+<!-- TODO: Create shortcut to URL.
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="cmpp4vShortcut" Guid="" Win64="no">
+        <Shortcut Id="p4vShortcut"
+                  Name="P4V"
+                  Target="[#filp4v.exe]"
+                  WorkingDirectory="INSTALLDIR"
+                  Icon="p4vicon"/>
+        <RemoveFolder Id="CleanUpShortCutP4V" Directory="ApplicationProgramsFolder" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\Microsoft\Perforce\p4v" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+-->
+    <DirectoryRef Id="INSTALLDIR">
+      <Component Id="env_var_priv" Guid="{7D46B0FD-D0A8-436E-8ABE-FC668D1A9ED3}" Shared="yes">
+        <!-- Same GUID. -->
+        <Condition>Privileged</Condition>
+        <Environment Id="PATH_priv"
+                     Name="PATH"
+                     Value="[INSTALLDIR]"
+                     Permanent="no"
+                     Part="last"
+                     Action="set"
+                     System="yes"/>
+        <!-- <CreateFolder/> Needed for KeyPath (ICE18) BUT on 32-bit results in empty INSTALLDIR left after uninstall. -->
+      </Component>
+      <!-- Registry Components (all have same GUID as in 12.2) -->
+      <Component Id="cmpp4client_pm" Guid="{571C9253-FFBE-400F-821A-0A324EE3D070}" Shared="yes">
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Perforce\Environment"
+                        Name="P4CLIENT" Value="[P4CLIENT]" Type="string" KeyPath="yes">
+        </RegistryValue>
+        <Condition>P4CLIENT AND Privileged AND PREV_P4CLIENT_PM AND NOT PREV_P4CLIENT_SU AND NOT PREV_P4CLIENT_SM AND NOT PREV_P4CLIENT_PU</Condition>
+      </Component>
+      <Component Id="cmpp4client_pu" Guid="{634FADD6-5DD4-490E-8EB5-CE2C8C3C35E9}" Shared="yes">
+        <RegistryValue Root="HKCU" Key="SOFTWARE\Perforce\Environment"
+                        Name="P4CLIENT" Value="[P4CLIENT]" Type="string" KeyPath="yes">
+        </RegistryValue>
+        <Condition>P4CLIENT AND NOT PREV_P4CLIENT_SU AND NOT PREV_P4CLIENT_SM AND (PREV_P4CLIENT_PU OR NOT PREV_P4CLIENT_PM OR (NOT Privileged AND PREV_P4CLIENT_PM))</Condition>
+      </Component>
+      <Component Id="cmpp4client_sm" Guid="{2CBF1C19-2AB4-4A32-96F9-50B1DE1885C9}" Shared="yes">
+        <RegistryValue Root="HKLM" Key="SYSTEM\CurrentControlSet\Control\Session Manager\Environment"
+                        Name="P4CLIENT" Value="[P4CLIENT]" Type="string" KeyPath="yes">
+        </RegistryValue>
+        <Condition>P4CLIENT AND Privileged AND PREV_P4CLIENT_SM AND NOT PREV_P4CLIENT_SU</Condition>
+      </Component>
+      <Component Id="cmpp4client_su" Guid="{F443EDAA-C707-4D48-B7E2-36080B8AFB5E}" Shared="yes">
+        <RegistryValue Root="HKCU" Key="Environment"
+                       Name="P4CLIENT" Value="[P4CLIENT]" Type="string" KeyPath="yes">
+        </RegistryValue>
+        <Condition>P4CLIENT AND (PREV_P4CLIENT_SU OR (NOT Privileged AND PREV_P4CLIENT_SM))</Condition>
+      </Component>
+      <Component Id="cmpp4diff_pm" Guid="{EE289722-4DB0-4146-B402-AF045311EC18}" Shared="yes">
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Perforce\Environment"
+                       Name="P4DIFF" Value="[P4DIFF]" Type="string" KeyPath="yes">
+        </RegistryValue>
+        <Condition>P4DIFF AND Privileged AND PREV_P4DIFF_PM AND NOT PREV_P4DIFF_SU AND NOT PREV_P4DIFF_SM AND NOT PREV_P4DIFF_PU</Condition>
+      </Component>
+      <Component Id="cmpp4diff_pu" Guid="{758C9534-DB1F-41E1-A72C-63171D90AAD3}" Shared="yes">
+        <RegistryValue Root="HKCU" Key="SOFTWARE\Perforce\Environment"
+                       Name="P4DIFF" Value="[P4DIFF]" Type="string" KeyPath="yes">
+        </RegistryValue>
+        <Condition>P4DIFF AND NOT PREV_P4DIFF_SU AND NOT PREV_P4DIFF_SM AND (PREV_P4DIFF_PU OR NOT PREV_P4DIFF_PM OR (NOT Privileged AND PREV_P4DIFF_PM))</Condition>
+      </Component>
+      <Component Id="cmpp4diff_sm" Guid="{DF8C5D17-4F54-4C0C-8FBF-FA692335B8FE}" Shared="yes">
+        <RegistryValue Root="HKLM" Key="SYSTEM\CurrentControlSet\Control\Session Manager\Environment"
+                       Name="P4DIFF" Value="[P4DIFF]" Type="string" KeyPath="yes">
+        </RegistryValue>
+        <Condition>P4DIFF AND Privileged AND PREV_P4DIFF_SM AND NOT PREV_P4DIFF_SU</Condition>
+      </Component>
+      <Component Id="cmpp4diff_su" Guid="{AC20A73C-2F63-480E-8FA7-4B4DF2B15AE4}" Shared="yes">
+        <RegistryValue Root="HKCU" Key="Environment"
+                       Name="P4DIFF" Value="[P4DIFF]" Type="string" KeyPath="yes">
+        </RegistryValue>
+        <Condition>P4DIFF AND (PREV_P4DIFF_SU OR (NOT Privileged AND PREV_P4DIFF_SM))</Condition>
+      </Component>
+      <Component Id="cmpp4editor_pm" Guid="{33DCBD10-29B6-42A9-A0FA-72A54983C7C5}" Shared="yes">
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Perforce\Environment"
+                       Name="P4EDITOR" Value="[P4EDITOR]" Type="string" KeyPath="yes">
+        </RegistryValue>
+        <Condition>Privileged AND PREV_P4EDITOR_PM AND NOT PREV_P4EDITOR_SU AND NOT PREV_P4EDITOR_SM AND NOT PREV_P4EDITOR_PU</Condition>
+      </Component>
+      <Component Id="cmpp4editor_pu" Guid="{152830C2-5C66-47F0-A8DE-2F8437F84D92}" Shared="yes">
+        <RegistryValue Root="HKCU" Key="SOFTWARE\Perforce\Environment"
+                       Name="P4EDITOR" Value="[P4EDITOR]" Type="string" KeyPath="yes">
+        </RegistryValue>
+        <Condition>NOT PREV_P4EDITOR_SU AND NOT PREV_P4EDITOR_SM AND (PREV_P4EDITOR_PU OR NOT PREV_P4EDITOR_PM OR (NOT Privileged AND PREV_P4EDITOR_PM))</Condition>
+      </Component>
+      <Component Id="cmpp4editor_sm" Guid="{42FBEC33-DEF1-49EB-B01D-F3786154F987}" Shared="yes">
+        <RegistryValue Root="HKLM" Key="SYSTEM\CurrentControlSet\Control\Session Manager\Environment"
+                       Name="P4EDITOR" Value="[P4EDITOR]" Type="string" KeyPath="yes">
+        </RegistryValue>
+        <Condition>Privileged AND PREV_P4EDITOR_SM AND NOT PREV_P4EDITOR_SU</Condition>
+      </Component>
+      <Component Id="cmpp4editor_su" Guid="{D2E933BD-A1C6-449F-B8F2-F0784544B4D3}" Shared="yes">
+        <RegistryValue Root="HKCU" Key="Environment"
+                       Name="P4EDITOR" Value="[P4EDITOR]" Type="string" KeyPath="yes">
+        </RegistryValue>
+        <Condition>PREV_P4EDITOR_SU OR (NOT Privileged AND PREV_P4EDITOR_SM)</Condition>
+      </Component>
+      <Component Id="cmpp4merge_pm" Guid="{B177A19E-E8FF-439F-983C-B2F0F8708655}" Shared="yes">
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Perforce\Environment"
+                       Name="P4MERGE" Value="[P4MERGE]" Type="string" KeyPath="yes">
+        </RegistryValue>
+        <Condition>P4MERGE AND Privileged AND PREV_P4MERGE_PM AND NOT PREV_P4MERGE_SU AND NOT PREV_P4MERGE_SM AND NOT PREV_P4MERGE_PU</Condition>
+      </Component>
+      <Component Id="cmpp4merge_pu" Guid="{44FFD6CF-72C0-4408-BBDE-2427DEAAF690}" Shared="yes">
+        <RegistryValue Root="HKCU" Key="SOFTWARE\Perforce\Environment"
+                       Name="P4MERGE" Value="[P4MERGE]" Type="string" KeyPath="yes">
+        </RegistryValue>
+        <Condition>P4MERGE AND NOT PREV_P4MERGE_SU AND NOT PREV_P4MERGE_SM AND (PREV_P4MERGE_PU OR NOT PREV_P4MERGE_PM OR (NOT Privileged AND PREV_P4MERGE_PM))</Condition>
+      </Component>
+      <Component Id="cmpp4merge_sm" Guid="{9AD51DD4-5298-4D99-B422-99AF7FC65B09}" Shared="yes">
+        <RegistryValue Root="HKLM" Key="SYSTEM\CurrentControlSet\Control\Session Manager\Environment"
+                       Name="P4MERGE" Value="[P4MERGE]" Type="string" KeyPath="yes">
+        </RegistryValue>
+        <Condition>P4MERGE AND Privileged AND PREV_P4MERGE_SM AND NOT PREV_P4MERGE_SU</Condition>
+      </Component>
+      <Component Id="cmpp4merge_su" Guid="{FACA988E-CE75-4714-B738-2ED0CB9492C3}" Shared="yes">
+        <RegistryValue Root="HKCU" Key="Environment"
+                       Name="P4MERGE" Value="[P4MERGE]" Type="string" KeyPath="yes">
+        </RegistryValue>
+        <Condition>P4MERGE AND (PREV_P4MERGE_SU OR (NOT Privileged AND PREV_P4MERGE_SM))</Condition>
+      </Component>
+      <Component Id="cmpp4port_pu" Guid="{B2895A43-0F40-460E-9B99-FBD1B8C537B2}" Shared="no">
+        <RegistryValue Root="HKCU" Key="SOFTWARE\Perforce\Environment"
+                       Name="P4PORT" Value="[P4PORT]" Type="string" KeyPath="yes">
+        </RegistryValue>
+        <Condition>NOT PREV_P4PORT_SU AND NOT PREV_P4PORT_SM</Condition>
+      </Component>
+      <Component Id="cmpp4port_su" Guid="{E5C81089-9EEE-46D0-A97F-06E0DA14C7E9}" Shared="no">
+        <RegistryValue Root="HKCU" Key="Environment"
+                       Name="P4PORT" Value="[P4PORT]" Type="string" KeyPath="yes">
+        </RegistryValue>
+        <Condition>PREV_P4PORT_SU OR PREV_P4PORT_SM</Condition>
+      </Component>
+      <Component Id="cmpp4user_pm" Guid="{363A5ECB-D5C3-4FEB-9A20-4E2D0AC91BB5}" Shared="yes">
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Perforce\Environment"
+                       Name="P4USER" Value="[P4USER]" Type="string" KeyPath="yes">
+        </RegistryValue>
+        <Condition>Privileged AND PREV_P4USER_PM AND NOT PREV_P4USER_SU AND NOT PREV_P4USER_SM AND NOT PREV_P4USER_PU</Condition>
+      </Component>
+      <Component Id="cmpp4user_pu" Guid="{B69056EC-B175-4F96-9E95-23829E64A64B}" Shared="yes">
+        <RegistryValue Root="HKCU" Key="SOFTWARE\Perforce\Environment"
+                       Name="P4USER" Value="[P4USER]" Type="string" KeyPath="yes">
+        </RegistryValue>
+        <Condition>NOT PREV_P4USER_SU AND NOT PREV_P4USER_SM AND (PREV_P4USER_PU OR NOT PREV_P4USER_PM OR (NOT Privileged AND PREV_P4USER_PM))</Condition>
+      </Component>
+      <Component Id="cmpp4user_sm" Guid="{C376E225-BB70-412F-BD8A-0FD8145691AD}" Shared="yes">
+        <RegistryValue Root="HKLM" Key="SYSTEM\CurrentControlSet\Control\Session Manager\Environment"
+                       Name="P4USER" Value="[P4USER]" Type="string" KeyPath="yes">
+        </RegistryValue>
+        <Condition>Privileged AND PREV_P4USER_SM AND NOT PREV_P4USER_SU</Condition>
+      </Component>
+      <Component Id="cmpp4user_su" Guid="{4CF0FCD8-161B-4345-92E3-718DFB77788F}" Shared="yes">
+        <RegistryValue Root="HKCU" Key="Environment"
+                       Name="P4USER" Value="[P4USER]" Type="string" KeyPath="yes">
+        </RegistryValue>
+        <Condition>PREV_P4USER_SU OR (NOT Privileged AND PREV_P4USER_SM)</Condition>
+      </Component>
+
+      <!-- Note: Project ignores ICE80 errors so this component can use "64BitDirectory" INSTALLDIR, which is a 32-bit directory when built for 32-bit. -->
+      <Component Id="universal_key_priv" Guid="{0DD32DE5-19EC-4B12-B2B7-CA9C1C9BE98B}" Shared="yes" Win64="no">
+        <RegistryValue Root="HKLM" Key="Software\Perforce\Environment"
+                       Name="P4INSTROOT" Value="[INSTALLDIR]" Type="string" KeyPath="yes">
+          <Permission User="Everyone" FileAllRights="yes" Read="yes"/>
+        </RegistryValue>
+        <Condition>Privileged</Condition>
+      </Component>
+      <Component Id="p4exp_integ_with_p4v_key" Guid="{A200ABB1-1225-40B9-9FDD-9071F59184CB}" Shared="yes" Win64="no">
+        <RegistryValue Root="HKLM" Key="Software\Perforce\P4EXP"
+                       Name="EXPINTEGWITH" Value="p4v" Type="string" KeyPath="yes">
+        </RegistryValue>
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="ReleaseNotesShortcut" Guid="{F7F980E7-47F3-4D31-A8AD-3CB79EE49367}">
+        <util:InternetShortcut Id="ReleaseNotesShortcut"
+             Name="P4EXP Release Notes"
+             Target="https://www.perforce.com/perforce/r$(env.urlversion)/user/p4expnotes.txt"/>
+        <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\Perforce\p4exp" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+
+      <!-- File Components -->
+    <?if $(var.Platform) = x64 ?>
+      <DirectoryRef Id="P4EXP">
+        <Merge Id="VisualC++10CRTx64" SourceFile="$(env.CommonProgramFiles)\Merge Modules\Microsoft_VC100_CRT_x64.msm" DiskId="1" Language="1033" />
+        <Component Id="cmpApex.WinForms.dll_64" Guid="{9E57ED41-235D-4E10-8DDD-D78E57AE7D3D}" Win64="yes"> <!-- New file. -->
+          <File Id="filApex.WinForms.dll" KeyPath="yes" Source="$(env.Bin64)\Apex.WinForms.dll" />
+        </Component>
+        <Component Id="p4exp_p4api_dot_net_x64" Guid="{5373231B-F7E8-405C-A019-30CEAC898D24}" Win64="yes"> <!-- Same GUID. -->
+          <File Id="filp4api.net.dll" KeyPath="yes" Source="$(env.Bin64)\p4api.net.dll" />
+        </Component>
+        <Component Id="p4exp_p4bridge_x64" Guid="{DED5AD2D-C9B8-483B-8E0B-C3E802D1124B}" Win64="yes"> <!-- Same GUID. -->
+          <File Id="filp4bridge.dll" KeyPath="yes" Source="$(env.Bin64)\p4bridge.dll" />
+        </Component>
+        <Component Id="p4exp_x64" Guid="{692C0DAC-B57E-402B-A857-CBC03336C882}" Win64="yes"> <!-- Same GUID. -->
+          <File Id="filp4exp64.dll" KeyPath="yes" Source="$(env.Bin64)\p4exp.dll" />
+        </Component>
+        <Component Id="cmpSharpShell.dll_x64" Guid="{1CFF5DC5-E350-41C9-BC77-73B541B2DF09}" Win64="yes"> <!-- New file. -->
+          <File Id="filSharpShell.dll" KeyPath="yes" Source="$(env.Bin64)\SharpShell.dll" />
+        </Component>
+        <Component Id="cmpsrm64.exe" Guid="{515B0011-29C5-4B02-B111-A39363AE92E3}" Win64="yes">
+          <File Id="filsrm64.exe" KeyPath="yes" Source="$(env.Bin64)\srm64.exe" />
+        </Component>
+        <Component Id="p4exp_icons_x64" Guid="{DE200044-D50B-4809-9C4C-D912BE58C2E0}" Win64="yes"> <!-- Same GUID. -->
+          <File Id="filadd.ico" Source="$(env.Bin64)\add.ico" KeyPath="yes" />
+          <File Id="filchecked_out.ico" Source="$(env.Bin64)\checked-out.ico" />
+          <File Id="fillatest_rev.ico" Source="$(env.Bin64)\latest_rev.ico" />
+          <File Id="filstale_rev.ico" Source="$(env.Bin64)\stale_rev.ico" />
+        </Component>
+        <!-- This WindowsInstaller file is x86, but it's included in the x64 archive build, so we call it x64. -->
+        <Component Id="Microsoft.Deployment.WindowsInstaller.dll_x64" Guid="{256042C8-615A-4CBC-AF20-FB73EFBAF602}" Win64="yes"> <!-- New file. -->
+          <File Id="filMicrosoft.Deployment.WindowsInstaller.dll" Source="$(env.Bin64)\Microsoft.Deployment.WindowsInstaller.dll" />
+        </Component>
+        <Directory Id="JA" Name="ja">
+          <Component Id="cmpp4exp.resources.dll_64" Guid="{22F547EA-D4D9-417F-913E-AD8467579237}" Win64="yes">
+            <File Id="filp4exp.resources.dll" KeyPath="yes" Source="$(env.Bin64)\ja\p4exp.resources.dll" />
+          </Component>
+        </Directory>
+      </DirectoryRef>
+      <!-- We want to also install 32-bit files on a 64-bit system, so include here.-->
+      <DirectoryRef Id="P4EXP_32_BIT">
+        <Merge Id="VisualC++10CRTx86" SourceFile="$(env.CommonProgramFiles)\Merge Modules\Microsoft_VC100_CRT_x86.msm" DiskId="1" Language="1033" />
+        <Component Id="cmpApex.WinForms.dll_x86" Guid="{324EF60E-0375-4327-B096-A6B8D23A24F8}" Win64="no">
+          <!-- New file. -->
+          <File Id="filApex.WinForms.dll_x86" KeyPath="yes" Source="$(env.Bin86)\Apex.WinForms.dll" />
+        </Component>
+        <Component Id="p4exp_p4api_dot_net_x86" Guid="{A131270B-9C99-402E-BB89-72DB70327F1E}" Win64="no">
+          <!-- Same GUID. -->
+          <File Id="filp4api.net.dll_x86" KeyPath="yes" Source="$(env.Bin86)\p4api.net.dll" />
+        </Component>
+        <Component Id="p4exp_p4bridge_x86" Guid="{3E728D38-6A22-41FC-88E8-1B9E64F5B1A4}" Win64="no">
+          <!-- Same GUID. -->
+          <File Id="filp4bridge.dll_x86" KeyPath="yes" Source="$(env.Bin86)\p4bridge.dll" />
+        </Component>
+        <Component Id="p4exp_x86" Guid="{2057397C-08A7-4DB2-9805-FE5510CC234C}" Win64="no">
+          <!-- Same GUID. -->
+          <File Id="filp4exp.dll_x86" KeyPath="yes" Source="$(env.Bin86)\p4exp.dll"/>
+        </Component>
+        <Component Id="cmpSharpShell.dll_x86" Guid="{51F2ECC9-6288-4B65-BFA1-F561C149EAD4}" Win64="no">
+          <!-- New file. -->
+          <File Id="filSharpShell.dll_x86" KeyPath="yes" Source="$(env.Bin86)\SharpShell.dll" />
+        </Component>
+        <Component Id="cmpsrm86.exe" Guid="{682A2C45-0286-4A12-A7F3-E45A80FA92CD}" Win64="no">
+          <File Id="filsrm86.exe" KeyPath="yes" Source="$(env.Bin86)\srm86.exe" />
+        </Component>
+        <Component Id="p4exp_icons_x86" Guid="{8906ADC1-DBD4-421F-9DCE-D826BCF36C51}" Win64="no">
+          <!-- Same GUID. -->
+          <File Id="filadd.ico_x86" Source="$(env.Bin86)\add.ico" KeyPath="yes" />
+          <File Id="filchecked_out.ico_x86" Source="$(env.Bin86)\checked-out.ico" />
+          <File Id="fillatest_rev.ico_x86" Source="$(env.Bin86)\latest_rev.ico" />
+          <File Id="filstale_rev.ico_x86" Source="$(env.Bin86)\stale_rev.ico" />
+        </Component>
+        <Directory Id="JA_32_BIT" Name="ja">
+          <Component Id="cmpp4exp.resources.dll_x86" Guid="{1619CFF6-41A5-4695-B6D8-82BDF6DDDB28}" Win64="no">
+            <File Id="filp4exp.resources.dll_x86" KeyPath="yes" Source="$(env.Bin86)\ja\p4exp.resources.dll" />
+          </Component>
+        </Directory>
+      </DirectoryRef>
+    <?else?>
+      <!-- 32-bit files -->
+      <DirectoryRef Id="P4EXP_32_BIT">
+        <Merge Id="VisualC++10CRTx86" SourceFile="$(env.CommonProgramFiles)\Merge Modules\Microsoft_VC100_CRT_x86.msm" DiskId="1" Language="1033" />
+        <Component Id="cmpApex.WinForms.dll_x86" Guid="{324EF60E-0375-4327-B096-A6B8D23A24F8}" Win64="no"> <!-- New file. -->
+          <File Id="filApex.WinForms.dll" KeyPath="yes" Source="$(env.Bin86)\Apex.WinForms.dll" />
+        </Component>
+        <Component Id="p4exp_p4api_dot_net_x86" Guid="{A131270B-9C99-402E-BB89-72DB70327F1E}" Win64="no"> <!-- Same GUID. -->
+          <File Id="filp4api.net.dll" KeyPath="yes" Source="$(env.Bin86)\p4api.net.dll" />
+        </Component>
+        <Component Id="p4exp_p4bridge_x86" Guid="{3E728D38-6A22-41FC-88E8-1B9E64F5B1A4}" Win64="no"> <!-- Same GUID. -->
+          <File Id="filp4bridge.dll" KeyPath="yes" Source="$(env.Bin86)\p4bridge.dll" />
+        </Component>
+        <Component Id="p4exp_x86" Guid="{2057397C-08A7-4DB2-9805-FE5510CC234C}" Win64="no"> <!-- Same GUID. -->
+          <File Id="filp4exp.dll" KeyPath="yes" Source="$(env.Bin86)\p4exp.dll"/>
+        </Component>
+        <Component Id="cmpSharpShell.dll_x86" Guid="{51F2ECC9-6288-4B65-BFA1-F561C149EAD4}" Win64="no"> <!-- New file. -->
+          <File Id="filSharpShell.dll" KeyPath="yes" Source="$(env.Bin86)\SharpShell.dll" />
+        </Component>
+        <Component Id="cmpsrm86.exe" Guid="{682A2C45-0286-4A12-A7F3-E45A80FA92CD}" Win64="no">
+          <File Id="filsrm86.exe" KeyPath="yes" Source="$(env.Bin86)\srm86.exe" />
+        </Component>
+        <Component Id="p4exp_icons_x86" Guid="{8906ADC1-DBD4-421F-9DCE-D826BCF36C51}" Win64="no"> <!-- Same GUID. -->
+          <File Id="filadd.ico" Source="$(env.Bin86)\add.ico" KeyPath="yes" />
+          <File Id="filchecked_out.ico" Source="$(env.Bin86)\checked-out.ico" />
+          <File Id="fillatest_rev.ico" Source="$(env.Bin86)\latest_rev.ico" />
+          <File Id="filstale_rev.ico" Source="$(env.Bin86)\stale_rev.ico" />
+        </Component>
+        <Component Id="Microsoft.Deployment.WindowsInstaller.dll_x86" Guid="{3CA7AB63-AC92-429A-BA14-C6A48A6B0EBC}" Win64="no"> <!-- New file. -->
+          <File Id="filMicrosoft.Deployment.WindowsInstaller.dll" Source="$(env.Bin86)\Microsoft.Deployment.WindowsInstaller.dll" />
+        </Component>
+        <Directory Id="JA_32_BIT" Name="ja">
+          <Component Id="cmpp4exp.resources.dll_x86" Guid="{1619CFF6-41A5-4695-B6D8-82BDF6DDDB28}" Win64="no">
+            <File Id="filp4exp.resources.dll_x86" KeyPath="yes" Source="$(env.Bin86)\ja\p4exp.resources.dll" />
+          </Component>
+        </Directory>
+      </DirectoryRef>
+    <?endif?>
+  </Fragment>
+</Wix>

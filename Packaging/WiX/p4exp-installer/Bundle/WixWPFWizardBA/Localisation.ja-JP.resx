@@ -1,0 +1,606 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BrowseButtonText" xml:space="preserve">
+    <value>閲覧シーケンス</value>
+  </data>
+  <data name="FinishPage_ExitButtonText" xml:space="preserve">
+    <value>終了(_E)</value>
+  </data>
+  <data name="FinishErrorPage_FinishErrorCanceled" xml:space="preserve">
+    <value>インストールがキャンセルされました。</value>
+  </data>
+  <data name="FinishErrorPage_FinishErrorConnectionError" xml:space="preserve">
+    <value>インターネットに接続できません。</value>
+  </data>
+  <data name="FinishErrorPage_FinishErrorCouldntDownloadInstallPackages" xml:space="preserve">
+    <value>インターネットから追加のパッケージをダウンロードできませんでした。</value>
+  </data>
+  <data name="FinishErrorPage_FinishErrorCouldntRetrieveInstallPackages" xml:space="preserve">
+    <value>追加のパッケージをダウンロードできませんでした。</value>
+  </data>
+  <data name="FinishErrorPage_FinishErrorUnknown" xml:space="preserve">
+    <value>エラーが発生しました。</value>
+    <comment>Was: An error has occurred, status code: 0x{0:X8}</comment>
+  </data>
+  <data name="FinishPage_InstallationFinishedSuccessfully" xml:space="preserve">
+    <value>{0}が正常にインストールされました</value>
+  </data>
+  <data name="BootstrapperManager_InstallErrorMessageTitle" xml:space="preserve">
+    <value>{0} - インストール中にエラーが発生しました</value>
+  </data>
+  <data name="BootstrapperManager_NewerVersionInstalledMessage" xml:space="preserve">
+    <value>{0}の新しいバージョンがすでにインストールされています</value>
+  </data>
+  <data name="BootstrapperManager_NewerVersionInstalledTitle" xml:space="preserve">
+    <value>{0} - 新しいバージョンがすでにインストールされています</value>
+  </data>
+  <data name="FinishPage_RestartButtonText" xml:space="preserve">
+    <value>すぐに再起動(_R)</value>
+  </data>
+  <data name="FinishPage_RestartExplorerText" xml:space="preserve">
+    <value>エクスプローラを再起動(_R)</value>
+  </data>
+  <data name="FinishPage_RestartExplorerRequired" xml:space="preserve">
+    <value>インストールを完了するには、ファイルエクスプローラを再起動する必要があります。ファイルエクスプローラのウィンドウとデスクトップが再表示されます。
+
+警告:ファイルエクスプローラを再起動すると、ファイルのコピー操作や移動操作が影響を受ける可能性があります。その結果、特定の処理が停止する可能性があります。</value>
+    <comment>Note: Put 2 line breaks (Shift-Enter) before "Warning!".</comment>
+  </data>
+  <data name="PlanPage_PlanningMessage" xml:space="preserve">
+    <value>{0}のインストールの準備を行っています...</value>
+  </data>
+  <data name="Wizard_BackButtonText" xml:space="preserve">
+    <value>&lt; 前へ(_B)</value>
+  </data>
+  <data name="Wizard_CancelButtonText" xml:space="preserve">
+    <value>キャンセル(_C)</value>
+  </data>
+  <data name="CancelDialogBody" xml:space="preserve">
+    <value>{0}のインストールをキャンセルしますか？</value>
+  </data>
+  <data name="CancelDialogTitle" xml:space="preserve">
+    <value>{0} - 設定</value>
+  </data>
+  <data name="ProgressPage_InstallingComponentsTextMain" xml:space="preserve">
+    <value>追加のコンポーネント{0}をインストールしています</value>
+    <comment>Used during Modify</comment>
+  </data>
+  <data name="ProgressPage_InstallingTextLine1" xml:space="preserve">
+    <value>この処理が完了するまで、数秒から数時間かかる場合があります。</value>
+  </data>
+  <data name="ProgressPage_InstallingTextLine2" xml:space="preserve">
+    <value>不足しているコンポーネントは、インターネットから自動的にダウンロードされます。</value>
+  </data>
+  <data name="ProgressPage_InstallingTextMain" xml:space="preserve">
+    <value>{0}をインストールしています</value>
+  </data>
+  <data name="Wizard_NextButtonText" xml:space="preserve">
+    <value>次へ(_N) &gt;</value>
+  </data>
+  <data name="ProgressPage_ProgressCachingEntryText" xml:space="preserve">
+    <value>{0}をキャッシュしています</value>
+  </data>
+  <data name="ProgressPage_ProgressCopyEntryText" xml:space="preserve">
+    <value>{0}をコピーしています</value>
+  </data>
+  <data name="ProgressPage_ProgressDownloadEntryText" xml:space="preserve">
+    <value>{0}をダウンロードしています</value>
+  </data>
+  <data name="ProgressPage_ProgressExecuteEntryText" xml:space="preserve">
+    <value>{0}</value>
+    <comment>This started with "Installing" but that would also appear during uninstall, so only use TextMain.</comment>
+  </data>
+  <data name="ProgressPage_ProgressExtractEntryText" xml:space="preserve">
+    <value>{0}を抽出しています</value>
+  </data>
+  <data name="ProgressPage_UninstallingTextMain" xml:space="preserve">
+    <value>{0}をアンインストールしています</value>
+    <comment>Was "Removing" but inconsistent with "Apps and Features" Uninstall button and finish dialog showing "Finished uninstalling".</comment>
+  </data>
+  <data name="ProgressPage_RepairingTextMain" xml:space="preserve">
+    <value>{0}を修復しています</value>
+  </data>
+  <data name="ProgressPage_TotalProgressText" xml:space="preserve">
+    <value>合計進捗率: {0}%</value>
+  </data>
+  <data name="ProgressPage_UpdatingTextLine2" xml:space="preserve">
+    <value>Webサイトにアクセスして、新機能に関する説明を確認することをお勧めします。</value>
+  </data>
+  <data name="ProgressPage_UpgradingTextMain" xml:space="preserve">
+    <value>{0}をアップグレードしています</value>
+  </data>
+  <data name="CancelAlreadyInProgressMessageBoxBody" xml:space="preserve">
+    <value>キャンセル処理はすでに実行中です。</value>
+  </data>
+  <data name="CancelAlreadyInProgressMessageBoxTitle" xml:space="preserve">
+    <value>{0} - 設定</value>
+  </data>
+  <data name="CancelUnavailableMessageBoxBody" xml:space="preserve">
+    <value>この段階でインストールをキャンセルすることはできません。</value>
+  </data>
+  <data name="CancelUnavailableMessageBoxTitle" xml:space="preserve">
+    <value>{0} - 設定</value>
+  </data>
+  <data name="Wizard_WindowTitle" xml:space="preserve">
+    <value>{0} - {1}</value>
+  </data>
+  <data name="Wizard_HeaderInstalling" xml:space="preserve">
+    <value>{0}をインストールしています</value>
+  </data>
+  <data name="Wizard_HeaderModifying" xml:space="preserve">
+    <value>{0}を変更しています</value>
+  </data>
+  <data name="Wizard_HeaderRemoving" xml:space="preserve">
+    <value>{0}を削除しています</value>
+  </data>
+  <data name="Wizard_HeaderRepairing" xml:space="preserve">
+    <value>{0}を修復しています</value>
+  </data>
+  <data name="Package_Netfx45Redist" xml:space="preserve">
+    <value>.NET Framework 4.5</value>
+  </data>
+  <data name="PackageConfiguration_PackageList_P4EXP_msi" xml:space="preserve">
+    <value>P4EXP Msi</value>
+  </data>
+  <data name="Wizard_InstallButtonText" xml:space="preserve">
+    <value>インストール(_I)</value>
+  </data>
+  <data name="FinishPage_ModificationFinishedSuccessfully" xml:space="preserve">
+    <value>{0}が正常に変更されました。</value>
+  </data>
+  <data name="FinishPage_RepairFinishedSuccessfully" xml:space="preserve">
+    <value>{0}が正常に修復されました。</value>
+  </data>
+  <data name="FinishPage_UninstallFinishedSuccessfully" xml:space="preserve">
+    <value>{0}が正常に削除されました。</value>
+  </data>
+  <data name="WixBootstrapper_RestartPendingDialogBody" xml:space="preserve">
+    <value>保留中の再起動処理があります。{0}をインストールする前に、コンピュータを再起動してください。</value>
+  </data>
+  <data name="WixBootstrapper_RestartPendingDialogTitle" xml:space="preserve">
+    <value>{0} - 設定</value>
+  </data>
+  <data name="SelectApplicationsPage_SelectApplicationsText" xml:space="preserve">
+    <value>宛先を選択</value>
+  </data>
+  <data name="Wizard_DoneButtonText" xml:space="preserve">
+    <value>完了(_D)</value>
+  </data>
+  <data name="ClientConfigurationPage_Browse" xml:space="preserve">
+    <value>参照(_R). . .</value>
+  </data>
+  <data name="ClientConfigurationPage_Server" xml:space="preserve">
+    <value>サーバ</value>
+  </data>
+  <data name="ClientConfigurationPage_ServerDesc" xml:space="preserve">
+    <value>クライアントの接続先となるPerforceサーバの名前(またはホスト名)とポート番号。ローカルサーバに接続する場合は、ホスト名を省略してください。</value>
+  </data>
+  <data name="ClientConfigurationPage_TextEditingApplication" xml:space="preserve">
+    <value>テキスト編集アプリケーション</value>
+  </data>
+  <data name="ClientConfigurationPage_TextEditingApplicationDesc" xml:space="preserve">
+    <value>テキストベースのフォームを開くためのアプリケーション。</value>
+  </data>
+  <data name="ClientConfigurationPage_TitleText" xml:space="preserve">
+    <value>クライアント設定</value>
+  </data>
+  <data name="ClientConfigurationPage_UserName" xml:space="preserve">
+    <value>ユーザ名</value>
+  </data>
+  <data name="ClientConfigurationPage_UserNameDesc" xml:space="preserve">
+    <value>Perforceサーバに接続するためのPerforceユーザ名。</value>
+  </data>
+  <data name="SelectApplicationsPage_ChangeButtonText" xml:space="preserve">
+    <value>変更(_A). . .</value>
+  </data>
+  <data name="SelectApplicationsPage_DirectoryTitle" xml:space="preserve">
+    <value>プライマリインストールディレクトリ:</value>
+  </data>
+  <data name="SelectApplicationsPage_ProductDescription" xml:space="preserve">
+    <value>Helix Plugin for File Explorerを使用すると、ファイルエクスプローラから直接Helix Coreの操作を実行することができます。</value>
+  </data>
+  <data name="SelectApplicationsPage_ProductName" xml:space="preserve">
+    <value>Helix Plugin for File Explorer (P4EXP)</value>
+  </data>
+  <data name="ReadyToInstallPage_Desc" xml:space="preserve">
+    <value>設定を表示または変更する場合は、[戻る]をクリックしてください。</value>
+  </data>
+  <data name="ReadyToInstallPage_Title" xml:space="preserve">
+    <value>インストールの準備が完了しました</value>
+  </data>
+  <data name="FolderBrowserDialog_PathDesc" xml:space="preserve">
+    <value>パスに新しいフォルダを入力してください。</value>
+  </data>
+  <data name="FolderBrowserDialog_PathTitle" xml:space="preserve">
+    <value>パス:</value>
+  </data>
+  <data name="FolderBrowserDialog_Title" xml:space="preserve">
+    <value>現在の宛先フォルダを変更</value>
+  </data>
+  <data name="Wizard_BadPath" xml:space="preserve">
+    <value>入力されたパスが正しくありません。</value>
+  </data>
+  <data name="Wizard_CloseButtonText" xml:space="preserve">
+    <value>閉じる(_C)</value>
+  </data>
+  <data name="ServerHelpDialog_Text1" xml:space="preserve">
+    <value>[サーバ]フィールドの値により、Perforceサーバの場所が指定されます。この値は、Perforceの管理者から受け取っている可能性があります。</value>
+  </data>
+  <data name="ServerHelpDialog_Text2" xml:space="preserve">
+    <value>現在の設定内容に応じて、サーバの場所を複数の方法で指定することができます。以下に、サポートされている形式をいくつか示します。</value>
+  </data>
+  <data name="ServerHelpDialog_Text3" xml:space="preserve">
+    <value>* &lt;ホスト名&gt;:&lt;ポート番号&gt;</value>
+  </data>
+  <data name="ServerHelpDialog_Text4" xml:space="preserve">
+    <value>* &lt;IPアドレス&gt;:&lt;ポート番号&gt;</value>
+  </data>
+  <data name="ServerHelpDialog_Text5" xml:space="preserve">
+    <value>* &lt;zeroconf名&gt; (サーバでZeroconfが有効になっている必要があります)</value>
+  </data>
+  <data name="ServerHelpDialog_Text6" xml:space="preserve">
+    <value>* &lt;ホスト名&gt; (ポート1666でサーバが設定されている必要があります)</value>
+  </data>
+  <data name="ServerHelpDialog_Text7" xml:space="preserve">
+    <value>* &lt;ポート番号&gt; (サーバがローカル環境に配置されている必要があります)</value>
+  </data>
+  <data name="ServerHelpDialog_Text8" xml:space="preserve">
+    <value>* &lt;TCP/SSLプレフィックス&gt;:&lt;ホスト名&gt;:&lt;ポート番号&gt;</value>
+  </data>
+  <data name="Wizard_OKText" xml:space="preserve">
+    <value>OK(_O)</value>
+  </data>
+  <data name="ClientConfigurationDialog_BrowseDlgFilter" xml:space="preserve">
+    <value>アプリケーション(*.exe)|*.exe</value>
+  </data>
+  <data name="ClientConfigurationDialog_BrowseDlgTitle" xml:space="preserve">
+    <value>テキストベースフォームを開くためのアプリケーションを選択してください。</value>
+  </data>
+  <data name="FinishPage_FinishedInstalling" xml:space="preserve">
+    <value>インストールが完了しました</value>
+  </data>
+  <data name="FinishPage_ReleaseNotes" xml:space="preserve">
+    <value>リリースノート</value>
+  </data>
+  <data name="FinishPage_TechnicalDocumentation" xml:space="preserve">
+    <value>技術ドキュメント</value>
+  </data>
+  <data name="Wizard_TextForLink" xml:space="preserve">
+    <value>ここ</value>
+    <comment>Text that will appear as a hyperlink.</comment>
+  </data>
+  <data name="MaintenancePage_Title" xml:space="preserve">
+    <value>メンテナンス</value>
+  </data>
+  <data name="MaintenancePage_Uninstall" xml:space="preserve">
+    <value>アンインストール(_U)</value>
+  </data>
+  <data name="MaintenancePage_UninstallDesc" xml:space="preserve">
+    <value>このシステムから{0}がアンインストールされます。</value>
+  </data>
+  <data name="MaintenancePage_UninstallDesc2" xml:space="preserve">
+    <value>このオプションを選択しても、クライアントファイル、ワークスペースファイル、サーバ上のデータベースファイル、プロキシキャッシュファイルが削除されることはありません。</value>
+  </data>
+  <data name="FinishPage_FinishedUninstalling" xml:space="preserve">
+    <value>アンインストールが完了しました</value>
+  </data>
+  <data name="FinishPage_RestartWarning" xml:space="preserve">
+    <value>設定に対する変更内容を反映するには、システムを再起動する必要があります。</value>
+  </data>
+  <data name="DefaultPortWarningDialog_Text" xml:space="preserve">
+    <value>[サーバ]フィールドのデフォルト値「perforce:1666」を更新しなければならない可能性があります。使用しているサーバの名前がわからない場合は、Perforceの管理者に問い合わせてください。</value>
+  </data>
+  <data name="FinishPage_FinishedRepairing" xml:space="preserve">
+    <value>修復が完了しました</value>
+  </data>
+  <data name="MaintenancePage_Repair" xml:space="preserve">
+    <value>修復(_R)</value>
+  </data>
+  <data name="MaintenancePage_RepairDesc" xml:space="preserve">
+    <value>修復インストールでエラーが発生しました。このオプションを選択すると、存在しないファイル、破損したファイル、ショートカット、レジストリエントリに関する問題が修正されます。</value>
+  </data>
+  <data name="UninstallPage_DeleteSettings" xml:space="preserve">
+    <value>アンインストールする製品の設定、プリファレンス、サービスパラメータが削除されます。</value>
+  </data>
+  <data name="UninstallPage_Title" xml:space="preserve">
+    <value>アンインストール</value>
+  </data>
+  <data name="UninstallPage_ToUninstall" xml:space="preserve">
+    <value>{0}をアンインストールするには、[アンインストール]をクリックします。</value>
+  </data>
+  <data name="Wizard_UninstallButtonText" xml:space="preserve">
+    <value>アンインストール(_U)</value>
+  </data>
+  <data name="UpgradePage_Desc" xml:space="preserve">
+    <value>アップグレードを開始するには、[アップグレード]をクリックします。</value>
+  </data>
+  <data name="UpgradePage_Title" xml:space="preserve">
+    <value>{0}のインストール環境をアップグレードしています</value>
+  </data>
+  <data name="FinishPage_FinishedUpgrading" xml:space="preserve">
+    <value>アップグレードが完了しました</value>
+  </data>
+  <data name="FinishPage_UpgradeFinishedSuccessfully" xml:space="preserve">
+    <value>{0}が正常にアップグレードされました</value>
+  </data>
+  <data name="SelectApplicationsPage_Version" xml:space="preserve">
+    <value>バージョン: {0}</value>
+    <comment>Shows version under product name.</comment>
+  </data>
+  <data name="Wizard_UpgradeButtonText" xml:space="preserve">
+    <value>アップグレード(_U)</value>
+  </data>
+  <data name="FinishErrorPage_ErrorP4VVersion" xml:space="preserve">
+    <value>Helix Plugin for File Explorerをインストールするには、バージョン2019.2/1883366以降のPerforce Visual Client (P4V)がインストールされている必要があります。{0}からダウンロードしてから、このインストーラをもう一度実行してください。</value>
+    <comment>The {0} is replaced by Wizard_TextForLink which is the text for the link ("here").</comment>
+  </data>
+  <data name="WarningPage_Desc" xml:space="preserve">
+    <value>これは、32ビットのオペレーティングシステム用のインストーラです。Helix Plugin for File Explorerをダウンロードし、Windowsの64ビット版インストーラ({0}で入手できます)を使用してHelix Plugin for File Explorerをインストールすることを強くお勧めします。</value>
+    <comment>{0} is replaced with the text Wizard_TextForLink</comment>
+  </data>
+  <data name="FinishErrorPage_P4VDownloadLink" xml:space="preserve">
+    <value>https://www.perforce.com/downloads/helix-visual-client-p4v</value>
+  </data>
+  <data name="FinishPage_ReleaseNotesURL" xml:space="preserve">
+    <value>https://www.perforce.com/perforce/r{0}/user/p4expnotes.txt</value>
+    <comment>{0} is replaced with the release version</comment>
+  </data>
+  <data name="FinishPage_TechnicalDocumentationURL" xml:space="preserve">
+    <value>https://www.perforce.com/perforce/r{0}/manuals/p4exp/Content/P4EXP/Home-p4exp.html</value>
+    <comment>{0} is replaced with the release version</comment>
+  </data>
+  <data name="FinishErrorPage_ShowLogFiles" xml:space="preserve">
+    <value>ログファイルを表示</value>
+  </data>
+  <data name="BootstrapperLog_BootstrapperFoundBundleVersion" xml:space="preserve">
+    <value>ブートストラッパーにより、{1}でバージョン{0}のバンドルが検出されました。現在のバージョンは{2}です。</value>
+  </data>
+  <data name="BootstrapperLog_BootstrapperHasCalled" xml:space="preserve">
+    <value>ブートストラッパーによって{0}が呼び出されました</value>
+  </data>
+  <data name="BootstrapperLog_Changed" xml:space="preserve">
+    <value>{0}が変更されました: {1}</value>
+  </data>
+  <data name="BootstrapperLog_FailedToDetectUpdates" xml:space="preserve">
+    <value>アップデートを検出できませんでした。ステータス: {0}</value>
+  </data>
+  <data name="BootstrapperLog_SettingErrorCode" xml:space="preserve">
+    <value>エラーコードを設定しています: {0}</value>
+  </data>
+  <data name="BootstrapperLog_SettingErrorMessage" xml:space="preserve">
+    <value>エラーメッセージを設定しています: {0}</value>
+  </data>
+  <data name="BootstrapperLog_AttemptToDowngrade" xml:space="preserve">
+    <value>アプリケーションのダウングレード操作が試行されました。</value>
+  </data>
+  <data name="BootstrapperLog_AttemptToReinstall" xml:space="preserve">
+    <value>アプリケーションの再インストール操作が試行されました。</value>
+  </data>
+  <data name="BootstrapperLog_BootstrapperDetectComplete" xml:space="preserve">
+    <value>ブートストラッパーの検出処理が完了しました。再開コマンド: {0}、起動コマンド: {1}</value>
+    <comment>(0) is Command.Resume, {1} is Command.Action</comment>
+  </data>
+  <data name="BootstrapperLog_BootstrapperDetectedAbsent" xml:space="preserve">
+    <value>ブートストラッパーの検出処理がDetectedAbsentで完了しました。</value>
+  </data>
+  <data name="BootstrapperLog_BootstrapperDetectedPresent" xml:space="preserve">
+    <value>ブートストラッパーの検出処理がDetectedPresentで完了しました。</value>
+  </data>
+  <data name="BootstrapperLog_BootstrapperHandledError" xml:space="preserve">
+    <value>ブートストラッパーにより、エラー{0}が処理されました。エラーメッセージ: {1}</value>
+    <comment>{0} is Error code, {1} is Error message</comment>
+  </data>
+  <data name="BootstrapperLog_BootstrapperHasCalledAndSource" xml:space="preserve">
+    <value>ブートストラッパーによって{0}が呼び出されました。ダウンロード元: {1}</value>
+  </data>
+  <data name="BootstrapperLog_BootstrapperReceivedErrorCode" xml:space="preserve">
+    <value>ブートストラッパーがエラーコード{0}を受信しました。エラーメッセージ: {1}</value>
+    <comment>{0} is Error code, {1} is Error message</comment>
+  </data>
+  <data name="BootstrapperLog_PackageDetectionComplete" xml:space="preserve">
+    <value>パッケージ検出処理が完了しました: {0}。ステータス: {1}</value>
+  </data>
+  <data name="BootstrapperLog_PlanningActionWith" xml:space="preserve">
+    <value>(0)によるアクションを準備しています</value>
+  </data>
+  <data name="BootstrapperLog_SettingLaunchAction" xml:space="preserve">
+    <value>ブートストラッパーによる選択内容に従い、現在選択されている起動アクションを{0}に設定しています。</value>
+  </data>
+  <data name="BootstrapperLog_ApplyActionCalled" xml:space="preserve">
+    <value>ApplyActionが呼び出されました。</value>
+  </data>
+  <data name="BootstrapperLog_BootstrapperHasCalledWithPackageID" xml:space="preserve">
+    <value>ブートストラッパーによって{0}が呼び出されました。パッケージID: {1}</value>
+    <comment>{0} is PlanPackageBegin, {1} is package ID</comment>
+  </data>
+  <data name="BootstrapperLog_BootstrapperPlanningMsiFeature" xml:space="preserve">
+    <value>ブートストラッパーにより、MsiFeature (機能ID: {0}、パッケージID: {1})の準備が実行されています</value>
+    <comment>{0} is feature ID, {1} is package ID</comment>
+  </data>
+  <data name="BootstrapperLog_BootstrapperShuttingDown" xml:space="preserve">
+    <value>ブートストラッパーをシャットダウンしています。</value>
+  </data>
+  <data name="BootstrapperLog_AddingProductToBundlesToUpdate" xml:space="preserve">
+    <value>製品{0}を、更新対象バンドルのリストに追加しています。</value>
+    <comment>{0} is the product code</comment>
+  </data>
+  <data name="BootstrapperLog_BootstrapperApplyComplete" xml:space="preserve">
+    <value>ブートストラッパーのApplyCompleteがステータス「{0}」で完了しました。再起動する必要があります: {1}。以前のバンドルステータス: {2}</value>
+    <comment>{0} is status, {1} is value of Restart, {2} is bundle installation state</comment>
+  </data>
+  <data name="BootstrapperLog_CheckForUpgrade" xml:space="preserve">
+    <value>アップグレードの確認: 製品コード: {0}、バンドルID: {1}</value>
+    <comment>{0} is bundle, {1} is bundle ID</comment>
+  </data>
+  <data name="BootstrapperLog_DetectedRelatedMSIPackage" xml:space="preserve">
+    <value>関連するMSIパッケージが検出されました: {0}</value>
+    <comment>{0} is the product code</comment>
+  </data>
+  <data name="BootstrapperLog_DetectRelatedBundle" xml:space="preserve">
+    <value>Bootstrapper_DetectRelatedBundle: バンドル: {0}、操作: {1}</value>
+    <comment>{0} is bundle product code, {1} is the operation</comment>
+  </data>
+  <data name="BootstrapperLog_NewerVersionInstalled" xml:space="preserve">
+    <value>{0}の新しいバージョンがすでにインストールされています。</value>
+    <comment>{0} is the bundle name</comment>
+  </data>
+  <data name="BootstrapperLog_SettingBundleToAbsent" xml:space="preserve">
+    <value>バンドルのステータスを「Absent」に設定しています。</value>
+  </data>
+  <data name="BootstrapperLog_VersionAlreadyInstalled" xml:space="preserve">
+    <value>このバージョンの{0}は、すでにインストールされています。</value>
+    <comment>{0} is the bundle name</comment>
+  </data>
+  <data name="BootstrapperLog_ExceptionOpeningExplorerWindow" xml:space="preserve">
+    <value>例外処理により、エクスプローラでパス「{0}」を開こうとしています。例外メッセージ: {1}</value>
+  </data>
+  <data name="FinishErrorPage_ErrorOSx86MSIx64" xml:space="preserve">
+    <value>このインストーラは、64ビットのオペレーティングシステム上で実行する必要があります。Helix Plugin for File Explorerの32ビット版インストーラは{0}で入手できます。</value>
+    <comment>The {0} is replaced by Wizard_TextForLink which is the text for the link ("here").</comment>
+  </data>
+  <data name="FinishPage_RememberToRestartExplorer" xml:space="preserve">
+    <value>後で、ファイルエクスプローラまたはシステムを再起動してください。</value>
+  </data>
+  <data name="FinishPage_RememberToRestartSystem" xml:space="preserve">
+    <value>後で、システムを再起動してください。</value>
+  </data>
+  <data name="WarningPage_Title" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="Wizard_P4EXPDownloadLink" xml:space="preserve">
+    <value>https://www.perforce.com/downloads/helix-plugin-file-explorer-p4exp</value>
+  </data>
+  <data name="ProgressPage_Title" xml:space="preserve">
+    <value>進捗</value>
+  </data>
+  <data name="FinishErrorPage_ErrorUpgradex64Withx86" xml:space="preserve">
+    <value>64ビット版のP4EXPがインストールされていますが、このインストーラは32ビット版P4EXP用のインストーラです。32ビット版のP4EXPをインストールする場合は、最初に64ビット版のP4EXPをアンインストールする必要があります。ただし、32ビット版のP4EXPをインストールすることはお勧めしません。</value>
+  </data>
+  <data name="FinishErrorPage_ErrorUpgradex86Withx64" xml:space="preserve">
+    <value>32ビット版のP4EXPがインストールされていますが、このインストーラは64ビット版P4EXP用のインストーラです。64ビット版のP4EXPをインストールすることをお勧めします。その場合は、最初に32ビット版のP4EXPをアンインストールする必要があります。</value>
+  </data>
+  <data name="FinishPage_License" xml:space="preserve">
+    <value>License</value>
+  </data>
+  <data name="FinishPage_LicenseURL" xml:space="preserve">
+    <value>https://www.perforce.com/perforce/r{0}/user/p4exp_license.txt</value>
+    <comment>{0} is replaced with the release version</comment>
+  </data>
+</root>

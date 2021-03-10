@@ -1,0 +1,84 @@
+﻿<?xml
+  version="1.0"
+  encoding="UTF-8"?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:bal="http://schemas.microsoft.com/wix/BalExtension"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension"
+     xmlns:dep="http://schemas.microsoft.com/wix/DependencyExtension">
+  <!-- The bundle version uses the MsiPackage ID below. -->
+  <Bundle Name="!(loc.BundleName)"
+          Version="!(bind.packageVersion.P4EXP)"
+          Manufacturer="!(loc.Manufacturer)"
+          UpgradeCode="89C8AE22-7280-4375-9C81-BED65B0B6BF2"
+          IconSourceFile="$(var.WixWPFWizardBA.ProjectDir)Resources\p4exp.ico">
+
+    <!-- Was Value="[ProgramFilesFolder]!(BundleProgramFilesDirName)\", but where does BundleProgramFilesDirName come from? -->
+    <Variable Name="InstallDir"
+              bal:Overridable="yes"
+              Value="[ProgramFiles64Folder]Perforce\" />
+
+    <Variable Name="DefaultPortWarned"
+              bal:Overridable="yes"
+              Value="false"/>
+
+    <Variable Name="DeleteSettings"
+              bal:Overridable="yes"
+              Value="0"/> <!-- The MSI installer uses "0" for false, and "1" for true. -->
+
+    <!-- Used for release version in URLs. -->
+    <Variable Name="URLVersion" Value="$(env.urlversion)" bal:Overridable="no"/>
+
+    <Variable Name="TitleBarRelease"
+              Value="$(env.TitleBarRelease)"/>
+
+    <Log PathVariable="P4EXPSetupLogFile" Prefix="PerforceHelixPluginWindowsExplorer" Extension=".log"/>
+
+    <BootstrapperApplicationRef Id="ManagedBootstrapperApplicationHost">
+      <bal:WixStandardBootstrapperApplication
+        LogoFile="$(var.WixWPFWizardBA.ProjectDir)Resources\p4exp.ico"
+        LicenseFile="none"/>
+      <Payload SourceFile="$(var.WixWPFWizardBA.TargetDir)\BootstrapperCore.config"/>
+      <Payload SourceFile="$(var.WixWPFWizardBA.TargetPath)"/>
+      <Payload SourceFile="$(var.WixWPFWizardBA.TargetDir)\GetP4Vars.exe"/>
+      <Payload SourceFile="$(var.WixWPFWizardBA.TargetDir)\Microsoft.Deployment.WindowsInstaller.dll"/>
+      <!-- To support localisation, we have to include the sattelite assemblies too! -->
+      <Payload SourceFile="$(var.WixWPFWizardBA.TargetDir)\ja-JP\WixWPFWizardBA.resources.dll" Name="ja-JP\WixWPFWizardBA.resources.dll"/>
+    </BootstrapperApplicationRef>
+
+    <Chain>
+      <!-- NetFx45Redist is defined in customactions/wixnetfxextension, so we must have something different. -->
+      <PackageGroupRef Id="NetFx45RedistMine"/>
+      <?ifdef env.MSIPLATFORM64 ?>
+        <!-- Use relative path to .msi after that project's post-build actions to copy to msi folder (note "64" in package name). -->
+        <!-- TODO Use variable for SourceFile path so can set that based on env.MSIPLATFORM64,
+        then don't need to duplicate all the other settings. -->
+        <MsiPackage SourceFile="..\..\p4exp-installer\msi\p4expinst64.msi"
+                    Name="packages\p4expinst64.msi"
+                    Visible="no"
+                    EnableFeatureSelection="no"
+                    Id="P4EXP">
+          <MsiProperty Name="INSTDIR" Value="[InstallDir]"/>
+          <MsiProperty Name="P4PORT" Value="[P4PORT]"/>
+          <MsiProperty Name="P4USER" Value="[P4USER]"/>
+          <MsiProperty Name="P4EDITOR" Value="[P4EDITOR]"/>
+          <MsiProperty Name="DELETE_SETTINGS" Value="[DeleteSettings]"/>
+        </MsiPackage>
+      <?else ?> <!-- Use 32-bit installer. -->
+        <!-- Use path from installer project's post-build event. -->
+        <MsiPackage SourceFile="..\..\p4exp-installer\msi\p4expinst.msi"
+                    Name="packages\p4expinst.msi"
+                    Visible="no"
+                    EnableFeatureSelection="no"
+                    Id="P4EXP">
+          <MsiProperty Name="INSTDIR" Value="[InstallDir]"/>
+          <MsiProperty Name="P4PORT" Value="[P4PORT]"/>
+          <MsiProperty Name="P4USER" Value="[P4USER]"/>
+          <MsiProperty Name="P4EDITOR" Value="[P4EDITOR]"/>
+          <MsiProperty Name="DELETE_SETTINGS" Value="[DeleteSettings]"/>
+        </MsiPackage>
+      <?endif ?>
+    </Chain>
+  </Bundle>
+
+</Wix>

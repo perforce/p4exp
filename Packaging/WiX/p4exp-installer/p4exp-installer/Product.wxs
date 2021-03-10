@@ -1,0 +1,359 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <Product Name="Helix Plugin for File Explorer" Id="*"
+            UpgradeCode="{A91EE5E2-5D91-483B-9147-278F50EB7B87}" Language="1033" Version="$(env.ProductVersion)" Manufacturer="Perforce Software">
+    <!-- InstallerVersion is 500 since we're using a Hyperlink control that's only available in MSI 5.0. -->
+    <Package
+      InstallerVersion="500"
+      Compressed="yes"
+      InstallScope="perMachine"
+      Manufacturer="Perforce Software"
+      />
+
+    <!-- Find P4V -->
+    <!-- We need to make these secure so that Remove will have them in server
+    context so there won't be an error that P4V not installed when it is.-->
+    <Property Id="P4VCOMPONENT32" Secure="yes">
+      <ComponentSearch Id="SearchForP4Vx86" Guid="{40F9427F-E0D9-4E5A-BCBA-33AB8FD6B717}" />
+    </Property>
+
+    <Property Id="P4VCOMPONENT64" Secure="yes">
+      <ComponentSearch Id="SearchForP4Vx64" Guid="{0FB3B9A2-2BBE-45C0-9291-13E4278749C3}" />
+    </Property>
+
+    <!-- The bootstrapper (.exe) asks the customer to download and install 2017.3, so we don't need to provide that information here.
+    Here we just make sure that P4V is installed, though we could also do that in the bootstrapper. -->
+    <Condition Message="[ProductName] requires that you have at least Helix Core Apps (P4V) 2019.2/1883366 installed. Run the Helix Core Apps 2019.2/1883366 installer again, choose Modify, and make sure you choose to install P4V.">
+      Installed OR P4VCOMPONENT64 OR P4VCOMPONENT32
+    </Condition>
+    
+    <!-- To allow installing on Windows 7, make sure .NET 4.5 is installed, which is not
+    included in Windows 7 by default, but is required by the product.
+    The setup.exe should install .NET if the user asks to, so shouldn't need to display this, but just in case. -->
+    <Property Id="PATHDOTNET4" Secure="yes">
+      <RegistrySearch Id="RegSearchPATHDOTNET4" Root="HKLM"
+                      Key="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full"
+                      Name="InstallPath"
+                      Type="raw"/>
+    </Property>
+
+    <Condition Message="[ProductName] requires .NET 4.5 which is not installed. Install .NET 4.5 then run this installer again.">
+      PATHDOTNET4
+    </Condition>
+
+    <Property Id='ARPCONTACT'>support@perforce.com</Property>
+    <Property Id='ARPHELPLINK'>http://www.perforce.com/perforce/support.html</Property>
+    <Property Id='ARPURLINFOABOUT'>http://www.perforce.com</Property>
+
+    <!-- From http://robmensching.com/blog/posts/2011/1/14/arpinstalllocation-and-how-to-set-it-with-the-wix-toolset/
+    Note that the optimization Rob mentions isn't described in a later post: "I never did write that did I? <smile/>" from
+    http://windows-installer-xml-wix-toolset.687559.n2.nabble.com/Installation-folder-during-maintenance-td7579689.html -->
+    <SetProperty Id="ARPINSTALLLOCATION" Value="[INSTALLDIR]" After="CostFinalize" />
+
+    <!-- Use WixUI_ErrorProgressText to replace progress message "Copying new files File: [1], Directory: [9], Size [6]" with "Copying new files".
+    See https://stackoverflow.com/questions/44161526/wix-copying-new-files-file-1-directory-9-size-6-shown-during-instal/44182276#44182276
+    As a result of doing this, needed to rename my dialogs that had the same names as the ones in the WiX UI extension.
+    Also the project needs a reference to WixUIExtension. -->
+    <UIRef Id="WixUI_ErrorProgressText" />
+
+    <?if $(var.Platform) = x64 ?>
+      <?define PlatformProgramFilesFolder = "ProgramFiles64Folder" ?>
+    <?else?>
+      <?define PlatformProgramFilesFolder = "ProgramFilesFolder" ?>
+    <?endif ?>
+
+    <!-- When upgrading, don't "migrate feature states," so user can choose
+    what will be installed regardless of what was installed in previous version.-->
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." 
+                  MigrateFeatures="no"/>
+
+    <!-- We won't allow installing on a system without a UI (Server Core). -->
+    <Property Id="WINDOWSINSTALLATIONTYPE">
+      <RegistrySearch Id="RegSearchInstallationType" Root="HKLM" Key="SOFTWARE\Microsoft\Windows NT\CurrentVersion" Name="InstallationType" Type="raw"/>
+    </Property>
+
+    <MediaTemplate EmbedCab="yes"/>
+
+    <Binary Id="versions_txt" SourceFile="..\res\versions.txt" /> <!-- Created at build time. -->
+    
+    <Property Id="INSTALLLEVEL" Value="100" /> <!-- Same level used in InstallShield project. -->
+
+    <!-- Disable dialog giving option of restarting File Explorer, which is what's done for our case.
+    This is problematic since Windows sometimes can't start Explorer. This happens during uninstall and upgrade of 12.2. -->
+    <Property Id="MSIRESTARTMANAGERCONTROL" Value="Disable" />
+      
+    <!-- Find location of Notepad.exe on the system for default editor. -->
+    <Property Id="NOTEPAD">
+      <DirectorySearch Id="SystemFolderNotepad" Path="[SystemFolder]">
+        <FileSearch Name="notepad.exe" />
+      </DirectorySearch>
+    </Property>
+
+    <!-- Since the custom action to browse for the file uses this property, it needs to be secure. -->
+    <Property Id="P4EDITOR" Secure="yes" />
+    
+    <!-- Find previously set P4 registry settings. -->
+    
+    <Property Id="PREV_INSTALLDIR_PMX86">
+      <RegistrySearch Id="RegSearchPREV_INSTALLDIR_PMX86" Root="HKLM" Key="SOFTWARE\Perforce\Environment" Win64="no" Name="P4INSTROOT" Type="raw"/>
+    </Property>
+    <Property Id="PREV_INSTALLDIR_PMX64">
+      <RegistrySearch Id="RegSearchPREV_INSTALLDIR_PMX64" Root="HKLM" Key="SOFTWARE\Perforce\Environment" Win64="yes" Name="P4INSTROOT" Type="raw"/>
+    </Property>
+    <Property Id="PREV_INSTALLDIR_PU">
+      <RegistrySearch Id="RegSearchPREV_INSTALLDIR_PU" Root="HKCU" Key="SOFTWARE\Perforce\Environment" Name="P4INSTROOT" Type="raw"/>
+    </Property>
+
+    <Property Id="PREV_P4EDITOR_PM">
+      <RegistrySearch Id="RegSearchPREV_P4EDITOR_PM" Root="HKLM" Key="SOFTWARE\Perforce\Environment" Name="P4EDITOR" Type="raw"/>
+    </Property>
+    <Property Id="PREV_P4EDITOR_PU">
+      <RegistrySearch Id="RegSearchPREV_P4EDITOR_PU" Root="HKCU" Key="SOFTWARE\Perforce\Environment" Name="P4EDITOR" Type="raw"/>
+    </Property>
+    <Property Id="PREV_P4EDITOR_SM">
+      <RegistrySearch Id="RegSearchPREV_P4EDITOR_SM" Root="HKLM" Key="SYSTEM\CurrentControlSet\Control\Session Manager\Environment" Name="P4EDITOR" Type="raw"/>
+    </Property>
+    <Property Id="PREV_P4EDITOR_SU">
+      <RegistrySearch Id="RegSearchPREV_P4EDITOR_SU" Root="HKCU" Key="Environment" Name="P4EDITOR" Type="raw"/>
+    </Property>
+
+    <Property Id="PREV_P4PORT_PM">
+      <RegistrySearch Id="RegSearchPREV_P4PORT_PM" Root="HKLM" Key="SOFTWARE\Perforce\Environment" Name="P4PORT" Type="raw"/>
+    </Property>
+    <Property Id="PREV_P4PORT_PU">
+      <RegistrySearch Id="RegSearchPREV_P4PORT_PU" Root="HKCU" Key="SOFTWARE\Perforce\Environment" Name="P4PORT" Type="raw"/>
+    </Property>
+    <Property Id="PREV_P4PORT_SM">
+      <RegistrySearch Id="RegSearchPREV_P4PORT_SM" Root="HKLM" Key="SYSTEM\CurrentControlSet\Control\Session Manager\Environment" Name="P4PORT" Type="raw"/>
+    </Property>
+    <Property Id="PREV_P4PORT_SU">
+      <RegistrySearch Id="RegSearchPREV_P4PORT_SU" Root="HKCU" Key="Environment" Name="P4PORT" Type="raw"/>
+    </Property>
+
+    <Property Id="PREV_P4USER_PM">
+      <RegistrySearch Id="RegSearchPREV_P4USER_PM" Root="HKLM" Key="SOFTWARE\Perforce\Environment" Name="P4USER" Type="raw"/>
+    </Property>
+    <Property Id="PREV_P4USER_PU">
+      <RegistrySearch Id="RegSearchPREV_P4USER_PU" Root="HKCU" Key="SOFTWARE\Perforce\Environment" Name="P4USER" Type="raw"/>
+    </Property>
+    <Property Id="PREV_P4USER_SM">
+      <RegistrySearch Id="RegSearchPREV_P4USER_SM" Root="HKLM" Key="SYSTEM\CurrentControlSet\Control\Session Manager\Environment" Name="P4USER" Type="raw"/>
+    </Property>
+    <Property Id="PREV_P4USER_SU">
+      <RegistrySearch Id="RegSearchPREV_P4USER_SU" Root="HKCU" Key="Environment" Name="P4USER" Type="raw"/>
+    </Property>
+    
+    <!-- properties -->
+
+    <Property Id="ErrorDialog" Value="SetupError" />
+    <Property Id="FatalError" Value="SetupCompleteError" />
+    <Property Id="MsiLogging" Value="voicewarmupx" /> <!-- voicewarmupx used in 12.2 MSI.
+      BUT it used /l*+ for the setup.exe command line ("*" - Wildcard, log all information
+      except for the v and x options. To include the v and x options, specify "/l*vx").
+      We use those same settings in our setup.exe. -->
+    <Property Id="ARPPRODUCTICON" Value="P4EXP.ico" />
+
+    <!-- Since we use it for radio buttons we have to give it a value we will use so there won't be build error ICE34.
+    There are custom actions to set it to "modify" or clear it if not in maintenance mode. -->
+    <Property Id="MAINTENANCE" Value="repair" />
+
+    <!-- We need this to be secure (so we can access it from a custom action), so need to give it a value, but
+    since we don't want it to have a value (checkbox unchecked) we have a custom action to clear it. -->
+    <Property Id="DELETE_SETTINGS" Value="0" Secure="yes" />
+    
+    <Binary Id="CustomActions" SourceFile="..\CA\bin\Release\CustomActions.dll"/>
+
+    <CustomAction Id="SetPREV_P4INSTALLDIR1_PMX86" Property="PREV_P4INSTALLDIR" Value="[PREV_INSTALLDIR_PMX86]" />
+    <CustomAction Id="SetPREV_P4INSTALLDIR1_PMX64" Property="PREV_P4INSTALLDIR" Value="[PREV_INSTALLDIR_PMX64]" />
+    <CustomAction Id="SetPREV_P4INSTALLDIR1_PU"    Property="PREV_P4INSTALLDIR" Value="[PREV_INSTALLDIR_PU]" />
+
+    <CustomAction Id="SetPREV_P4EDITOR1_PM" Property="PREV_P4EDITOR" Value="[PREV_P4EDITOR_PM]" />
+    <CustomAction Id="SetPREV_P4EDITOR2_PU" Property="PREV_P4EDITOR" Value="[PREV_P4EDITOR_PU]" />
+    <CustomAction Id="SetPREV_P4EDITOR3_SM" Property="PREV_P4EDITOR" Value="[PREV_P4EDITOR_SM]" />
+    <CustomAction Id="SetPREV_P4EDITOR4_SU" Property="PREV_P4EDITOR" Value="[PREV_P4EDITOR_SU]" />
+
+    <CustomAction Id="SetPREV_P4PORT1_PM" Property="PREV_P4PORT" Value="[PREV_P4PORT_PM]" />
+    <CustomAction Id="SetPREV_P4PORT2_PU" Property="PREV_P4PORT" Value="[PREV_P4PORT_PU]" />
+    <CustomAction Id="SetPREV_P4PORT3_SM" Property="PREV_P4PORT" Value="[PREV_P4PORT_SM]" />
+    <CustomAction Id="SetPREV_P4PORT4_SU" Property="PREV_P4PORT" Value="[PREV_P4PORT_SU]" />
+
+    <CustomAction Id="SetPREV_P4USER1_PM" Property="PREV_P4USER" Value="[PREV_P4USER_PM]" />
+    <CustomAction Id="SetPREV_P4USER2_PU" Property="PREV_P4USER" Value="[PREV_P4USER_PU]" />
+    <CustomAction Id="SetPREV_P4USER3_SM" Property="PREV_P4USER" Value="[PREV_P4USER_SM]" />
+    <CustomAction Id="SetPREV_P4USER4_SU" Property="PREV_P4USER" Value="[PREV_P4USER_SU]" />
+
+    <CustomAction Id="SetPrevious_P4INSTALLDIR" Property="INSTALLDIR" Value="[PREV_P4INSTALLDIR]" />
+    <CustomAction Id="SetPrevious_P4EDITOR" Property="P4EDITOR" Value="[PREV_P4EDITOR]" />
+    <CustomAction Id="SetPrevious_P4PORT" Property="P4PORT" Value="[PREV_P4PORT]" />
+    <CustomAction Id="SetPrevious_P4USER" Property="P4USER" Value="[PREV_P4USER]" />
+
+    <CustomAction Id="SetDefaultP4EDITOR" Property="P4EDITOR" Value="[NOTEPAD]" />
+    <CustomAction Id="SetDefaultP4PORT" Property="P4PORT" Value="perforce:1666" />
+    <CustomAction Id="SetDefaultP4USER" Property="P4USER" Value="[LogonUser]" />
+
+    <CustomAction Id="SetPathBeforeBrowse" Property="FILEPATH" Value="[P4EDITOR]" />
+    <CustomAction Id="SetMaintenanceEmpty" Property="MAINTENANCE" Value="" />
+    <CustomAction Id="SetDeleteSettingsEmpty" Property="DELETE_SETTINGS" Value="" />
+    <CustomAction Id="BrowseForFile" Execute="immediate" BinaryKey="CustomActions" DllEntry="BrowseForFile"/>
+    <CustomAction Id="GetAppVersions" Execute="immediate" BinaryKey="CustomActions" DllEntry="GetAppVersions"/>
+    <CustomAction Id="DeleteSettings" Execute="immediate" BinaryKey="CustomActions" DllEntry="DeleteSettings"/>
+    
+    <!-- Support previously documented use of INSTDIR property used with silent install. -->
+    <CustomAction Id="UseINSTDIR" Property="INSTALLDIR" Value="[INSTDIR]" />
+
+    <!-- This creates a custom action of type 242 with Source: NOTEPAD (full path to notepad.exe) and Target: [MsiLogFileLocation]
+    242 = 50 (calls an executable launched with a command line) + the value for asyncNoWait.
+    When using ExeCommand="[NOTEPAD] [MsiLogFileLocation]" Return="asyncNoWait" Directory="INSTALLDIR" get error:
+    Error 2732:  Directory Manager not initialized.-->
+    <CustomAction Id="ShowLogFile" ExeCommand="[MsiLogFileLocation]" Return="asyncNoWait" Property="NOTEPAD" />
+
+    <!-- This is used by bitmap buttons that replace the Hyperlinks that have white backgrounds. 
+    Before calling, the property WixShellExecTarget needs to be set with the URL. -->
+    <CustomAction Id="OpenURL" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" Return="ignore" />
+
+    <!-- In previous installer, the CA to register the DLL is Synchronous (Check exit code) and Commit Execution in System Context.
+    There is this comment: Execution must be commit in system context or else EXP won't be registered after upgrade.
+    To get system context (LocalSystem) we use Impersonate="no". -->
+    <!-- For info about WixQuiteExec: http://wixtoolset.org/documentation/manual/v3/customactions/qtexec.html-->
+    <?if $(var.Platform) = x64 ?>
+      <SetProperty Id="RegisterDLLx64" Value="&quot;[P4EXP]srm64.exe&quot; install &quot;[P4EXP]p4exp.dll&quot; -codebase" Sequence="execute" Before="RegisterDLLx64" /> <!-- Must include Sequence="execute". -->
+      <CustomAction Id="RegisterDLLx64" BinaryKey="WixCA" DllEntry="WixQuietExec64" Execute="commit" Impersonate="no" Return="check" />
+      <SetProperty Id="UnRegisterDLLx64" Value="&quot;[P4EXP]srm64.exe&quot; uninstall &quot;[P4EXP]p4exp.dll&quot;" Sequence="execute" Before="UnRegisterDLLx64"/> <!-- Must include Sequence="execute" or get error Found an ActionRow with a non-existent Before action: UnRegisterDLLx64. -->
+      <CustomAction Id="UnRegisterDLLx64" BinaryKey="WixCA" DllEntry="WixQuietExec64" Execute="deferred" Impersonate="no" Return="ignore" />
+    <?endif ?>
+
+    <!-- We need these in x64 also, so no condition to include. -->
+    <SetProperty Id="RegisterDLLx86" Value="&quot;[P4EXP_32_BIT]srm86.exe&quot; install &quot;[P4EXP_32_BIT]p4exp.dll&quot; -codebase" Sequence="execute" Before="RegisterDLLx86"/>
+    <CustomAction Id="RegisterDLLx86" BinaryKey="WixCA" DllEntry="WixQuietExec" Execute="commit" Impersonate="no" Return="check" />
+    <!-- After="RemoveRegistryValues"-->
+    <SetProperty Id="UnRegisterDLLx86" Value="&quot;[P4EXP_32_BIT]srm86.exe&quot; uninstall &quot;[P4EXP_32_BIT]p4exp.dll&quot;" Sequence="execute" Before="UnRegisterDLLx86" />
+    <CustomAction Id="UnRegisterDLLx86" BinaryKey="WixCA" DllEntry="WixQuietExec" Execute="deferred" Impersonate="no" Return="ignore" />
+
+    <InstallExecuteSequence>
+      <Custom Action="SetPREV_P4INSTALLDIR1_PMX86" After="AppSearch"><![CDATA[UILevel < 5 AND PREV_INSTALLDIR_PMX86]]></Custom>
+      <Custom Action="SetPREV_P4INSTALLDIR1_PMX64" After="SetPREV_P4INSTALLDIR1_PMX86"><![CDATA[UILevel < 5 AND PREV_INSTALLDIR_PMX64]]></Custom>
+      <Custom Action="SetPREV_P4INSTALLDIR1_PU" After="SetPREV_P4INSTALLDIR1_PMX64"><![CDATA[UILevel < 5 AND PREV_INSTALLDIR_PU]]></Custom>
+      <Custom Action="SetPREV_P4EDITOR1_PM" After="SetPREV_P4INSTALLDIR1_PU"><![CDATA[UILevel < 5 AND PREV_P4EDITOR_PM]]></Custom>
+      <Custom Action="SetPREV_P4EDITOR2_PU" After="SetPREV_P4EDITOR1_PM"><![CDATA[UILevel < 5 AND PREV_P4EDITOR_PU]]></Custom>
+      <Custom Action="SetPREV_P4EDITOR3_SM" After="SetPREV_P4EDITOR2_PU"><![CDATA[UILevel < 5 AND PREV_P4EDITOR_SM]]></Custom>
+      <Custom Action="SetPREV_P4EDITOR4_SU" After="SetPREV_P4EDITOR3_SM"><![CDATA[UILevel < 5 AND PREV_P4EDITOR_SU]]></Custom>
+      <Custom Action="SetPREV_P4PORT1_PM" After="SetPREV_P4EDITOR4_SU"><![CDATA[UILevel < 5 AND PREV_P4PORT_PM]]></Custom>
+      <Custom Action="SetPREV_P4PORT2_PU" After="SetPREV_P4PORT1_PM"><![CDATA[UILevel < 5 AND PREV_P4PORT_PU]]></Custom>
+      <Custom Action="SetPREV_P4PORT3_SM" After="SetPREV_P4PORT2_PU"><![CDATA[UILevel < 5 AND PREV_P4PORT_SM]]></Custom>
+      <Custom Action="SetPREV_P4PORT4_SU" After="SetPREV_P4PORT3_SM"><![CDATA[UILevel < 5 AND PREV_P4PORT_SU]]></Custom>
+      <Custom Action="SetPREV_P4USER1_PM" After="SetPREV_P4PORT4_SU"><![CDATA[UILevel < 5 AND PREV_P4USER_PM]]></Custom>
+      <Custom Action="SetPREV_P4USER2_PU" After="SetPREV_P4USER1_PM"><![CDATA[UILevel < 5 AND PREV_P4USER_PU]]></Custom>
+      <Custom Action="SetPREV_P4USER3_SM" After="SetPREV_P4USER2_PU"><![CDATA[UILevel < 5 AND PREV_P4USER_SM]]></Custom>
+      <Custom Action="SetPREV_P4USER4_SU" After="SetPREV_P4USER3_SM"><![CDATA[UILevel < 5 AND PREV_P4USER_SU]]></Custom>
+
+      <!-- Since this CA refers to a directory, must come before CostFinalize (ICE12). -->
+      <Custom Action="SetPrevious_P4INSTALLDIR" Before="CostFinalize"><![CDATA[UILevel < 5 AND PREV_P4INSTALLDIR AND NOT Installed]]></Custom>
+      <!-- Since this refers to a directory must be before CostFinalize. -->
+      <Custom Action="UseINSTDIR" Before="CostFinalize">INSTDIR</Custom>
+      
+      <Custom Action="SetPrevious_P4EDITOR" After="MigrateFeatureStates"><![CDATA[UILevel < 5 AND PREV_P4EDITOR AND NOT P4EDITOR]]></Custom>
+      <Custom Action="SetPrevious_P4PORT" After="SetPrevious_P4EDITOR"><![CDATA[UILevel < 5 AND PREV_P4PORT AND NOT P4PORT]]></Custom>
+      <Custom Action="SetPrevious_P4USER" After="SetPrevious_P4PORT"><![CDATA[UILevel < 5 AND PREV_P4USER AND NOT P4USER]]></Custom>
+      <Custom Action="SetDefaultP4EDITOR" After="SetPrevious_P4USER"><![CDATA[UILevel < 5 AND NOT P4EDITOR]]></Custom>
+      <Custom Action="SetDefaultP4PORT" After="SetDefaultP4EDITOR"><![CDATA[UILevel < 5 AND NOT P4PORT]]></Custom>
+      <Custom Action="SetDefaultP4USER" After="SetDefaultP4PORT"><![CDATA[UILevel < 5 AND NOT P4USER]]></Custom>
+      <!-- If the installer is running silently need to do this. -->
+      <Custom Action="SetDeleteSettingsEmpty" After="SetDefaultP4USER">DELETE_SETTINGS = "0"</Custom>
+      <Custom Action="DeleteSettings" After="RemoveFiles">Installed OR WIX_UPGRADE_DETECTED</Custom>
+      <!-- Registering and unregistering DLLs.
+      Bundle sets REINSTALL to ALL so also check for that. -->
+      <Custom Action="RegisterDLLx86" After="RegisterTypeLibraries"><![CDATA[&P4EXP = 3 OR REINSTALL >< "P4EXP" OR REINSTALL = "ALL"]]></Custom>
+      <?if $(var.Platform) = x64 ?>
+        <Custom Action="RegisterDLLx64" After="RegisterDLLx86"><![CDATA[&P4EXP = 3 OR REINSTALL >< "P4EXP" OR REINSTALL = "ALL"]]></Custom>
+      <?endif ?>
+      <Custom Action="UnRegisterDLLx86" After="RemoveRegistryValues"><![CDATA[&P4EXP = 2]]></Custom>
+      <?if $(var.Platform) = x64 ?>
+        <Custom Action="UnRegisterDLLx64" After="UnRegisterDLLx86"><![CDATA[&P4EXP = 2]]></Custom>
+      <?endif ?>
+    </InstallExecuteSequence>
+      
+    <InstallUISequence>
+      <!-- Collect properties from system searches into appropriate properties (PREV_(property)). -->
+      <Custom Action="SetPREV_P4INSTALLDIR1_PMX86" After="AppSearch">PREV_INSTALLDIR_PMX86</Custom>
+      <Custom Action="SetPREV_P4INSTALLDIR1_PMX64" After="SetPREV_P4INSTALLDIR1_PMX86">PREV_INSTALLDIR_PMX64</Custom>
+      <Custom Action="SetPREV_P4INSTALLDIR1_PU" After="SetPREV_P4INSTALLDIR1_PMX64">PREV_INSTALLDIR_PU</Custom>
+      <Custom Action="SetPREV_P4EDITOR1_PM" After="SetPREV_P4INSTALLDIR1_PU">PREV_P4EDITOR_PM</Custom>
+      <Custom Action="SetPREV_P4EDITOR2_PU" After="SetPREV_P4EDITOR1_PM">PREV_P4EDITOR_PU</Custom>
+      <Custom Action="SetPREV_P4EDITOR3_SM" After="SetPREV_P4EDITOR2_PU">PREV_P4EDITOR_SM</Custom>
+      <Custom Action="SetPREV_P4EDITOR4_SU" After="SetPREV_P4EDITOR3_SM">PREV_P4EDITOR_SU</Custom>
+      <Custom Action="SetPREV_P4PORT1_PM" After="SetPREV_P4EDITOR4_SU">PREV_P4PORT_PM</Custom>
+      <Custom Action="SetPREV_P4PORT2_PU" After="SetPREV_P4PORT1_PM">PREV_P4PORT_PU</Custom>
+      <Custom Action="SetPREV_P4PORT3_SM" After="SetPREV_P4PORT2_PU">PREV_P4PORT_SM</Custom>
+      <Custom Action="SetPREV_P4PORT4_SU" After="SetPREV_P4PORT3_SM">PREV_P4PORT_SU</Custom>
+      <Custom Action="SetPREV_P4USER1_PM" After="SetPREV_P4PORT4_SU">PREV_P4USER_PM</Custom>
+      <Custom Action="SetPREV_P4USER2_PU" After="SetPREV_P4USER1_PM">PREV_P4USER_PU</Custom>
+      <Custom Action="SetPREV_P4USER3_SM" After="SetPREV_P4USER2_PU">PREV_P4USER_SM</Custom>
+      <Custom Action="SetPREV_P4USER4_SU" After="SetPREV_P4USER3_SM">PREV_P4USER_SU</Custom>
+
+      <!-- Set properties from appropriate properties set above. -->
+      <Custom Action="SetPrevious_P4EDITOR" After="SetPREV_P4USER4_SU">PREV_P4EDITOR AND NOT P4EDITOR</Custom>
+      <Custom Action="SetPrevious_P4PORT" After="SetPrevious_P4EDITOR">PREV_P4PORT AND NOT P4PORT</Custom>
+      <Custom Action="SetPrevious_P4USER" After="SetPrevious_P4PORT">PREV_P4USER AND NOT P4USER</Custom>
+
+      <!-- If properties not set (not possible due to actions above, and P4V required?!), set them to a default value. -->
+      <Custom Action="SetDefaultP4EDITOR" After="SetPrevious_P4USER">NOT P4EDITOR</Custom>
+      <Custom Action="SetDefaultP4PORT" After="SetDefaultP4EDITOR">NOT P4PORT</Custom>
+      <Custom Action="SetDefaultP4USER" After="SetDefaultP4EDITOR">NOT P4USER</Custom>
+
+      <!-- Since this CA refers to a directory, must come before CostFinalize (ICE12). -->
+      <Custom Action="SetPrevious_P4INSTALLDIR" Before="CostFinalize">PREV_P4INSTALLDIR AND NOT Installed</Custom>
+      
+      <Custom Action="GetAppVersions" After="SetDefaultP4USER"></Custom>
+      <Custom Action="SetMaintenanceEmpty" After="GetAppVersions">NOT (Installed AND NOT REMOVE="ALL")</Custom>
+
+      <!-- Since this referrs to a directory must be before CostFinalize. -->
+      <Custom Action="UseINSTDIR" Before="CostFinalize">INSTDIR</Custom>
+
+      <!-- Since DELETE_SETTINGS is a property for a checkbox, want it empty (property undefined) if it's 0
+      so checkbox will be unchecked. -->
+      <Custom Action="SetDeleteSettingsEmpty" After="SetMaintenanceEmpty">DELETE_SETTINGS="0"</Custom>
+
+      <!-- To support http://answers.perforce.com/articles/KB/2456, also check if REMOVE has feature. -->
+
+      <Show Dialog="InstallWelcome" After="CostFinalize">NOT Installed AND NOT WIX_UPGRADE_DETECTED</Show>
+      <Show Dialog="ProgramMaintenance" After="CostFinalize">Installed AND NOT REMOVE="ALL" AND NOT REINSTALL="ALL"</Show>
+      <Show Dialog="Upgrade" After="ProgramMaintenance">WIX_UPGRADE_DETECTED OR REMOVE="ALL" OR REINSTALL="ALL"</Show>
+      <Show Dialog="ExitDialogMy" OnExit="success" Overridable="yes" />
+      <Show Dialog="SetupCompleteError" OnExit="error" />
+      <Show Dialog="UserExitMy" OnExit="cancel" Overridable="yes" />
+    </InstallUISequence>
+ 
+    <AdminUISequence>
+      <Show Dialog="ExitDialogMy" OnExit="success" Overridable="yes" />
+      <Show Dialog="SetupCompleteError" OnExit="error" />
+      <Show Dialog="UserExitMy" OnExit="cancel" Overridable="yes" />
+      <Show Dialog="SetupProgress" After="CostFinalize">1</Show>
+    </AdminUISequence>
+
+    <!--These fix the build error ICE32: Possible Mis-Aligned Foreign Keys.
+These errors are due to the old merge modules having incompatible table
+column widths.
+See: http://windows-installer-xml-wix-toolset.687559.n2.nabble.com/WiX-devs-wix-Bugs-1637945-light-fails-when-merging-Microsoft-VFP-9-Runtime-MSMs-td716112.html-->
+    <EnsureTable Id="Class" />
+    <EnsureTable Id="Condition" />
+    <EnsureTable Id="Extension" />
+    <EnsureTable Id="PublishComponent" />
+    <EnsureTable Id="TypeLib" />
+    
+    <FeatureRef Id="P4EXP" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+        <Directory Id="$(var.PlatformProgramFilesFolder)">
+          <Directory Id="INSTALLDIR" Name="Perforce">
+            <Directory Id="P4EXP" Name="P4EXP"/>
+            <Directory Id="P4EXP_32_BIT" Name="P4EXP 32-bit"/>
+          </Directory>
+        </Directory>
+        <Directory Id="ProgramMenuFolder">
+            <Directory Id="ApplicationProgramsFolder" Name="Perforce"/>
+        </Directory>
+    </Directory>
+
+  </Product>
+</Wix>

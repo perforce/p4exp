@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WixLocalization Culture="en-us" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+  <String Id="Error1314"><!-- _locID_text="Error1314" _locComment="Error1314" -->The specified path is unavailable: '[2]'.</String>
+  <String Id="Error1322"><!-- _locID_text="Error1322" _locComment="Error1322" -->A portion of the following folder path is invalid. It is either empty or exceeds the length allowed by the system: '[2]'</String>
+</WixLocalization>

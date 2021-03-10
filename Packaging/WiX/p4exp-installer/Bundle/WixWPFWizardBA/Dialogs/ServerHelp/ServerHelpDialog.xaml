@@ -1,0 +1,54 @@
+﻿<Window x:Class="WixWPFWizardBA.Dialogs.ServerHelp.ServerHelpDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d"
+        x:Name="view"
+        Title="{Binding DialogTitle}"
+        xmlns:wixWpfWizardBa="clr-namespace:WixWPFWizardBA"
+        DataContext="{Binding ElementName=view, Path=ViewModel}"
+        Width="500"
+        Height="300"
+        WindowStyle="ToolWindow"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        Foreground="White"
+        >
+    <DockPanel Background="White">
+        <DockPanel DockPanel.Dock="Top"
+                   Width="500"
+                   Height="230">
+            <DockPanel.Background>
+                <ImageBrush ImageSource="/WixWPFWizardBA;component/Resources/help_bg.bmp" Stretch="UniformToFill"/>
+            </DockPanel.Background>
+            <StackPanel Margin="20,10,20,10">
+                <TextBlock Text="{x:Static wixWpfWizardBa:Localisation.ServerHelpDialog_Text1}" TextWrapping="Wrap" Margin="0 0 0 10"/>
+                <TextBlock Text="{x:Static wixWpfWizardBa:Localisation.ServerHelpDialog_Text2}" TextWrapping="Wrap" Margin="0 0 0 10"/>
+                <TextBlock Text="{x:Static wixWpfWizardBa:Localisation.ServerHelpDialog_Text3}" />
+                <TextBlock Text="{x:Static wixWpfWizardBa:Localisation.ServerHelpDialog_Text4}" />
+                <TextBlock Text="{x:Static wixWpfWizardBa:Localisation.ServerHelpDialog_Text5}" />
+                <TextBlock Text="{x:Static wixWpfWizardBa:Localisation.ServerHelpDialog_Text6}" />
+                <TextBlock Text="{x:Static wixWpfWizardBa:Localisation.ServerHelpDialog_Text7}" />
+                <TextBlock Text="{x:Static wixWpfWizardBa:Localisation.ServerHelpDialog_Text8}" />
+            </StackPanel>
+        </DockPanel>
+        <Grid Height="20"
+              Margin="0 0 0 0"
+              HorizontalAlignment="Stretch"
+              DockPanel.Dock="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0"
+                    Margin="0"
+                    Click="CloseClicked"
+                    Width="100"
+                    Foreground="Black"
+                    Content="{x:Static wixWpfWizardBa:Localisation.Wizard_CloseButtonText}"
+                    IsDefault="True"
+                    Padding="0" />
+        </Grid>
+    </DockPanel>
+</Window>

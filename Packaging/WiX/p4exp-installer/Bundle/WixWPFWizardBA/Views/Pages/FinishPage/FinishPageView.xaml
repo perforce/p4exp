@@ -1,0 +1,155 @@
+﻿<!--
+    Copyright (c) Nick Guletskii and Arseniy Aseev. All rights reserved.  
+    Licensed under the MIT License. See LICENSE file in the solution root for full license information.  
+-->
+<UserControl x:Class="WixWPFWizardBA.Views.Pages.FinishPage.FinishPageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:bootstrapper="clr-namespace:Microsoft.Tools.WindowsInstallerXml.Bootstrapper;assembly=BootstrapperCore"
+             xmlns:finishPage="clr-namespace:WixWPFWizardBA.Views.Pages.FinishPage"
+             xmlns:versionStatus="clr-namespace:WixWPFWizardBA.Common"
+             xmlns:httpconverter="clr-namespace:WixWPFWizardBA.Converters"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:wixWpfWizardBa="clr-namespace:WixWPFWizardBA"
+             d:DataContext="{d:DesignInstance finishPage:FinishPageViewModel}"
+             d:DesignWidth="493"
+             d:DesignHeight="312"
+             Foreground="White"
+             Background="Transparent"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <httpconverter:TextBlockFormatToHyperlinkConverter x:Key="TextBlockFormatToHyperlinkConverter" />
+    </UserControl.Resources>
+    <Grid Margin="0">
+        <Grid.Background>
+            <ImageBrush ImageSource="/WixWPFWizardBA;component/Resources/success_bg.bmp" Stretch="Fill"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="52" />
+            <RowDefinition Height="5" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0"
+                   Margin ="0 0 20 0" TextAlignment="Right" VerticalAlignment="Center"
+                   FontSize="14"
+                   FontWeight="Bold">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding WizardViewModel.ExecutedAction}"
+                                     Value="{x:Static bootstrapper:LaunchAction.Uninstall}">
+                            <Setter Property="Text" Value="{x:Static wixWpfWizardBa:Localisation.FinishPage_FinishedUninstalling}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding WizardViewModel.ExecutedAction}"
+                                     Value="{x:Static bootstrapper:LaunchAction.Repair}">
+                            <Setter Property="Text" Value="{x:Static wixWpfWizardBa:Localisation.FinishPage_FinishedRepairing}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding WizardViewModel.VersionStatus}"
+                                     Value="{x:Static versionStatus:VersionStatus.OlderInstalled}">
+                            <Setter Property="Text" Value="{x:Static wixWpfWizardBa:Localisation.FinishPage_FinishedUpgrading}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                   <Setter Property="Text" Value="{x:Static wixWpfWizardBa:Localisation.FinishPage_FinishedInstalling}" />
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBlock Grid.Row="3"
+                   Margin="20 35 0 0">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding WizardViewModel.ExecutedAction}"
+                                     Value="{x:Static bootstrapper:LaunchAction.Uninstall}">
+                            <Setter Property="Text" Value="{Binding Bootstrapper.BundleName,
+                                  StringFormat={x:Static wixWpfWizardBa:Localisation.FinishPage_UninstallFinishedSuccessfully}}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding WizardViewModel.ExecutedAction}"
+                                     Value="{x:Static bootstrapper:LaunchAction.Repair}">
+                            <Setter Property="Text" Value="{Binding Bootstrapper.BundleName,
+                                  StringFormat={x:Static wixWpfWizardBa:Localisation.FinishPage_RepairFinishedSuccessfully}}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding WizardViewModel.VersionStatus}"
+                                     Value="{x:Static versionStatus:VersionStatus.OlderInstalled}">
+                            <Setter Property="Text" Value="{Binding Bootstrapper.BundleName,
+                                  StringFormat={x:Static wixWpfWizardBa:Localisation.FinishPage_UpgradeFinishedSuccessfully}}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                    <Setter Property="Text" Value="{Binding Bootstrapper.BundleName,
+                                  StringFormat={x:Static wixWpfWizardBa:Localisation.FinishPage_InstallationFinishedSuccessfully}}"/>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBlock Grid.Row="3" Margin="20 75 0 0">
+            <Hyperlink NavigateUri="{Binding ReleaseNotesURL}"
+                       RequestNavigate="Hyperlink_RequestNavigate">
+                <Hyperlink.Inlines>
+                    <Run Text="{x:Static wixWpfWizardBa:Localisation.FinishPage_ReleaseNotes}"/>
+                </Hyperlink.Inlines>
+            </Hyperlink>
+            <Hyperlink NavigateUri="{Binding TechnicalDocumentationURL}"
+                       RequestNavigate="Hyperlink_RequestNavigate">
+                <Hyperlink.Inlines>
+                    <Run Text="{x:Static wixWpfWizardBa:Localisation.FinishPage_TechnicalDocumentation}"/>
+                </Hyperlink.Inlines>
+            </Hyperlink>
+            <Hyperlink NavigateUri="{Binding LicenseURL}"
+                       RequestNavigate="Hyperlink_RequestNavigate">
+                <Hyperlink.Inlines>
+                    <Run Text="{x:Static wixWpfWizardBa:Localisation.FinishPage_License}"/>
+                </Hyperlink.Inlines>
+            </Hyperlink>
+            <TextBlock.Style>
+               <Style TargetType="TextBlock">
+                   <Style.Triggers>
+                       <DataTrigger Binding="{Binding WizardViewModel.ExecutedAction}"
+                                       Value="{x:Static bootstrapper:LaunchAction.Uninstall}">
+                           <Setter Property="Visibility" Value="Hidden" />
+                       </DataTrigger>
+                   </Style.Triggers>
+                   <Setter Property="Visibility" Value="Visible" />
+               </Style>
+           </TextBlock.Style>
+        </TextBlock>
+        <TextBlock Grid.Row="4"
+                   Margin="190,0,0,-90"
+                   TextBlock.Foreground="Red"
+                   TextBlock.FontWeight="Bold"
+                   TextWrapping="Wrap"
+                   Text="{x:Static wixWpfWizardBa:Localisation.FinishPage_RestartExplorerRequired}">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding WizardViewModel.ExecutedAction}"
+                                     Value="{x:Static bootstrapper:LaunchAction.Uninstall}">
+                            <Setter Property="Visibility" Value="Hidden" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding WizardViewModel.RestartRequired}" Value="True">
+                            <Setter Property="Visibility" Value="Hidden" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                    <Setter Property="Visibility" Value="Visible" />
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBlock Grid.Row="4"
+                   Margin="190 0 0 -90"
+                   TextBlock.Foreground="Red"
+                   TextBlock.FontWeight="Bold"
+                   TextWrapping="Wrap"
+                   Text="{x:Static wixWpfWizardBa:Localisation.FinishPage_RestartWarning}">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding WizardViewModel.RestartRequired}" Value="True">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                    <Setter Property="Visibility" Value="Hidden" />
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+    </Grid>
+</UserControl>

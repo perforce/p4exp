@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) .NET Foundation and contributors. All rights reserved. Licensed under the Microsoft Reciprocal License. See LICENSE.TXT file in the project root for full license information. -->
+
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+
+  <!--
+        .NET Framework installation state properties
+        Official documentation can be found at the following location:
+           .NET Framework 4.5 - http://msdn.microsoft.com/en-us/library/5a4x27ek.aspx, http://msdn.microsoft.com/en-us/library/ee942965(v=VS.110).aspx
+    -->
+
+  <?define NetFx45MinRelease = 378389?>
+  <?define NetFx45EulaLink =  http://go.microsoft.com/fwlink/?LinkID=260867 ?>
+
+
+  <!-- Release value of .NET 4.5 and later -->
+  <Fragment>
+    <Property Id="WIXNETFX4RELEASEINSTALLED" Secure="yes">
+      <RegistrySearch Id="NetFx4ReleaseInstalled" Root="HKLM" Key="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full" Name="Release" Type="raw" />
+    </Property>
+  </Fragment>
+
+  <Fragment>
+    <PropertyRef Id="WIXNETFX4RELEASEINSTALLED" />
+    <Property Id="WIX_IS_NETFRAMEWORK_45_OR_LATER_INSTALLED" Secure="yes" />
+    <SetProperty Id="WIX_IS_NETFRAMEWORK_45_OR_LATER_INSTALLED" Value="1" After="AppSearch">
+      WIXNETFX4RELEASEINSTALLED >= "#$(var.NetFx45MinRelease)"
+    </SetProperty>
+  </Fragment>
+
+  <Fragment>
+    <util:RegistrySearch
+        Id="NETFRAMEWORK45"
+        Variable="NETFRAMEWORK45"
+        Root="HKLM"
+        Key="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full"
+        Value="Release"
+        Result="value" />
+  </Fragment>
+
+  <Fragment>
+    <util:RegistrySearchRef Id="NETFRAMEWORK45"/>
+
+    <WixVariable Id="WixMbaPrereqPackageId" Value="NetFx45Redist" />
+    <WixVariable Id="WixMbaPrereqLicenseUrl" Value="$(var.NetFx45EulaLink)" Overridable="yes" />
+    <WixVariable Id="NetFx45RedistDetectCondition" Value="NETFRAMEWORK45 &gt;= $(var.NetFx45MinRelease)" Overridable="yes" />
+    <WixVariable Id="NetFx45RedistInstallCondition" Value="" Overridable="yes" />
+    <WixVariable Id="NetFx45RedistPackageDirectory" Value="redist\" Overridable="yes" />
+
+    <!-- Remove RepairCommand so repairing P4EXP won't also try to repair .Net.
+	        When repairing .Net, though it doesn't look like there were changes, a reboot is required. -->
+    <PackageGroup Id="NetFx45RedistMine">
+      <ExePackage
+          InstallCommand="/q /norestart /ChainingPackage &quot;[WixBundleName]&quot; /log &quot;[NetFx45FullLog].html&quot;"
+          UninstallCommand="/uninstall /q /norestart /ChainingPackage &quot;[WixBundleName]&quot; /log &quot;[NetFx45FullLog].html&quot;"
+          PerMachine="yes"
+          DetectCondition="!(wix.NetFx45RedistDetectCondition)"
+          InstallCondition="!(wix.NetFx45RedistInstallCondition)"
+          Id="NetFx45Redist"
+          Vital="yes"
+          Permanent="yes"
+          Protocol="netfx4"
+          Name="dotNetFx45_Full_setup.exe"
+          SourceFile="$(var.WixWPFWizardBA.ProjectDir)Resources\dotNetFx45_Full_setup.exe"
+          LogPathVariable="NetFx45FullLog"
+          Compressed="yes"> <!-- Compressed="yes" is key to including the package in the bundle, and for the bundle to find it. -->
+      </ExePackage>
+    </PackageGroup>
+  </Fragment>
+</Wix>
+  
