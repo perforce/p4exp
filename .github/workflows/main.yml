@@ -44,4 +44,4 @@ jobs:
 
       - name: Build p4exp
         run: |          
-          docker run -v ${{ github.workspace }}:c:\mount -e arch=$env:arch $Env:docker c:\build\compile.ps1
+          docker run -v ${{ github.workspace }}\..\:c:\mount -e arch=$env:arch $Env:docker c:\build\compile.ps1
