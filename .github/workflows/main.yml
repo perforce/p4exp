@@ -39,7 +39,6 @@ jobs:
           dir ${{ github.workspace }}\..
           dir
           pwd
-          dir p4-bin
       - name: Get docker image
         run: docker pull $Env:docker
 
