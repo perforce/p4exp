@@ -33,10 +33,10 @@ jobs:
           echo ${{ secrets.DOCKERHUB_TOKEN }}| docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
       - name: Get p4api.net
         run: |
-          New-Item -ItemType Directory "${{ github.workspace }}\..\p4-bin\bin.ntx64
+          New-Item -ItemType Directory ${{ github.workspace }}\..\p4-bin\bin.ntx64
           $WebClient = New-Object System.Net.WebClient ; $WebClient.DownloadFile("ftp://ftp.perforce.com/perforce/$env:codeline/bin.nt$env:arch/p4api.net.zip","${{ github.workspace }}\p4api.net.zip")
-          Move-Item p4api.net.zip "${{ github.workspace }}\..\p4-bin\bin.nt$env:arch\
-          dir "${{ github.workspace }}\..
+          Move-Item p4api.net.zip ${{ github.workspace }}\..\p4-bin\bin.nt$env:arch\
+          dir ${{ github.workspace }}\..
           dir
           pwd
           dir p4-bin
