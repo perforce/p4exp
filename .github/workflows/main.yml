@@ -1,0 +1,49 @@
+name: CI
+
+env:
+  codeline:       "r20.2"
+  docker:         "ppiorunski/p4php7:p4exp-server2016"
+  arch:           "x64"
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: windows-2016
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Login to docker hub
+        run: |
+          echo ${{ secrets.DOCKERHUB_TOKEN }}| docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+      - name: Get p4api.net
+        run: |
+          New-Item -ItemType Directory ${{ github.workspace }}\..\p4-bin\bin.ntx64
+          $WebClient = New-Object System.Net.WebClient ; $WebClient.DownloadFile("ftp://ftp.perforce.com/perforce/$env:codeline/bin.nt$env:arch/p4api.net.zip","${{ github.workspace }}\p4api.net.zip")
+          Move-Item p4api.net.zip ${{ github.workspace }}\..\p4-bin\bin.nt$env:arch\
+          New-Item -ItemType Directory ${{ github.workspace }}\tools
+          $WebClient = New-Object System.Net.WebClient ; $WebClient.DownloadFile("https://dist.nuget.org/win-x86-commandline/latest/nuget.exe","${{ github.workspace }}\tools\nuget.exe")
+          dir ${{ github.workspace }}\..
+          dir
+          pwd
+      - name: Get docker image
+        run: docker pull $Env:docker
+
+      - name: Build p4exp
+        run: |          
+          docker run -v ${{ github.workspace }}\..\:c:\mount -e arch=$env:arch $Env:docker c:\build\compile.ps1
