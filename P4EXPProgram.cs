@@ -119,14 +119,14 @@ namespace P4EXP
         {
             Properties.Settings mySettings = new Properties.Settings();
 
-            if (_p4VCPath != null)
+            if ((_p4VCPath != null) && System.IO.File.Exists(_p4VCPath))
             {
                 return _p4VCPath;
             }
 
             string prefString = mySettings.P4VCPath;
 
-            if ((prefString != null) && (prefString.EndsWith("p4vc.exe")))
+            if ((prefString != null) && (prefString.EndsWith("p4vc.exe")) && System.IO.File.Exists(prefString))
             {
                 _p4VCPath = prefString;
             }
@@ -137,6 +137,13 @@ namespace P4EXP
                 {
                     mySettings.P4VCPath = installLocation + "p4vc.exe";
                     _p4VCPath = installLocation + "p4vc.exe";
+                    mySettings.Save();
+                    return _p4VCPath;
+                }
+                else if (System.IO.File.Exists(installLocation + "p4vc.bat"))
+                {
+                    mySettings.P4VCPath = installLocation + "p4vc.bat";
+                    _p4VCPath = installLocation + "p4vc.bat";
                     mySettings.Save();
                     return _p4VCPath;
                 }
