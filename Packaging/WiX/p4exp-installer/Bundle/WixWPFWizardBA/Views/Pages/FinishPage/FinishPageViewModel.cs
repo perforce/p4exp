@@ -44,7 +44,16 @@ namespace WixWPFWizardBA.Views.Pages.FinishPage
                         MessageBox.Show(Localisation.FinishPage_RememberToRestartExplorer);
                     }
                     this.Bootstrapper.Engine.Quit(wizardViewModel.Status); }, _ => true);
-            this.CanGoToPreviousPage = true;
+
+            this.LearnMoreCommand = new SimpleCommand(
+                _ =>
+                {
+                    System.Diagnostics.Process.Start( // Use Hidden so command prompt window does not appear.
+                        new System.Diagnostics.ProcessStartInfo("cmd", $"/c start {Localisation.FinishPage_PromotionURL}")
+                        { CreateNoWindow = true, WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden });
+                }, _ => true);
+
+            this.CanGoToPreviousPage = true; // The Back button is the Exit button.
 
             this.CanGoToNextPage = false; // Assume only an Exit button.
 
@@ -74,6 +83,8 @@ namespace WixWPFWizardBA.Views.Pages.FinishPage
                 }
             }
         }
+
+        public SimpleCommand LearnMoreCommand { get; }
 
         /// <summary>
         /// For P4EXP, when installing, upgrading, or repairing, we need to restart

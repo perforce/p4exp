@@ -603,4 +603,17 @@
     <value>https://www.perforce.com/perforce/r{0}/user/p4exp_license.txt</value>
     <comment>{0} is replaced with the release version</comment>
   </data>
+  <data name="FinishPage_PromotionURL" xml:space="preserve">
+    <value>https://www.perforce.com/products/helix-core-apps/helix-sync</value>
+  </data>
+  <data name="FinishPage_LearnMore" xml:space="preserve">
+    <value>LEARN MORE</value>
+    <comment>Text for button.</comment>
+  </data>
+  <data name="FinishPage_PromotionText1" xml:space="preserve">
+    <value>Art or audio assets not always getting versioned?</value>
+  </data>
+  <data name="FinishPage_PromotionText2" xml:space="preserve">
+    <value>The drag-and-drop interface that lets creatives version like developers.</value>
+  </data>
 </root>

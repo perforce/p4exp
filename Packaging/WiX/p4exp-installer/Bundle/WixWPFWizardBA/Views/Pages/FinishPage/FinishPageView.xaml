@@ -22,6 +22,17 @@
         <httpconverter:TextBlockFormatToHyperlinkConverter x:Key="TextBlockFormatToHyperlinkConverter" />
     </UserControl.Resources>
     <Grid Margin="0">
+        <Grid.Resources>
+            <!-- Cyan foreground has better contrast on black background on all systems. -->
+            <Style x:Key="{x:Type Hyperlink}" TargetType="{x:Type Hyperlink}">
+                <Setter Property="Foreground" Value="Cyan" />
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Foreground" Value="Red" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
         <Grid.Background>
             <ImageBrush ImageSource="/WixWPFWizardBA;component/Resources/success_bg.bmp" Stretch="Fill"/>
         </Grid.Background>
@@ -29,13 +40,13 @@
             <RowDefinition Height="52" />
             <RowDefinition Height="5" />
             <RowDefinition Height="20" />
-            <RowDefinition Height="100" />
-            <RowDefinition Height="40" />
+            <RowDefinition Height="117" />
+            <RowDefinition Height="122" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0"
-                   Margin ="0 0 20 0" TextAlignment="Right" VerticalAlignment="Center"
+                   Margin ="0,17,20,17" TextAlignment="Right" VerticalAlignment="Center"
                    FontSize="14"
-                   FontWeight="Bold">
+                   FontWeight="Bold" Height="19">
             <TextBlock.Style>
                 <Style TargetType="TextBlock">
                     <Style.Triggers>
@@ -52,12 +63,12 @@
                             <Setter Property="Text" Value="{x:Static wixWpfWizardBa:Localisation.FinishPage_FinishedUpgrading}" />
                         </DataTrigger>
                     </Style.Triggers>
-                   <Setter Property="Text" Value="{x:Static wixWpfWizardBa:Localisation.FinishPage_FinishedInstalling}" />
+                    <Setter Property="Text" Value="{x:Static wixWpfWizardBa:Localisation.FinishPage_FinishedInstalling}" />
                 </Style>
             </TextBlock.Style>
         </TextBlock>
-        <TextBlock Grid.Row="3"
-                   Margin="20 35 0 0">
+        <TextBlock Grid.Row="2"
+                   Margin="20,3,0,0">
             <TextBlock.Style>
                 <Style TargetType="TextBlock">
                     <Style.Triggers>
@@ -82,7 +93,7 @@
                 </Style>
             </TextBlock.Style>
         </TextBlock>
-        <TextBlock Grid.Row="3" Margin="20 75 0 0">
+        <TextBlock Grid.Row="3" Margin="20,11,0,63">
             <Hyperlink NavigateUri="{Binding ReleaseNotesURL}"
                        RequestNavigate="Hyperlink_RequestNavigate">
                 <Hyperlink.Inlines>
@@ -102,16 +113,16 @@
                 </Hyperlink.Inlines>
             </Hyperlink>
             <TextBlock.Style>
-               <Style TargetType="TextBlock">
-                   <Style.Triggers>
-                       <DataTrigger Binding="{Binding WizardViewModel.ExecutedAction}"
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding WizardViewModel.ExecutedAction}"
                                        Value="{x:Static bootstrapper:LaunchAction.Uninstall}">
-                           <Setter Property="Visibility" Value="Hidden" />
-                       </DataTrigger>
-                   </Style.Triggers>
-                   <Setter Property="Visibility" Value="Visible" />
-               </Style>
-           </TextBlock.Style>
+                            <Setter Property="Visibility" Value="Hidden" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                    <Setter Property="Visibility" Value="Visible" />
+                </Style>
+            </TextBlock.Style>
         </TextBlock>
         <TextBlock Grid.Row="4"
                    Margin="190,0,0,-90"
@@ -135,7 +146,7 @@
             </TextBlock.Style>
         </TextBlock>
         <TextBlock Grid.Row="4"
-                   Margin="190 0 0 -90"
+                   Margin="190,1,0,-91"
                    TextBlock.Foreground="Red"
                    TextBlock.FontWeight="Bold"
                    TextWrapping="Wrap"
@@ -151,5 +162,35 @@
                 </Style>
             </TextBlock.Style>
         </TextBlock>
+        <!-- To fix text on bitmap background being blurry, use text instead. -->
+        <TextBlock Grid.Row="3" Margin="92,37,20,62" TextWrapping="Wrap"
+                   FontSize="12"
+                   FontStyle="Italic"
+                   FontWeight="Light"
+                   Text="{x:Static wixWpfWizardBa:Localisation.FinishPage_PromotionText1}"/>
+        <TextBlock Grid.Row="3" Margin="92,80,150,0" TextWrapping="Wrap"
+                   Text="{x:Static wixWpfWizardBa:Localisation.FinishPage_PromotionText2}" />
+        <!-- The button was provided in a jpeg from Marketing (Chris Kirsh?) via
+            Brent Schiestl. I wanted to match the color exactly, so I used Paint to pick the color
+            then edit it to get the RGB. -->
+        <Button x:Name="btnLearnMore"
+                BorderBrush="#02B2E3"
+                BorderThickness="2.5"
+                Background="Black"
+                Command="{Binding LearnMoreCommand}"
+                HorizontalAlignment="Left"
+                Margin="45,0,0,81" Grid.Row="4" VerticalAlignment="Bottom" Width="120" Height="32"
+                IsTabStop="True">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+            <TextBlock Text="{x:Static wixWpfWizardBa:Localisation.FinishPage_LearnMore}"
+                       Foreground="#02B2E3"
+                       FontWeight="Bold"
+                       FontSize="13">
+            </TextBlock>
+        </Button>
     </Grid>
 </UserControl>

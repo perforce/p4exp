@@ -1,13 +1,13 @@
                              Release Notes for
               P4EXP, the Helix Plugin for File Explorer
-                             Version 2020.2
+                             Version 2021.2
 
 Introduction
 
         This document lists all user-visible changes to P4EXP that were
-        made between releases 2003.2 and 2020.2. To display the version of
+        made between releases 2003.2 and 2021.2. To display the version of
         P4EXP that you are using, choose "Connection Information..."
-        command from the More menu. P4EXP 2020.2 is compatible with the
+        command from the More menu. P4EXP 2021.2 is compatible with the
         2018.1 server release and above. P4EXP requires that P4V
         2019.2/1883366 is installed.
 
@@ -31,11 +31,6 @@ Third Party Software
 
 Known Issues
 
-        On Windows 8.1, some actions (revert, add, log off) may not
-        automatically refresh the file icons in File Explorer. Updating
-        the visual file state after these actions may require a manual
-        refresh via: Perforce -> Refresh File State.
-
         Due to a limit on the number of file overlay icons allowed by
         Windows, the P4EXP icons may not show at all if other extensions
         using file overlay icons are installed. For more information and
@@ -45,6 +40,21 @@ Known Issues
         On High-DPI display, bitmap buttons on installer final dialog
         are too small. This is a Windows problem that currently doesn't
         have a fix or workaround.
+
+---------------------------------------------------------------------------
+
+New Functionality in 2021.2
+
+        (Job #109730)
+           Added support for 2021.2 P4D.
+
+---------------------------------------------------------------------------
+
+Bugs fixed in 2020.2 Patch 1
+
+       2117264 (Job #106258) *
+           P4EXP now correctly displays Time-lapse View and Revision
+           Graph, when used with 2021.1 version of P4V.
 
 ---------------------------------------------------------------------------
 

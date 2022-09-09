@@ -673,6 +673,15 @@ namespace WixWPFWizardBA {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to LEARN MORE.
+        /// </summary>
+        public static string FinishPage_LearnMore {
+            get {
+                return ResourceManager.GetString("FinishPage_LearnMore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to License.
         /// </summary>
         public static string FinishPage_License {
@@ -696,6 +705,33 @@ namespace WixWPFWizardBA {
         public static string FinishPage_ModificationFinishedSuccessfully {
             get {
                 return ResourceManager.GetString("FinishPage_ModificationFinishedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Art or audio assets not always getting versioned?.
+        /// </summary>
+        public static string FinishPage_PromotionText1 {
+            get {
+                return ResourceManager.GetString("FinishPage_PromotionText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The drag-and-drop interface that lets creatives version like developers..
+        /// </summary>
+        public static string FinishPage_PromotionText2 {
+            get {
+                return ResourceManager.GetString("FinishPage_PromotionText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://www.perforce.com/products/helix-core-apps/helix-sync.
+        /// </summary>
+        public static string FinishPage_PromotionURL {
+            get {
+                return ResourceManager.GetString("FinishPage_PromotionURL", resourceCulture);
             }
         }
         
