@@ -1,6 +1,6 @@
                              Release Notes for
               P4EXP, the Helix Plugin for File Explorer
-                             Version 2022.2
+                             Version 2021.2
 
 Introduction
 
@@ -40,50 +40,6 @@ Known Issues
         On High-DPI display, bitmap buttons on installer final dialog
         are too small. This is a Windows problem that currently doesn't
         have a fix or workaround.
-
---------------------------------------------------------------------------
-
-New functionality in 2022.2 (2022.2/2432809) (2023/04/25)
-
-        (Job #115313) *
-            Rebuilt with the latest p4api.net API.
-
---------------------------------------------------------------------------
-
-New functionality in 2021.2 Patch 5 (2021.2/2406364) (2023/02/10)
-
-        Important security note
-            This version addresses vulnerabilities in OpenSSL (CVE-2023-0286, 
-            CVE-2023-0215, CVE-2022-4450, CVE-2022-4304) by linking in version
-            1.1.1t of the library.
-
---------------------------------------------------------------------------
-
-New Functionality in 2021.2 Patch 4 (2021.2/2393892) (2023/01/17)
-
-        (Job #113519) *
-            Rebuilt with the latest p4api.net API.
-
----------------------------------------------------------------------------
-
-New Functionality in 2021.2 Patch 3
-
-        (Job #113610) * *
-           Rebuilt with the latest p4api.net API.
-
----------------------------------------------------------------------------
-
-New Functionality in 2021.2 Patch 2
-
-        (Job #112608) * *
-           Rebuilt with the latest p4api.net API.
-
----------------------------------------------------------------------------
-
-New Functionality in 2021.2 Patch 1
-
-        2333090 (Job #112101)
-           Rebuilt with the latest p4api.net API.
 
 ---------------------------------------------------------------------------
 

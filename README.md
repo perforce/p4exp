@@ -2,7 +2,7 @@
 
 # P4EXP
 
-P4EXP, the Helix Plugin For File Explorer, lets you perform Helix Core tasks on files from a file browser, such as Windows File Explorer.
+P4EXP, the Helix Plugin for File Explore, enables you to perform Helix server tasks on files in the context of your file browser (for example, File Explorer).
 
 ## Requirements
 
