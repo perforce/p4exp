@@ -391,7 +391,6 @@ namespace P4EXP
                 if (enterPW.DialogResult == DialogResult.Cancel)
                 {
                     store.loginCancelled = true;
-                    LogOff(store);
                 }
                 if (enterPW.DialogResult == DialogResult.OK)
                 {
@@ -1790,6 +1789,36 @@ namespace P4EXP
                 FileLogger.stopDebugLogging(Properties.Resources.FileLogger_Open_in_P4V);
                 return;
             }
+           
+            if(!string.IsNullOrEmpty(p4vPath) && System.IO.File.Exists(p4vPath))
+            {
+                string version = FileVersionInfo.GetVersionInfo(p4vPath).ToString();
+                string[] filelines = version.Split('\n');
+                string line = filelines[3].Replace("FileVersion:", "").Trim();
+                line = line.Remove(6);
+                double versionnum = Convert.ToDouble(line);
+
+                //recalculate p4v path based on version.
+                // P4V deprecated options p4v -s and p4v -t in 2024.1 release.
+                // These options needs to be replaced by p4vc -workspacewindow -s / -t
+                if (versionnum >= 2024.1)
+                {
+                    string p4vcPath = P4VCPath();
+
+                    if (string.IsNullOrEmpty(p4vcPath) || !System.IO.File.Exists(p4vcPath))
+                    {
+                        string message = Properties.Resources.MessageDlg_CannotLocateP4VC;
+                        Message dlg = new Message(Properties.Resources.MessageDlg_MissingApplication, message);
+                        dlg.ShowDialog();
+                        FileLogger.LogMessage(1, Properties.Resources.FileLogger_Open_in_P4V, message);
+                        FileLogger.stopDebugLogging(Properties.Resources.FileLogger_Open_in_P4V);
+                        return;
+                    }
+                    p4vPath = p4vcPath;
+                }
+
+            }
+
             Process startP4V = new Process();
             startP4V.StartInfo.FileName = p4vPath;
             RepoStorage store = getRepoStorage(commandFiles);
@@ -1806,12 +1835,26 @@ namespace P4EXP
                 {
                     charset = " -C " + charset;
                 }
-                startP4V.StartInfo.Arguments =
+
+                if (p4vPath.Contains("p4vc"))
+                {
+                    startP4V.StartInfo.Arguments =
+                    " -p " + rep.Connection.Server.Address.Uri
+                    + " -u " + rep.Connection.UserName
+                    + " -c " + rep.Connection.Client.Name
+                    + charset
+                    + " workspacewindow -s \"" + commandFiles[0].LocalPath.Path + "\"";
+                    startP4V.StartInfo.UseShellExecute = false;
+                }
+                else
+                {
+                    startP4V.StartInfo.Arguments =
                     " -p " + rep.Connection.Server.Address.Uri
                     + " -u " + rep.Connection.UserName
                     + " -c " + rep.Connection.Client.Name
                     + charset
                     + " -s \"" + commandFiles[0].LocalPath.Path + "\"";
+                }
 
                 startP4V.StartInfo.CreateNoWindow = true;
                 startP4V.Start();

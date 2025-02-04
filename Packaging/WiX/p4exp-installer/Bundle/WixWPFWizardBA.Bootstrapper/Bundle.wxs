@@ -42,6 +42,7 @@
       <Payload SourceFile="$(var.WixWPFWizardBA.TargetPath)"/>
       <Payload SourceFile="$(var.WixWPFWizardBA.TargetDir)\GetP4Vars.exe"/>
       <Payload SourceFile="$(var.WixWPFWizardBA.TargetDir)\Microsoft.Deployment.WindowsInstaller.dll"/>
+      <Payload SourceFile="..\..\res\versions.txt"/>
       <!-- To support localisation, we have to include the sattelite assemblies too! -->
       <Payload SourceFile="$(var.WixWPFWizardBA.TargetDir)\ja-JP\WixWPFWizardBA.resources.dll" Name="ja-JP\WixWPFWizardBA.resources.dll"/>
     </BootstrapperApplicationRef>

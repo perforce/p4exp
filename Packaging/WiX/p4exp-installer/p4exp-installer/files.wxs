@@ -44,28 +44,6 @@
         <ComponentRef Id="p4exp_icons_x64"/>
         <ComponentRef Id="Microsoft.Deployment.WindowsInstaller.dll_x64"/>
         <ComponentRef Id="cmpp4exp.resources.dll_64"/>
-        <!-- Since we also install x86 on x64, also include them. -->
-        <MergeRef Id="VisualC++10CRTx86"/>
-        <ComponentRef Id="cmpApex.WinForms.dll_x86"/>
-        <ComponentRef Id="p4exp_p4api_dot_net_x86"/>
-        <ComponentRef Id="p4exp_p4bridge_x86"/>
-        <ComponentRef Id="p4exp_x86"/>
-        <ComponentRef Id="cmpSharpShell.dll_x86"/>
-        <ComponentRef Id="cmpsrm86.exe"/>
-        <ComponentRef Id="p4exp_icons_x86"/>
-        <ComponentRef Id="cmpp4exp.resources.dll_x86"/>
-      <?else ?>
-        <!-- 32-bit components go here -->
-        <MergeRef Id="VisualC++10CRTx86"/>
-        <ComponentRef Id="cmpApex.WinForms.dll_x86"/>
-        <ComponentRef Id="p4exp_p4api_dot_net_x86"/>
-        <ComponentRef Id="p4exp_p4bridge_x86"/>
-        <ComponentRef Id="p4exp_x86"/>
-        <ComponentRef Id="cmpSharpShell.dll_x86"/>
-        <ComponentRef Id="cmpsrm86.exe"/>
-        <ComponentRef Id="p4exp_icons_x86"/>
-        <ComponentRef Id="Microsoft.Deployment.WindowsInstaller.dll_x86"/>
-        <ComponentRef Id="cmpp4exp.resources.dll_x86"/>
       <?endif ?>
     </Feature>
 
@@ -289,82 +267,6 @@
         <Directory Id="JA" Name="ja">
           <Component Id="cmpp4exp.resources.dll_64" Guid="{22F547EA-D4D9-417F-913E-AD8467579237}" Win64="yes">
             <File Id="filp4exp.resources.dll" KeyPath="yes" Source="$(env.Bin64)\ja\p4exp.resources.dll" />
-          </Component>
-        </Directory>
-      </DirectoryRef>
-      <!-- We want to also install 32-bit files on a 64-bit system, so include here.-->
-      <DirectoryRef Id="P4EXP_32_BIT">
-        <Merge Id="VisualC++10CRTx86" SourceFile="$(env.CommonProgramFiles)\Merge Modules\Microsoft_VC100_CRT_x86.msm" DiskId="1" Language="1033" />
-        <Component Id="cmpApex.WinForms.dll_x86" Guid="{324EF60E-0375-4327-B096-A6B8D23A24F8}" Win64="no">
-          <!-- New file. -->
-          <File Id="filApex.WinForms.dll_x86" KeyPath="yes" Source="$(env.Bin86)\Apex.WinForms.dll" />
-        </Component>
-        <Component Id="p4exp_p4api_dot_net_x86" Guid="{A131270B-9C99-402E-BB89-72DB70327F1E}" Win64="no">
-          <!-- Same GUID. -->
-          <File Id="filp4api.net.dll_x86" KeyPath="yes" Source="$(env.Bin86)\p4api.net.dll" />
-        </Component>
-        <Component Id="p4exp_p4bridge_x86" Guid="{3E728D38-6A22-41FC-88E8-1B9E64F5B1A4}" Win64="no">
-          <!-- Same GUID. -->
-          <File Id="filp4bridge.dll_x86" KeyPath="yes" Source="$(env.Bin86)\p4bridge.dll" />
-        </Component>
-        <Component Id="p4exp_x86" Guid="{2057397C-08A7-4DB2-9805-FE5510CC234C}" Win64="no">
-          <!-- Same GUID. -->
-          <File Id="filp4exp.dll_x86" KeyPath="yes" Source="$(env.Bin86)\p4exp.dll"/>
-        </Component>
-        <Component Id="cmpSharpShell.dll_x86" Guid="{51F2ECC9-6288-4B65-BFA1-F561C149EAD4}" Win64="no">
-          <!-- New file. -->
-          <File Id="filSharpShell.dll_x86" KeyPath="yes" Source="$(env.Bin86)\SharpShell.dll" />
-        </Component>
-        <Component Id="cmpsrm86.exe" Guid="{682A2C45-0286-4A12-A7F3-E45A80FA92CD}" Win64="no">
-          <File Id="filsrm86.exe" KeyPath="yes" Source="$(env.Bin86)\srm86.exe" />
-        </Component>
-        <Component Id="p4exp_icons_x86" Guid="{8906ADC1-DBD4-421F-9DCE-D826BCF36C51}" Win64="no">
-          <!-- Same GUID. -->
-          <File Id="filadd.ico_x86" Source="$(env.Bin86)\add.ico" KeyPath="yes" />
-          <File Id="filchecked_out.ico_x86" Source="$(env.Bin86)\checked-out.ico" />
-          <File Id="fillatest_rev.ico_x86" Source="$(env.Bin86)\latest_rev.ico" />
-          <File Id="filstale_rev.ico_x86" Source="$(env.Bin86)\stale_rev.ico" />
-        </Component>
-        <Directory Id="JA_32_BIT" Name="ja">
-          <Component Id="cmpp4exp.resources.dll_x86" Guid="{1619CFF6-41A5-4695-B6D8-82BDF6DDDB28}" Win64="no">
-            <File Id="filp4exp.resources.dll_x86" KeyPath="yes" Source="$(env.Bin86)\ja\p4exp.resources.dll" />
-          </Component>
-        </Directory>
-      </DirectoryRef>
-    <?else?>
-      <!-- 32-bit files -->
-      <DirectoryRef Id="P4EXP_32_BIT">
-        <Merge Id="VisualC++10CRTx86" SourceFile="$(env.CommonProgramFiles)\Merge Modules\Microsoft_VC100_CRT_x86.msm" DiskId="1" Language="1033" />
-        <Component Id="cmpApex.WinForms.dll_x86" Guid="{324EF60E-0375-4327-B096-A6B8D23A24F8}" Win64="no"> <!-- New file. -->
-          <File Id="filApex.WinForms.dll" KeyPath="yes" Source="$(env.Bin86)\Apex.WinForms.dll" />
-        </Component>
-        <Component Id="p4exp_p4api_dot_net_x86" Guid="{A131270B-9C99-402E-BB89-72DB70327F1E}" Win64="no"> <!-- Same GUID. -->
-          <File Id="filp4api.net.dll" KeyPath="yes" Source="$(env.Bin86)\p4api.net.dll" />
-        </Component>
-        <Component Id="p4exp_p4bridge_x86" Guid="{3E728D38-6A22-41FC-88E8-1B9E64F5B1A4}" Win64="no"> <!-- Same GUID. -->
-          <File Id="filp4bridge.dll" KeyPath="yes" Source="$(env.Bin86)\p4bridge.dll" />
-        </Component>
-        <Component Id="p4exp_x86" Guid="{2057397C-08A7-4DB2-9805-FE5510CC234C}" Win64="no"> <!-- Same GUID. -->
-          <File Id="filp4exp.dll" KeyPath="yes" Source="$(env.Bin86)\p4exp.dll"/>
-        </Component>
-        <Component Id="cmpSharpShell.dll_x86" Guid="{51F2ECC9-6288-4B65-BFA1-F561C149EAD4}" Win64="no"> <!-- New file. -->
-          <File Id="filSharpShell.dll" KeyPath="yes" Source="$(env.Bin86)\SharpShell.dll" />
-        </Component>
-        <Component Id="cmpsrm86.exe" Guid="{682A2C45-0286-4A12-A7F3-E45A80FA92CD}" Win64="no">
-          <File Id="filsrm86.exe" KeyPath="yes" Source="$(env.Bin86)\srm86.exe" />
-        </Component>
-        <Component Id="p4exp_icons_x86" Guid="{8906ADC1-DBD4-421F-9DCE-D826BCF36C51}" Win64="no"> <!-- Same GUID. -->
-          <File Id="filadd.ico" Source="$(env.Bin86)\add.ico" KeyPath="yes" />
-          <File Id="filchecked_out.ico" Source="$(env.Bin86)\checked-out.ico" />
-          <File Id="fillatest_rev.ico" Source="$(env.Bin86)\latest_rev.ico" />
-          <File Id="filstale_rev.ico" Source="$(env.Bin86)\stale_rev.ico" />
-        </Component>
-        <Component Id="Microsoft.Deployment.WindowsInstaller.dll_x86" Guid="{3CA7AB63-AC92-429A-BA14-C6A48A6B0EBC}" Win64="no"> <!-- New file. -->
-          <File Id="filMicrosoft.Deployment.WindowsInstaller.dll" Source="$(env.Bin86)\Microsoft.Deployment.WindowsInstaller.dll" />
-        </Component>
-        <Directory Id="JA_32_BIT" Name="ja">
-          <Component Id="cmpp4exp.resources.dll_x86" Guid="{1619CFF6-41A5-4695-B6D8-82BDF6DDDB28}" Win64="no">
-            <File Id="filp4exp.resources.dll_x86" KeyPath="yes" Source="$(env.Bin86)\ja\p4exp.resources.dll" />
           </Component>
         </Directory>
       </DirectoryRef>

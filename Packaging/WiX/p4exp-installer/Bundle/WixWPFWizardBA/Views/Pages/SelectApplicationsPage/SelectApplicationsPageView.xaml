@@ -42,7 +42,7 @@
                    Text="{x:Static wixWpfWizardBa:Localisation.SelectApplicationsPage_ProductName}" />
             <TextBlock Grid.Row="2"
                    Foreground="Gray"
-                   Text="{Binding Bootstrapper.Engine.StringVariables[VersionForPage], 
+                   Text="{Binding p4expVersion, 
                          StringFormat={x:Static wixWpfWizardBa:Localisation.SelectApplicationsPage_Version}}" />
             <TextBlock Grid.Row="3"
                        HorizontalAlignment="Left"

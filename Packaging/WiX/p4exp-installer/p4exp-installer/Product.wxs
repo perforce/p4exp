@@ -14,9 +14,6 @@
     <!-- Find P4V -->
     <!-- We need to make these secure so that Remove will have them in server
     context so there won't be an error that P4V not installed when it is.-->
-    <Property Id="P4VCOMPONENT32" Secure="yes">
-      <ComponentSearch Id="SearchForP4Vx86" Guid="{40F9427F-E0D9-4E5A-BCBA-33AB8FD6B717}" />
-    </Property>
 
     <Property Id="P4VCOMPONENT64" Secure="yes">
       <ComponentSearch Id="SearchForP4Vx64" Guid="{0FB3B9A2-2BBE-45C0-9291-13E4278749C3}" />
@@ -95,9 +92,6 @@
     
     <!-- Find previously set P4 registry settings. -->
     
-    <Property Id="PREV_INSTALLDIR_PMX86">
-      <RegistrySearch Id="RegSearchPREV_INSTALLDIR_PMX86" Root="HKLM" Key="SOFTWARE\Perforce\Environment" Win64="no" Name="P4INSTROOT" Type="raw"/>
-    </Property>
     <Property Id="PREV_INSTALLDIR_PMX64">
       <RegistrySearch Id="RegSearchPREV_INSTALLDIR_PMX64" Root="HKLM" Key="SOFTWARE\Perforce\Environment" Win64="yes" Name="P4INSTROOT" Type="raw"/>
     </Property>
@@ -164,7 +158,6 @@
     
     <Binary Id="CustomActions" SourceFile="..\CA\bin\Release\CustomActions.dll"/>
 
-    <CustomAction Id="SetPREV_P4INSTALLDIR1_PMX86" Property="PREV_P4INSTALLDIR" Value="[PREV_INSTALLDIR_PMX86]" />
     <CustomAction Id="SetPREV_P4INSTALLDIR1_PMX64" Property="PREV_P4INSTALLDIR" Value="[PREV_INSTALLDIR_PMX64]" />
     <CustomAction Id="SetPREV_P4INSTALLDIR1_PU"    Property="PREV_P4INSTALLDIR" Value="[PREV_INSTALLDIR_PU]" />
 
@@ -223,16 +216,9 @@
       <CustomAction Id="UnRegisterDLLx64" BinaryKey="WixCA" DllEntry="WixQuietExec64" Execute="deferred" Impersonate="no" Return="ignore" />
     <?endif ?>
 
-    <!-- We need these in x64 also, so no condition to include. -->
-    <SetProperty Id="RegisterDLLx86" Value="&quot;[P4EXP_32_BIT]srm86.exe&quot; install &quot;[P4EXP_32_BIT]p4exp.dll&quot; -codebase" Sequence="execute" Before="RegisterDLLx86"/>
-    <CustomAction Id="RegisterDLLx86" BinaryKey="WixCA" DllEntry="WixQuietExec" Execute="commit" Impersonate="no" Return="check" />
-    <!-- After="RemoveRegistryValues"-->
-    <SetProperty Id="UnRegisterDLLx86" Value="&quot;[P4EXP_32_BIT]srm86.exe&quot; uninstall &quot;[P4EXP_32_BIT]p4exp.dll&quot;" Sequence="execute" Before="UnRegisterDLLx86" />
-    <CustomAction Id="UnRegisterDLLx86" BinaryKey="WixCA" DllEntry="WixQuietExec" Execute="deferred" Impersonate="no" Return="ignore" />
 
     <InstallExecuteSequence>
-      <Custom Action="SetPREV_P4INSTALLDIR1_PMX86" After="AppSearch"><![CDATA[UILevel < 5 AND PREV_INSTALLDIR_PMX86]]></Custom>
-      <Custom Action="SetPREV_P4INSTALLDIR1_PMX64" After="SetPREV_P4INSTALLDIR1_PMX86"><![CDATA[UILevel < 5 AND PREV_INSTALLDIR_PMX64]]></Custom>
+      <Custom Action="SetPREV_P4INSTALLDIR1_PMX64" After="AppSearch"><![CDATA[UILevel < 5 AND PREV_INSTALLDIR_PMX64]]></Custom>
       <Custom Action="SetPREV_P4INSTALLDIR1_PU" After="SetPREV_P4INSTALLDIR1_PMX64"><![CDATA[UILevel < 5 AND PREV_INSTALLDIR_PU]]></Custom>
       <Custom Action="SetPREV_P4EDITOR1_PM" After="SetPREV_P4INSTALLDIR1_PU"><![CDATA[UILevel < 5 AND PREV_P4EDITOR_PM]]></Custom>
       <Custom Action="SetPREV_P4EDITOR2_PU" After="SetPREV_P4EDITOR1_PM"><![CDATA[UILevel < 5 AND PREV_P4EDITOR_PU]]></Custom>
@@ -263,20 +249,17 @@
       <Custom Action="DeleteSettings" After="RemoveFiles">Installed OR WIX_UPGRADE_DETECTED</Custom>
       <!-- Registering and unregistering DLLs.
       Bundle sets REINSTALL to ALL so also check for that. -->
-      <Custom Action="RegisterDLLx86" After="RegisterTypeLibraries"><![CDATA[&P4EXP = 3 OR REINSTALL >< "P4EXP" OR REINSTALL = "ALL"]]></Custom>
       <?if $(var.Platform) = x64 ?>
-        <Custom Action="RegisterDLLx64" After="RegisterDLLx86"><![CDATA[&P4EXP = 3 OR REINSTALL >< "P4EXP" OR REINSTALL = "ALL"]]></Custom>
+        <Custom Action="RegisterDLLx64" After="RegisterTypeLibraries"><![CDATA[&P4EXP = 3 OR REINSTALL >< "P4EXP" OR REINSTALL = "ALL"]]></Custom>
       <?endif ?>
-      <Custom Action="UnRegisterDLLx86" After="RemoveRegistryValues"><![CDATA[&P4EXP = 2]]></Custom>
       <?if $(var.Platform) = x64 ?>
-        <Custom Action="UnRegisterDLLx64" After="UnRegisterDLLx86"><![CDATA[&P4EXP = 2]]></Custom>
+        <Custom Action="UnRegisterDLLx64" After="RemoveRegistryValues"><![CDATA[&P4EXP = 2]]></Custom>
       <?endif ?>
     </InstallExecuteSequence>
       
     <InstallUISequence>
       <!-- Collect properties from system searches into appropriate properties (PREV_(property)). -->
-      <Custom Action="SetPREV_P4INSTALLDIR1_PMX86" After="AppSearch">PREV_INSTALLDIR_PMX86</Custom>
-      <Custom Action="SetPREV_P4INSTALLDIR1_PMX64" After="SetPREV_P4INSTALLDIR1_PMX86">PREV_INSTALLDIR_PMX64</Custom>
+      <Custom Action="SetPREV_P4INSTALLDIR1_PMX64" After="AppSearch">PREV_INSTALLDIR_PMX64</Custom>
       <Custom Action="SetPREV_P4INSTALLDIR1_PU" After="SetPREV_P4INSTALLDIR1_PMX64">PREV_INSTALLDIR_PU</Custom>
       <Custom Action="SetPREV_P4EDITOR1_PM" After="SetPREV_P4INSTALLDIR1_PU">PREV_P4EDITOR_PM</Custom>
       <Custom Action="SetPREV_P4EDITOR2_PU" After="SetPREV_P4EDITOR1_PM">PREV_P4EDITOR_PU</Custom>
@@ -347,7 +330,6 @@ See: http://windows-installer-xml-wix-toolset.687559.n2.nabble.com/WiX-devs-wix-
         <Directory Id="$(var.PlatformProgramFilesFolder)">
           <Directory Id="INSTALLDIR" Name="Perforce">
             <Directory Id="P4EXP" Name="P4EXP"/>
-            <Directory Id="P4EXP_32_BIT" Name="P4EXP 32-bit"/>
           </Directory>
         </Directory>
         <Directory Id="ProgramMenuFolder">

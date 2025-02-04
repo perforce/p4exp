@@ -1,15 +1,14 @@
                              Release Notes for
               P4EXP, the Helix Plugin for File Explorer
-                             Version 2023.1
+                             Version 2024.2
 
 Introduction
 
         This document lists all user-visible changes to P4EXP that were
         made between releases 2003.2 and this release. To display the version of
         P4EXP that you are using, choose "Connection Information..."
-        command from the More menu. P4EXP 2021.2 is compatible with the
-        2018.1 server release and above. P4EXP requires that P4V
-        2019.2/1883366 is installed.
+        command from the More menu. P4EXP 2024.2 is compatible with the
+        2018.1 server release and above. P4EXP requires that P4V is installed.
 
         To enable file state icons in File explorer after install a
         restart of the explorer application is required. This can be done
@@ -19,7 +18,7 @@ Introduction
 
 Supported Platforms
 
-        * Windows 7, 10 (x86, x86_64)
+        * Windows 10,11 intel(x64)
 
 Third Party Software
 
@@ -40,13 +39,52 @@ Known Issues
         On High-DPI display, bitmap buttons on installer final dialog
         are too small. This is a Windows problem that currently doesn't
         have a fix or workaround.
+--------------------------------------------------------------------------
+New Functionality in 2024.2  (2024.2/2707220) (2025/01/21)
+
+        (Job #124066) *
+            Rebuilt with the latest p4api.net API.
+
+        #2705527 (Job #124031) *
+            Fixed issue where user was unable to open latest P4V.
+
+        #2706351 (Job #123882) *
+            This issue has been fixed where the user was being logged out
+            upon clicking the Cancel button on the Login window.
+
+--------------------------------------------------------------------------
+New Functionality in 2024.1  (2024.1/2639155) (2024/08/13)
+
+        (Job #121969) *
+            Rebuilt with the latest p4api.net API.
 
 --------------------------------------------------------------------------
 
+New Functionality in 2023.2  (2023.2/2578767) (2024/03/29)
+
+        (Job #119186) *
+            Rebuilt with the latest p4api.net API 
+			
+---------------------------------------------------------------------------
+New Functionality in 2023.1 Patch 1 (2023.1/2572384) (2024/03/14)
+
+        (Job #119187) *
+            Rebuilt with the latest p4api.net API 
+            to address possible vulnerability: CVE-2023-5759.
+
+--------------------------------------------------------------------------
 New functionality in 2023.1 (2023.1/2456196) (2023/06/20)
 
         (Job #116071) *
             Rebuilt with the latest p4api.net API. (2023.1/2456134)
+
+--------------------------------------------------------------------------
+
+New Functionality in 2022.2 Patch 1  (2022.2/2571545) (2024/03/13)
+
+        (Job #119187) *
+            Rebuilt with the latest p4api.net API 
+            to address possible vulnerability: CVE-2023-5759.
 
 --------------------------------------------------------------------------
 
