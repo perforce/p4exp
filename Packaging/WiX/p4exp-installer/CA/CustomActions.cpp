@@ -2,7 +2,7 @@
 #include <fstream> // ifstream
 #include <codecvt> // codecvt_utf8, wstring_convert, convert_typeX
 
-const WCHAR caption[50] = L"Helix Core Apps Setup";
+const WCHAR caption[50] = L"P4 Apps Setup";
 
 /********************************************************************
 ExtractBinary - Get binary

@@ -22,7 +22,7 @@
             <ImageBrush ImageSource="/WixWPFWizardBA;component/Resources/interior.bmp" Stretch="Fill"/>
         </DockPanel.Background>
         <TextBlock DockPanel.Dock="Top"
-                   Margin="50, 20"
+                   Margin="60, 20"
                    Text="{x:Static wixWpfWizardBa:Localisation.SelectApplicationsPage_SelectApplicationsText}" />
         <Grid Height="250"
               Margin="25 0 0 15"

@@ -7,11 +7,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 //
-[assembly: AssemblyTitle("Helix Plugin for File Explorer")]
-[assembly: AssemblyDescription("Helix Plugin for File Explorer")]
+[assembly: AssemblyTitle("P4 for Windows File Explorer")]
+[assembly: AssemblyDescription("P4 for Windows File Explorer")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Perforce Software, Inc.")]
-[assembly: AssemblyProduct("Helix Plugin for File Explorer")]
+[assembly: AssemblyProduct("P4 for Windows File Explorer")]
 [assembly: AssemblyCopyright("Copyright (C) 2013 Perforce Software, Inc.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

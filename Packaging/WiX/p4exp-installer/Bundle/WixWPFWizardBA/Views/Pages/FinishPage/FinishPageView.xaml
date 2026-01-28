@@ -124,12 +124,12 @@
                 </Style>
             </TextBlock.Style>
         </TextBlock>
-        <TextBlock Grid.Row="4"
-                   Margin="190,0,0,-90"
+        <TextBlock Grid.Row="3"
+                   Margin="190,105.4,-0.2,-79"
                    TextBlock.Foreground="Red"
                    TextBlock.FontWeight="Bold"
                    TextWrapping="Wrap"
-                   Text="{x:Static wixWpfWizardBa:Localisation.FinishPage_RestartExplorerRequired}">
+                   Text="{x:Static wixWpfWizardBa:Localisation.FinishPage_RestartExplorerRequired}" Grid.RowSpan="2">
             <TextBlock.Style>
                 <Style TargetType="TextBlock">
                     <Style.Triggers>
@@ -163,12 +163,12 @@
             </TextBlock.Style>
         </TextBlock>
         <!-- To fix text on bitmap background being blurry, use text instead. -->
-        <TextBlock Grid.Row="3" Margin="92,37,20,62" TextWrapping="Wrap"
+        <TextBlock Grid.Row="3" Margin="203,37.4,19.8,62.4" TextWrapping="Wrap"
                    FontSize="12"
                    FontStyle="Italic"
                    FontWeight="Light"
                    Text="{x:Static wixWpfWizardBa:Localisation.FinishPage_PromotionText1}"/>
-        <TextBlock Grid.Row="3" Margin="92,80,150,0" TextWrapping="Wrap"
+        <TextBlock Grid.Row="3" Margin="203,60.4,37.8,19.4" TextWrapping="Wrap"
                    Text="{x:Static wixWpfWizardBa:Localisation.FinishPage_PromotionText2}" />
         <!-- The button was provided in a jpeg from Marketing (Chris Kirsh?) via
             Brent Schiestl. I wanted to match the color exactly, so I used Paint to pick the color

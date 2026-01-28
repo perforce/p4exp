@@ -128,7 +128,7 @@ namespace P4EXP.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Helix Plugin for File Explorer.
+        ///   Looks up a localized string similar to P4 for Windows File Explorer.
         /// </summary>
         internal static string ConnectionInfo_HelixPlugin {
             get {

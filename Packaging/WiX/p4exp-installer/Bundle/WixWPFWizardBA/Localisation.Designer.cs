@@ -520,7 +520,7 @@ namespace WixWPFWizardBA {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This installer can only be run on a 64-bit operating system. A 32-bit installer for Helix Plugin for File Explorer is available {0}..
+        ///   Looks up a localized string similar to This installer can only be run on a 64-bit operating system. A 32-bit installer for P4 for Windows File Explorer is available {0}..
         /// </summary>
         public static string FinishErrorPage_ErrorOSx86MSIx64 {
             get {
@@ -529,7 +529,7 @@ namespace WixWPFWizardBA {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Helix Plugin for File Explorer requires that you have at least Perforce Visual Client (P4V) 2019.2/1883366 installed. Download from {0} then run this installer again..
+        ///   Looks up a localized string similar to P4 for Windows File Explorer requires that you have at least Perforce Visual Client (P4V) 2019.2/1883366 installed. Download from {0} then run this installer again..
         /// </summary>
         public static string FinishErrorPage_ErrorP4VVersion {
             get {
@@ -1134,7 +1134,7 @@ namespace WixWPFWizardBA {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Helix Plugin for File Explorer enables you to perform Helix Core operations directly from File Explorer..
+        ///   Looks up a localized string similar to The P4 for Windows File Explorer Plugin enables you to perform P4 operations directly from File Explorer..
         /// </summary>
         public static string SelectApplicationsPage_ProductDescription {
             get {
@@ -1143,7 +1143,7 @@ namespace WixWPFWizardBA {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Helix Plugin for File Explorer (P4EXP).
+        ///   Looks up a localized string similar to P4 for Windows File Explorer (P4EXP).
         /// </summary>
         public static string SelectApplicationsPage_ProductName {
             get {
@@ -1287,7 +1287,7 @@ namespace WixWPFWizardBA {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This installer is for a 32-bit operating system. We strongly recommend you download and install Helix Plugin for File Explorer using the Windows 64-bit installer, available {0}..
+        ///   Looks up a localized string similar to This installer is for a 32-bit operating system. We strongly recommend you download and install P4 for Windows File Explorer using the Windows 64-bit installer, available {0}..
         /// </summary>
         public static string WarningPage_Desc {
             get {

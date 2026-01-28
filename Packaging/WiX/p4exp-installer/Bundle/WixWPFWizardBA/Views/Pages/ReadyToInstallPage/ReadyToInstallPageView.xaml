@@ -28,7 +28,7 @@
             <ImageBrush ImageSource="/WixWPFWizardBA;component/Resources/interior.bmp" Stretch="Fill"/>
         </Grid.Background>
         <TextBlock Grid.Row="0"
-                   Margin="45 17 0 0"
+                   Margin="60 17 0 0"
                    Text="{x:Static wixWpfWizardBa:Localisation.ReadyToInstallPage_Title}" />
         <TextBlock Grid.Row="1"
                    Margin="25 10 0 0"

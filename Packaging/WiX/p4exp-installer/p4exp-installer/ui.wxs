@@ -38,14 +38,14 @@
       <Dialog Id="SelectDest" Width="370" Height="270" Title="[ProductName] - $(env.TitleBarRelease)" NoMinimize="yes" TrackDiskSpace="yes">
         <!-- By using TabSkip="no" any checkboxes appear on the background bitmap. -->
         <Control Id="Background" Type="Bitmap" X="0" Y="0" Width="370" Height="234" TabSkip="no" Text="interior.bmp" />
-        <Control Id="Title" Type="Text" X="40" Y="10" Width="210" Height="12" Transparent="yes" NoPrefix="yes" Text="{&amp;IntHeadingTitle}Select Destination" />
-        <Control Id="Description" Type="Text" X="40" Y="20" Width="219" Height="12" Transparent="yes" NoPrefix="yes" Text="{&amp;IntHeading}Select the destination for the files" />
+        <Control Id="Title" Type="Text" X="45" Y="10" Width="210" Height="12" Transparent="yes" NoPrefix="yes" Text="{&amp;IntHeadingTitle}Select Destination" />
+        <Control Id="Description" Type="Text" X="45" Y="20" Width="219" Height="12" Transparent="yes" NoPrefix="yes" Text="{&amp;IntHeading}Select the destination for the files" />
         <!-- TODO: Get logo bitmap (icon will work?).
                     <Control Id="P4EXPBMP" Type="Bitmap" X="46" Y="62" Width="21" Height="26" Text="p4exp_logo.bmp" />
             -->
-        <Control Id="P4EXPText" Type="Text" X="22" Y="69" Width="199" Height="17" Transparent="yes" Text="{&amp;IntText}Helix Plugin for File Explorer (P4EXP)" />
+        <Control Id="P4EXPText" Type="Text" X="22" Y="69" Width="199" Height="17" Transparent="yes" Text="{&amp;IntText}P4 for Windows File Explorer (P4EXP)" />
         <Control Id="P4EXPTextVersion" Type="Text" X="22" Y="88" Width="163" Height="17" Transparent="yes" Text="{&amp;IntTextVersion}[P4EXP_Version]" />
-        <Control Id="SideText1" Type="Text" X="22" Y="112" Height="35" Width="199" Transparent="yes" Text="{&amp;IntText}The Helix Plugin for File Explorer enables you to perform Helix Core operations directly from File Explorer." />
+        <Control Id="SideText1" Type="Text" X="22" Y="112" Height="35" Width="199" Transparent="yes" Text="{&amp;IntText}The P4 for Windows File Explorer Plugin enables you to perform P4 operations directly from File Explorer." />
         <Control Id="LocationLine" Type="Line" X="19" Y="201" Height="2" Width="341" />
         <Control Id="LocationLabel" Type="Text" X="22" Y="205" Width="167" Height="10" Transparent="yes" Text="{&amp;IntText}Primary install directory:">
           <Subscribe Event="SelectionPathOn" Attribute="Visible" />
@@ -111,10 +111,10 @@
         <Control Id="P4PORTButton" Type="PushButton" X="260" Y="63" Width="15" Height="15" Text="?">
             <Publish Event="SpawnDialog" Value="P4PORTInfo" />
         </Control>
-        <Control Id="P4PORTNoteLabel" Type="Text" X="21" Y="80" Width="237" Height="24" Transparent="yes" Text="{&amp;Note}Name or hostname and port number of the Perforce server that clients connect to. Omit hostname for connecting to a local server." />
+        <Control Id="P4PORTNoteLabel" Type="Text" X="21" Y="80" Width="237" Height="24" Transparent="yes" Text="{&amp;Note}Name or hostname and port number of the P4 server that clients connect to. Omit hostname for connecting to a local server." />
         <Control Id="P4USERLabel" Type="Text" X="21" Y="108" Width="237" Height="12" Transparent="yes" Text="{&amp;IntText}User Name" />
         <Control Id="P4USER" Type="Edit" X="21" Y="120" Width="237" Height="15" Property="P4USER" />
-        <Control Id="P4USERNoteLabel" Type="Text" X="21" Y="138" Width="237" Height="12" Transparent="yes" Text="{&amp;Note}Perforce user name for connecting to a Perforce server." />
+        <Control Id="P4USERNoteLabel" Type="Text" X="21" Y="138" Width="237" Height="12" Transparent="yes" Text="{&amp;Note}Perforce user name for connecting to a P4 server." />
         <Control Id="P4EDITORLabel" Type="Text" X="21" Y="188" Width="237" Height="12" Transparent="yes" Text="{&amp;IntText}Text Editing Application" />
         <Control Id="P4EDITOR" Type="Edit" X="21" Y="200" Width="237" Height="15" Property="P4EDITOR" />
         <Control Id="P4EDITORButton" Type="PushButton" X="280" Y="199" Width="66" Height="17" Text="B&amp;rowse...">
@@ -144,7 +144,7 @@
       <Dialog Id="P4PORTInfo" Width="320" Height="216" Title="[ProductName] - $(env.TitleBarRelease)" NoMinimize="yes">
           <Control Id="Background" Type="Bitmap" X="0" Y="0" Width="321" Height="190" TabSkip="no" Text="help_bg.bmp" />
           <Control Id="Icon" Type="Icon" X="15" Y="14" Width="40" Height="40" Text="info_bg_bk.ico" />
-          <Control Id="Text1" Type="Text" X="65" Y="14" Width="236" Height="23" Transparent="yes" Text="{&amp;IntText}The Server field specifies the location of the Perforce server. This value was likely given to you by your Perforce administrator." />
+          <Control Id="Text1" Type="Text" X="65" Y="14" Width="236" Height="23" Transparent="yes" Text="{&amp;IntText}The Server field specifies the location of the P4 server. This value was likely given to you by your Perforce administrator." />
           <Control Id="Text1B" Type="Text" X="65" Y="40" Width="236" Height="23" Transparent="yes" Text="{&amp;IntText}The location can be specified in multiple ways depending upon your configuration. Below are some supported formats:" />
           <Control Id="Text2" Type="Text" X="65" Y="82" Width="225" Height="14" Transparent="yes" Text="{&amp;IntText}* &lt;hostname&gt;:&lt;port number&gt;" />
           <Control Id="Text3" Type="Text" X="65" Y="96" Width="225" Height="14" Transparent="yes" Text="{&amp;IntText}* &lt;IP address&gt;:&lt;port number&gt;" />
@@ -340,9 +340,11 @@
         <Control Id="Back" Type="PushButton" X="170" Y="243" Width="56" Height="17" Text="&lt; &amp;Back" Disabled="yes" />
         <Control Id="Cancel" Type="PushButton" X="300" Y="243" Width="56" Height="17" Text="&amp;Cancel" Disabled="yes" />
         <Control Id="BottomLine" Type="Line" X="0" Y="234" Width="370" Height="2" />
-        <Control Id="ToLearnMore" Type="Text" X="66" Y="207" Height="10" Width="77" Transparent="yes" Text="{&amp;ExtText}To learn more, visit" />
-        <Control Id="ToLearnMoreBtn" Type="PushButton" X="138" Y="209" Width="165" Height="10" Bitmap="yes" FixedSize="yes" TabSkip="yes" Text="ToLearnMore.bmp">
-          <Publish Property="WixShellExecTarget" Value="https://www.perforce.com/products/helix-teamhub" Order="1">1</Publish>
+        <Control Id="PromotionText1" Type="Text" X="66" Y="124" Height="10" Width="237" Transparent="yes" Text="{&amp;ExtText}Art or audio assets not always getting versioned?" />
+    <Control Id="PromotionText2" Type="Text" X="66" Y="136" Height="10" Width="300" Transparent="yes" Text="{&amp;ExtText}The drag-and-drop interface that lets creatives version like developers." />
+          <Control Id="ToLearnMore" Type="Text" X="66" Y="148" Height="10" Width="77" Transparent="yes" Text="{&amp;ExtText}To learn more, visit" />
+        <Control Id="ToLearnMoreBtn" Type="PushButton" X="138" Y="150" Width="58" Height="10" Bitmap="yes" FixedSize="yes" TabSkip="yes" Text="LearnMore.bmp">
+          <Publish Property="WixShellExecTarget" Value="https://www.perforce.com/products/helix-core-apps/helix-sync" Order="1">1</Publish>
           <Publish Event="DoAction" Value="OpenURL" Order="2">1</Publish>
         </Control>
       </Dialog>
@@ -418,8 +420,8 @@
       </Dialog>
       <Dialog Id="ProgramMaintenance" Width="370" Height="270" Title="[ProductName] - $(env.TitleBarRelease)" NoMinimize="yes">
         <Control Type="Bitmap" Id="background" X="0" Y="0" Width="370" Height="234" TabSkip="no" Text="interior.bmp" />
-        <Control Id="Title" Type="Text" X="40" Y="10" Width="210" Height="12" Transparent="yes" NoPrefix="yes" Text="{&amp;IntHeadingTitle}Program Maintenance" />
-        <Control Id="Description" Type="Text" X="40" Y="20" Width="219" Height="12" Transparent="yes" NoPrefix="yes" Text="{&amp;IntHeading}Repair or remove the application" />
+        <Control Id="Title" Type="Text" X="45" Y="10" Width="210" Height="12" Transparent="yes" NoPrefix="yes" Text="{&amp;IntHeadingTitle}Program Maintenance" />
+        <Control Id="Description" Type="Text" X="45" Y="20" Width="219" Height="12" Transparent="yes" NoPrefix="yes" Text="{&amp;IntHeading}Repair or remove the application" />
         <Control Id="RepairButton" Type="PushButton" X="25" Y="56" Width="56" Height="17" Text="Re&amp;pair">
           <Publish Property="MAINTENANCE" Value="repair" Order="1">1</Publish>
           <Publish Event="NewDialog" Value="ReadyToInstall" Order="2">1</Publish>
@@ -432,7 +434,7 @@
           <Publish Event="NewDialog" Value="ReadyToRemove" Order="2">1</Publish>
         </Control>
         <Control Id="RemoveText1" Type="Text" X="25" Y="142" Height="13" Width="309" Transparent="yes">
-          <Text>{&amp;IntText}Remove Helix Plugin for File Explorer from this machine.</Text>
+          <Text>{&amp;IntText}Remove P4 for Windows File Explorer from this machine.</Text>
         </Control>
         <Control Id="RemoveText2" Type="Text" X="25" Y="157" Height="20" Width="309" Transparent="yes">
           <Text>{&amp;IntTextBoldItalic}No client/workspace files, server database files, or proxy cache files will be removed when this option is used.</Text>

@@ -313,10 +313,10 @@ Warning! Restarting File Explorer may interrupt file copy/move operations, and m
     <value>Primary install directory:</value>
   </data>
   <data name="SelectApplicationsPage_ProductDescription" xml:space="preserve">
-    <value>The Helix Plugin for File Explorer enables you to perform Helix Core operations directly from File Explorer.</value>
+    <value>The P4 for Windows File Explorer Plugin enables you to perform P4 operations directly from File Explorer.</value>
   </data>
   <data name="SelectApplicationsPage_ProductName" xml:space="preserve">
-    <value>Helix Plugin for File Explorer (P4EXP)</value>
+    <value>P4 for Windows File Explorer (P4EXP)</value>
   </data>
   <data name="ReadyToInstallPage_Desc" xml:space="preserve">
     <value>If you want to review or change any of your settings, click Back.</value>
@@ -447,11 +447,11 @@ Warning! Restarting File Explorer may interrupt file copy/move operations, and m
     <value>_Upgrade</value>
   </data>
   <data name="FinishErrorPage_ErrorP4VVersion" xml:space="preserve">
-    <value>Helix Plugin for File Explorer requires that you have at least Perforce Visual Client (P4V) 2019.2/1883366 installed. Download from {0} then run this installer again.</value>
+    <value>P4 for Windows File Explorer requires that you have at least Perforce Visual Client (P4V) 2019.2/1883366 installed. Download from {0} then run this installer again.</value>
     <comment>The {0} is replaced by Wizard_TextForLink which is the text for the link ("here").</comment>
   </data>
   <data name="WarningPage_Desc" xml:space="preserve">
-    <value>This installer is for a 32-bit operating system. We strongly recommend you download and install Helix Plugin for File Explorer using the Windows 64-bit installer, available {0}.</value>
+    <value>This installer is for a 32-bit operating system. We strongly recommend you download and install P4 for Windows File Explorer using the Windows 64-bit installer, available {0}.</value>
     <comment>{0} is replaced with the text Wizard_TextForLink</comment>
   </data>
   <data name="FinishErrorPage_P4VDownloadLink" xml:space="preserve">
@@ -571,7 +571,7 @@ Warning! Restarting File Explorer may interrupt file copy/move operations, and m
     <value>Exception trying to open in Explorer the path {0}. Exception message: {1}</value>
   </data>
   <data name="FinishErrorPage_ErrorOSx86MSIx64" xml:space="preserve">
-    <value>This installer can only be run on a 64-bit operating system. A 32-bit installer for Helix Plugin for File Explorer is available {0}.</value>
+    <value>This installer can only be run on a 64-bit operating system. A 32-bit installer for P4 for Windows File Explorer is available {0}.</value>
     <comment>The {0} is replaced by Wizard_TextForLink which is the text for the link ("here").</comment>
   </data>
   <data name="FinishPage_RememberToRestartExplorer" xml:space="preserve">

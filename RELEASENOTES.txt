@@ -1,14 +1,18 @@
                              Release Notes for
-              P4EXP, the Helix Plugin for File Explorer
-                             Version 2025.1
+              P4EXP, the P4 for Windows File Explorer
+                             Version 2025.2
 
 Introduction
 
         This document lists all user-visible changes to P4EXP that were
         made between releases 2003.2 and this release. To display the version of
         P4EXP that you are using, choose "Connection Information..."
-        command from the More menu. P4EXP 2025.1 is compatible with the
-        2018.1 P4 server release and above. P4EXP requires that P4V is installed.
+        command from the More menu.
+
+        P4EXP 2025.2 is compatible with P4 Server 2022.1 and later. 
+        Earlier P4 Server versions from 2019.1 onward may continue to work 
+        but are not actively supported and are handled on a best-effort basis. 
+        P4EXP requires that P4V is installed.
 
         To enable file state icons in File explorer after install a
         restart of the explorer application is required. This can be done
@@ -51,6 +55,18 @@ Important Product Rebrand Notice
         To learn more, see:
          https://www.perforce.com/blog/vcs/introducing-the-p4-platform
 
+--------------------------------------------------------------------------
+
+New Functionality in 2025.2 (2025.2/2878812) (2026/01/15)
+
+        (Job #130532) *
+            Rebuilt with the 2025.2 p4api.net API.
+
+        #2876707 (Job #126755) *
+            Plugin renamed to "P4 for Windows File Explorer" as part of rebranding.
+
+        #2876704 (Job #130517) *
+            Updated P4EXP installer as part of rebranding.
 --------------------------------------------------------------------------
 
 New Functionality in 2025.1 (2025.1/2778783) (2025/06/12)

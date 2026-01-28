@@ -28,7 +28,7 @@
             <ImageBrush ImageSource="/WixWPFWizardBA;component/Resources/interior.bmp" Stretch="Fill"/>
         </Grid.Background>
         <TextBlock Grid.Row="0"
-                   Margin="45 17 0 0"
+                   Margin="60 17 0 0"
                    Text="{x:Static wixWpfWizardBa:Localisation.ClientConfigurationPage_TitleText}" />
         <TextBlock Grid.Row="1"
                    Margin="25 10 0 0"
@@ -65,7 +65,7 @@
                  Margin="27 37 120 26"
                  Text="{Binding PathToEditor}" />
         <TextBlock Grid.Row="3"
-                   Margin="25,64,110,0"
+                   Margin="25,62,110,0"
                    Foreground="Gray"
                    TextWrapping="Wrap"
                    Text="{x:Static wixWpfWizardBa:Localisation.ClientConfigurationPage_TextEditingApplicationDesc}" />

@@ -32,7 +32,7 @@
     <Variable Name="TitleBarRelease"
               Value="$(env.TitleBarRelease)"/>
 
-    <Log PathVariable="P4EXPSetupLogFile" Prefix="PerforceHelixPluginWindowsExplorer" Extension=".log"/>
+    <Log PathVariable="P4EXPSetupLogFile" Prefix="PerforceP4forWindowsFileExplorer" Extension=".log"/>
 
     <BootstrapperApplicationRef Id="ManagedBootstrapperApplicationHost">
       <bal:WixStandardBootstrapperApplication

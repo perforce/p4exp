@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
-  <Product Name="Helix Plugin for File Explorer" Id="*"
+  <Product Name="P4 for Windows File Explorer" Id="*"
             UpgradeCode="{A91EE5E2-5D91-483B-9147-278F50EB7B87}" Language="1033" Version="$(env.ProductVersion)" Manufacturer="Perforce Software">
     <!-- InstallerVersion is 500 since we're using a Hyperlink control that's only available in MSI 5.0. -->
     <Package
@@ -21,7 +21,7 @@
 
     <!-- The bootstrapper (.exe) asks the customer to download and install 2017.3, so we don't need to provide that information here.
     Here we just make sure that P4V is installed, though we could also do that in the bootstrapper. -->
-    <Condition Message="[ProductName] requires that you have at least Helix Core Apps (P4V) 2019.2/1883366 installed. Run the Helix Core Apps 2019.2/1883366 installer again, choose Modify, and make sure you choose to install P4V.">
+    <Condition Message="[ProductName] requires that you have at least Perforce Visual Client (P4V) 2019.2/1883366 installed. Run the P4 Apps installer again, choose Modify, and make sure you choose to install P4V.">
       Installed OR P4VCOMPONENT64 OR P4VCOMPONENT32
     </Condition>
     

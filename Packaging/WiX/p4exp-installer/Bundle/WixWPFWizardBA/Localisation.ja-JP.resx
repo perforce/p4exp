@@ -314,10 +314,10 @@
     <value>プライマリインストールディレクトリ:</value>
   </data>
   <data name="SelectApplicationsPage_ProductDescription" xml:space="preserve">
-    <value>Helix Plugin for File Explorerを使用すると、ファイルエクスプローラから直接Helix Coreの操作を実行することができます。</value>
+    <value>P4 for Windows File Explorerを使用すると、ファイルエクスプローラから直接P4の操作を実行することができます。</value>
   </data>
   <data name="SelectApplicationsPage_ProductName" xml:space="preserve">
-    <value>Helix Plugin for File Explorer (P4EXP)</value>
+    <value>P4 for Windows File Explorer (P4EXP)</value>
   </data>
   <data name="ReadyToInstallPage_Desc" xml:space="preserve">
     <value>設定を表示または変更する場合は、[戻る]をクリックしてください。</value>
@@ -448,11 +448,11 @@
     <value>アップグレード(_U)</value>
   </data>
   <data name="FinishErrorPage_ErrorP4VVersion" xml:space="preserve">
-    <value>Helix Plugin for File Explorerをインストールするには、バージョン2019.2/1883366以降のPerforce Visual Client (P4V)がインストールされている必要があります。{0}からダウンロードしてから、このインストーラをもう一度実行してください。</value>
+    <value>P4 for Windows File Explorerをインストールするには、バージョン2019.2/1883366以降のPerforce Visual Client (P4V)がインストールされている必要があります。{0}からダウンロードしてから、このインストーラをもう一度実行してください。</value>
     <comment>The {0} is replaced by Wizard_TextForLink which is the text for the link ("here").</comment>
   </data>
   <data name="WarningPage_Desc" xml:space="preserve">
-    <value>これは、32ビットのオペレーティングシステム用のインストーラです。Helix Plugin for File Explorerをダウンロードし、Windowsの64ビット版インストーラ({0}で入手できます)を使用してHelix Plugin for File Explorerをインストールすることを強くお勧めします。</value>
+    <value>これは、32ビットのオペレーティングシステム用のインストーラです。P4 for Windows File Explorerをダウンロードし、Windowsの64ビット版インストーラ({0}で入手できます)を使用してP4 for Windows File Explorerをインストールすることを強くお勧めします。</value>
     <comment>{0} is replaced with the text Wizard_TextForLink</comment>
   </data>
   <data name="FinishErrorPage_P4VDownloadLink" xml:space="preserve">
@@ -572,7 +572,7 @@
     <value>例外処理により、エクスプローラでパス「{0}」を開こうとしています。例外メッセージ: {1}</value>
   </data>
   <data name="FinishErrorPage_ErrorOSx86MSIx64" xml:space="preserve">
-    <value>このインストーラは、64ビットのオペレーティングシステム上で実行する必要があります。Helix Plugin for File Explorerの32ビット版インストーラは{0}で入手できます。</value>
+    <value>このインストーラは、64ビットのオペレーティングシステム上で実行する必要があります。P4 for Windows File Explorerの32ビット版インストーラは{0}で入手できます。</value>
     <comment>The {0} is replaced by Wizard_TextForLink which is the text for the link ("here").</comment>
   </data>
   <data name="FinishPage_RememberToRestartExplorer" xml:space="preserve">

@@ -768,7 +768,7 @@
     <value>現在のディレクトリ:</value>
   </data>
   <data name="ConnectionInfo_HelixPlugin" xml:space="preserve">
-    <value>Helix Plugin for File Explorer</value>
+    <value>P4 for Windows File Explorer</value>
   </data>
   <data name="ConnectionInfo_PerforceSoftware" xml:space="preserve">
     <value>Perforce Software</value>
