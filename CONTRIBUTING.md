@@ -14,7 +14,7 @@ The CLA grants Perforce a perpetual, worldwide, royalty-free copyright and paten
 
 To sign the CLA:
 
-1. Download the CLA here: [CLA.docx](https://github.com/perforce/p4exp/blob/main/CLA.docx);
+1. Download the CLA here: [CLA.docx](https://github.com/perforce/p4exp/blob/master/CLA.docx);
 2. Complete the signature block, including your name, title, date, and GitHub username; and
 3. Return the signed CLA to [contracts@perforce.com](mailto:contracts@perforce.com) prior to submitting your first pull request.
 
