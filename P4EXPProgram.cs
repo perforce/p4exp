@@ -224,7 +224,17 @@ namespace P4EXP
 
         internal static String HashConnection(String port, String user, String client)
         {
-            return port + "+" + user + "+" + client;
+            // Include Windows session ID to isolate repository connections per RDP/Terminal Services session
+            // This prevents password prompts from one user appearing in another user's session
+            // when multiple users share the same working folder on a Windows Server
+            int sessionId = System.Diagnostics.Process.GetCurrentProcess().SessionId;
+            string hash = sessionId + ":" + port + "+" + user + "+" + client;
+            FileLogger.LogMessage(3, "HashConnection",
+                string.Format("SessionId={0}, WindowsUser={1}\\{2}, P4User={3}, Hash={4}",
+                    sessionId,
+                    System.Environment.UserDomainName, System.Environment.UserName,
+                    user, hash));
+            return hash;
         }
 
         static bool firstRepoCall = true;
@@ -390,6 +400,12 @@ namespace P4EXP
 
                 Login enterPW = new Login(rep.Connection.UserName,
                                                             rep.Connection.Server.Address.Uri);
+                FileLogger.LogMessage(3, "Login",
+                    string.Format("Showing password prompt: SessionId={0}, WindowsUser={1}\\{2}, P4User={3}, P4Port={4}",
+                        System.Diagnostics.Process.GetCurrentProcess().SessionId,
+                        System.Environment.UserDomainName, System.Environment.UserName,
+                        rep.Connection.UserName,
+                        rep.Connection.Server.Address.Uri));
                 enterPW.ShowDialog();
                 // TODO: make this configurable?
                 store.loginRetry = DateTime.Now.AddSeconds(15);

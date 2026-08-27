@@ -1,6 +1,6 @@
                              Release Notes for
               P4EXP, the P4 for Windows File Explorer
-                             Version 2025.2
+                             Version 2026.1
 
 Introduction
 
@@ -9,7 +9,7 @@ Introduction
         P4EXP that you are using, choose "Connection Information..."
         command from the More menu.
 
-        P4EXP 2025.2 is compatible with P4 Server 2022.1 and later. 
+        P4EXP 2026.1 is compatible with P4 Server 2022.2 and later. 
         Earlier P4 Server versions from 2019.1 onward may continue to work 
         but are not actively supported and are handled on a best-effort basis. 
         P4EXP requires that P4V is installed.
@@ -55,6 +55,12 @@ Important Product Rebrand Notice
         To learn more, see:
          https://www.perforce.com/blog/vcs/introducing-the-p4-platform
 
+--------------------------------------------------------------------------
+
+New Functionality in 2026.1 (2026.1/3041745) (2026/08/18)
+
+        (Job #133693) *
+            Rebuilt with the 2026.1 p4api.net API.
 --------------------------------------------------------------------------
 
 New Functionality in 2025.2 (2025.2/2878812) (2026/01/15)
